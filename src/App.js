@@ -7,6 +7,7 @@ import {
 } from 'react-router-dom';
 
 import PublicNav from './PublicNav';
+import LandingPage from './components/LandingPage/LandingPage';
 import LoginPage from './components/LoginPage/LoginPage';
 import RegisterPage from './components/RegisterPage/RegisterPage';
 import UserPage from './components/UserPage/UserPage';
@@ -23,7 +24,7 @@ const App = () => (
           <Redirect exact from="/" to="/home" />
           <Route
             path="/home"
-            component={LoginPage}
+            component={LandingPage}
           />
           <Route
             path="/login"
