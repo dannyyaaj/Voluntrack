@@ -5,7 +5,7 @@ import Header from './components/Header/Header';
 const PublicNav = () => (
   <div className="navbar">
       <Header title="Voluntrack" />
-      <ul>
+      <ul className="publicNav">
         <li>
           <Link to="/">
             Home
