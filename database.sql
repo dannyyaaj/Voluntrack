@@ -26,14 +26,14 @@ CREATE TABLE "event" (
     roles VARCHAR(1000)
 );
 
-CREATE TABLE "user" (
+CREATE TABLE "person" (
     id SERIAL PRIMARY KEY,
     username VARCHAR (80) UNIQUE NOT NULL,
     password VARCHAR (1000) NOT NULL,
-    email VARCHAR (100) NOT NULL,
-    first_name VARCHAR (100) NOT NULL,
+    email VARCHAR (100),
+    first_name VARCHAR (100),
     middle_name VARCHAR (100),
-    last_name VARCHAR (100) NOT NULL,
+    last_name VARCHAR (100),
     primary_phone VARCHAR (10),
     address VARCHAR (100),
     city VARCHAR (50),
@@ -47,7 +47,7 @@ CREATE TABLE "user" (
 CREATE TABLE "shifts" (
 	id SERIAL PRIMARY KEY,
 	event_id INT REFERENCES "event",
-	volunteer_id INT REFERENCES "user",
+	volunteer_id INT REFERENCES "person",
 	start_time TIMESTAMPTZ NOT NULL,
 	end_time TIMESTAMPTZ NOT NULL,
 	total_hours DECIMAL(5,2)
