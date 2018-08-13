@@ -4,24 +4,24 @@ import Header from './components/Header/Header';
 
 const PublicNav = () => (
   <div className="navbar">
-      <Header title="Voluntrack" />
-      <ul className="publicNav">
-        <li>
-          <Link to="/">
-            Home
+    <Header title="Voluntrack" />
+    <ul className="publicNav">
+      <li>
+        <Link to="/login">
+          Log In
           </Link>
-        </li>
-        <li>
-          <Link to="/register">
-            Sign Up
+      </li>
+      <li>
+        <Link to="/register">
+          Sign Up
           </Link>
-        </li>
-        <li>
-          <Link to="/login">
-            Log In
+      </li>
+      <li>
+        <Link to="/">
+          Home
           </Link>
-        </li>
-      </ul>
+      </li>
+    </ul>
   </div>
 );
 

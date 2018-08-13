@@ -13,6 +13,12 @@ body {
     color: #ece7e7;
 }
 
+.summary {
+    width: 600px;
+    text-align: center;
+    font-size: 2rem;
+}
+
 form {
     background-color: #dbd5d5;
     width: 30%;
