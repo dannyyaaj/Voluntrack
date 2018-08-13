@@ -5,6 +5,7 @@ const Header = ({ title }) => (
     <div>
       <h1 className="lead">{ title }</h1>
     </div>
+   
   </div>
 );
 
