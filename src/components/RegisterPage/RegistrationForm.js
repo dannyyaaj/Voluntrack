@@ -8,35 +8,41 @@ import TextField from '@material-ui/core/TextField';
 
 const styles = () => ({
   container: {
+    display: 'flex',
+    flexWrap: 'wrap',
     textAlign: 'center',
     margin: '1.5rem auto',
     padding: '1.5rem 2rem',
     backgroundColor: 'white',
-    height: '25%',
-    width: '75%'
+    // height: '25%',
+    // width: '75%'
   },
   formTitle: {
     color: 'black',
     marginBottom: '2.5rem',
   },
   textField: {
-    width: 1000,
+    width: 500,
+    margin: '0 auto',
+    padding: '0 0 1.5rem 0'
   }
 });
 
 class RegistrationForm extends Component {
   render() {
     return (
-      <div className={this.props.classes.container}>
-        <form
+      <form
+        className={this.props.classes.container}
         onSubmit={this.props.registerUser}>
-             <FormControl component="fieldset">
+        <FormControl component="fieldset">
           <div>
             <FormLabel htmlFor="firstName">
-              First Name:
-              <input
-                type="text"
+              <TextField
+                className={this.props.classes.textField}
+                label="First Name"
                 name="firstName"
+                fullWidth
+                margin="normal"
                 value={this.props.firstName}
                 onChange={this.props.handleInputChangeFor('firstName')}
               />
@@ -44,9 +50,10 @@ class RegistrationForm extends Component {
           </div>
           <div>
             <FormLabel htmlFor="lastName">
-              Last Name:
-              <input
-                type="text"
+
+              <TextField
+                className={this.props.classes.textField}
+                label="Last Name"
                 name="lastName"
                 value={this.props.lastName}
                 onChange={this.props.handleInputChangeFor('lastName')}
@@ -55,9 +62,9 @@ class RegistrationForm extends Component {
           </div>
           <div>
             <FormLabel htmlFor="email">
-              Email:
-              <input
-                type="text"
+              <TextField
+                className={this.props.classes.textField}
+                label="Email"
                 name="email"
                 value={this.props.email}
                 onChange={this.props.handleInputChangeFor('email')}
@@ -66,9 +73,9 @@ class RegistrationForm extends Component {
           </div>
           <div>
             <FormLabel htmlFor="username">
-              Username:
-              <input
-                type="text"
+              <TextField
+                className={this.props.classes.textField}
+                label="Username"
                 name="username"
                 value={this.props.username}
                 onChange={this.props.handleInputChangeFor('username')}
@@ -77,8 +84,9 @@ class RegistrationForm extends Component {
           </div>
           <div>
             <FormLabel htmlFor="password">
-              Password:
-              <input
+              <TextField
+                className={this.props.classes.textField}
+                label="Password"
                 type="password"
                 name="password"
                 value={this.props.password}
@@ -94,13 +102,12 @@ class RegistrationForm extends Component {
             />
             <Link to="/home">Cancel</Link>
           </div>
-          </FormControl>
-        </form>
-      </div>
+        </FormControl>
+      </form>
     )
   }
 }
 
 const StyledRegistrationForm =
-withStyles(styles)(RegistrationForm);
+  withStyles(styles)(RegistrationForm);
 export default StyledRegistrationForm;

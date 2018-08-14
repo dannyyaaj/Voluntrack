@@ -1,10 +1,23 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import RegistrationForm from './RegistrationForm';
+import { withStyles } from "@material-ui/core/styles";
+import { Card, CardContent, Grid } from '@material-ui/core';
+
+const styles = {
+  card: {
+    margin: '2rem auto',
+    width: '50%',
+    backgroundColor: '#DCEFF5',
+  },
+  cardActions: {
+    padding: '0 40%'
+  },
+}
+
 class RegisterPage extends Component {
   constructor(props) {
     super(props);
-
     this.state = {
       username: '',
       password: '',
@@ -73,87 +86,95 @@ class RegisterPage extends Component {
 
   render() {
     return (
-      <div>
-        {this.renderAlert()}
-        <h1 className="formHeader">Sign up and start volunteering today</h1>
-        <RegistrationForm
-          registerUser={this.registerUser}
-          firstName={this.state.firstName}
-          lastName={this.state.lastName}
-          email={this.state.email}
-          username={this.state.username}
-          password={this.state.password}
-          handleInputChangeFor={this.handleInputChangeFor}
-        />
-        {/* <form className="signUpForm" onSubmit={this.registerUser}>
-          <div>
-            <label htmlFor="firstName">
-              First Name:
-              <input
-                type="text"
-                name="firstName"
-                value={this.state.firstName}
-                onChange={this.handleInputChangeFor('firstName')}
+      <Grid container justify="center">
+        <Grid item xs={12}>
+          <Card className={this.props.classes.card}>
+            <CardContent>
+              {this.renderAlert()}
+              <h1 className="formHeader">Sign up and start volunteering today</h1>
+              <RegistrationForm
+                registerUser={this.registerUser}
+                firstName={this.state.firstName}
+                lastName={this.state.lastName}
+                email={this.state.email}
+                username={this.state.username}
+                password={this.state.password}
+                handleInputChangeFor={this.handleInputChangeFor}
               />
-            </label>
-          </div>
-          <div>
-            <label htmlFor="lastName">
-              Last Name:
-              <input
-                type="text"
-                name="lastName"
-                value={this.state.lastName}
-                onChange={this.handleInputChangeFor('lastName')}
-              />
-            </label>
-          </div>
-          <div>
-            <label htmlFor="email">
-              Email:
-              <input
-                type="text"
-                name="email"
-                value={this.state.email}
-                onChange={this.handleInputChangeFor('email')}
-              />
-            </label>
-          </div>
-          <div>
-            <label htmlFor="username">
-              Username:
-              <input
-                type="text"
-                name="username"
-                value={this.state.username}
-                onChange={this.handleInputChangeFor('username')}
-              />
-            </label>
-          </div>
-          <div>
-            <label htmlFor="password">
-              Password:
-              <input
-                type="password"
-                name="password"
-                value={this.state.password}
-                onChange={this.handleInputChangeFor('password')}
-              />
-            </label>
-          </div>
-          <div className="getStarted">
+            </CardContent>
+          </Card>
+        </Grid>
+      </Grid>
+
+      /* <form className="signUpForm" onSubmit={this.registerUser}>
+        <div>
+          <label htmlFor="firstName">
+            First Name:
             <input
-              type="submit"
-              name="submit"
-              value="Get Started"
+              type="text"
+              name="firstName"
+              value={this.state.firstName}
+              onChange={this.handleInputChangeFor('firstName')}
             />
-            <Link to="/home">Cancel</Link>
-          </div>
-        </form> */}
-      </div>
+          </label>
+        </div>
+        <div>
+          <label htmlFor="lastName">
+            Last Name:
+            <input
+              type="text"
+              name="lastName"
+              value={this.state.lastName}
+              onChange={this.handleInputChangeFor('lastName')}
+            />
+          </label>
+        </div>
+        <div>
+          <label htmlFor="email">
+            Email:
+            <input
+              type="text"
+              name="email"
+              value={this.state.email}
+              onChange={this.handleInputChangeFor('email')}
+            />
+          </label>
+        </div>
+        <div>
+          <label htmlFor="username">
+            Username:
+            <input
+              type="text"
+              name="username"
+              value={this.state.username}
+              onChange={this.handleInputChangeFor('username')}
+            />
+          </label>
+        </div>
+        <div>
+          <label htmlFor="password">
+            Password:
+            <input
+              type="password"
+              name="password"
+              value={this.state.password}
+              onChange={this.handleInputChangeFor('password')}
+            />
+          </label>
+        </div>
+        <div className="getStarted">
+          <input
+            type="submit"
+            name="submit"
+            value="Get Started"
+          />
+          <Link to="/home">Cancel</Link>
+        </div>
+      </form> */
     );
   }
 }
+const StyledRegisterPage = withStyles(styles)(RegisterPage)
 
-export default RegisterPage;
+export default StyledRegisterPage;
 
