@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import axios from 'axios';
-
+import RegistrationForm from './RegistrationForm';
 class RegisterPage extends Component {
   constructor(props) {
     super(props);
@@ -11,7 +10,8 @@ class RegisterPage extends Component {
       password: '',
       email: '',
       firstName: '',
-      lastName: ''
+      lastName: '',
+      admin_access: false
     };
   }
 
@@ -20,14 +20,16 @@ class RegisterPage extends Component {
 
     if (this.state.username === '' || this.state.password === '') {
       this.setState({
-        message: 'Choose a username and password!',
+        message: 'Please complete all inputs!',
       });
     } else {
       const body = {
         username: this.state.username,
         password: this.state.password,
         email: this.state.email,
-     
+        firstName: this.state.firstName,
+        lastName: this.state.lastName,
+        admin_access: this.state.admin_access
       };
 
       // making the request to the server to post the new user's registration
@@ -74,7 +76,16 @@ class RegisterPage extends Component {
       <div>
         {this.renderAlert()}
         <h1 className="formHeader">Sign up and start volunteering today</h1>
-        <form onSubmit={this.registerUser}>
+        <RegistrationForm
+          registerUser={this.registerUser}
+          firstName={this.state.firstName}
+          lastName={this.state.lastName}
+          email={this.state.email}
+          username={this.state.username}
+          password={this.state.password}
+          handleInputChangeFor={this.handleInputChangeFor}
+        />
+        {/* <form className="signUpForm" onSubmit={this.registerUser}>
           <div>
             <label htmlFor="firstName">
               First Name:
@@ -130,15 +141,15 @@ class RegisterPage extends Component {
               />
             </label>
           </div>
-          <div className="register">
+          <div className="getStarted">
             <input
               type="submit"
               name="submit"
-              value="Register"
+              value="Get Started"
             />
             <Link to="/home">Cancel</Link>
           </div>
-        </form>
+        </form> */}
       </div>
     );
   }

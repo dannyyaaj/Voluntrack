@@ -14,9 +14,6 @@ body {
 }
 
 form {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: auto;
   background-color: #dbd5d5;
   width: 30%;
   height: 250px;
@@ -29,11 +26,16 @@ form {
   text-align: center;
 }
 
-.register {
+.signUpForm {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto;
+}
+
+.getStarted {
   text-align: center;
   grid-column: 1 / 3;
   grid-row: 4
-
 }
 
 input {
