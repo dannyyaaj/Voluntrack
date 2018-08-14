@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import volunteers_one from '../../resources/volunteers_one.jpg';
+import volunteers_three from '../../resources/volunteers_three.jpg';
 
 class Carousel extends Component {
   render() {
@@ -7,8 +7,13 @@ class Carousel extends Component {
       <div>
         <div
         style={{
-          background: `url(${volunteers_one})`,
-          height: `1000px`
+          background: `url(${volunteers_three})`,
+          backgroundSize: "cover",
+          backgroundRepeat: "no-repeat",
+          backgroundPosition: "center",
+          height: "1000px",
+          width: "100%",
+          opacity: "0.7"
           }}
         >
         </div>

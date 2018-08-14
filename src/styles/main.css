@@ -81,9 +81,15 @@ li a:hover {
 
 /* About */
 
+.aboutSection {
+  background: black;
+  opacity: 0.8;
+}
+
 .about {
-  margin: 0 auto;
+  color: white;
   width: 600px;
   text-align: center;
   font-size: 2rem;
+  margin: 0 auto;
 }
