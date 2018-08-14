@@ -8,14 +8,10 @@ import TextField from '@material-ui/core/TextField';
 
 const styles = () => ({
   container: {
-    display: 'flex',
-    flexWrap: 'wrap',
     textAlign: 'center',
     margin: '1.5rem auto',
     padding: '1.5rem 2rem',
     backgroundColor: 'white',
-    // height: '25%',
-    // width: '75%'
   },
   formTitle: {
     color: 'black',
@@ -35,7 +31,6 @@ class RegistrationForm extends Component {
         className={this.props.classes.container}
         onSubmit={this.props.registerUser}>
         <FormControl component="fieldset">
-          <div>
             <FormLabel htmlFor="firstName">
               <TextField
                 className={this.props.classes.textField}
@@ -47,53 +42,47 @@ class RegistrationForm extends Component {
                 onChange={this.props.handleInputChangeFor('firstName')}
               />
             </FormLabel>
-          </div>
-          <div>
             <FormLabel htmlFor="lastName">
-
               <TextField
                 className={this.props.classes.textField}
                 label="Last Name"
                 name="lastName"
+                fullWidth
                 value={this.props.lastName}
                 onChange={this.props.handleInputChangeFor('lastName')}
               />
             </FormLabel>
-          </div>
-          <div>
             <FormLabel htmlFor="email">
               <TextField
                 className={this.props.classes.textField}
                 label="Email"
                 name="email"
+                fullWidth
                 value={this.props.email}
                 onChange={this.props.handleInputChangeFor('email')}
               />
             </FormLabel>
-          </div>
-          <div>
             <FormLabel htmlFor="username">
               <TextField
                 className={this.props.classes.textField}
                 label="Username"
                 name="username"
+                fullWidth
                 value={this.props.username}
                 onChange={this.props.handleInputChangeFor('username')}
               />
             </FormLabel>
-          </div>
-          <div>
             <FormLabel htmlFor="password">
               <TextField
                 className={this.props.classes.textField}
                 label="Password"
                 type="password"
                 name="password"
+                fullWidth
                 value={this.props.password}
                 onChange={this.props.handleInputChangeFor('password')}
               />
             </FormLabel>
-          </div>
           <div>
             <input
               type="submit"
