@@ -1,56 +1,50 @@
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
 }
 
 .instructions h1 {
-    font-size: 24px;
-    font-weight: 700;
+  font-size: 24px;
+  font-weight: 700;
 }
 
 .instructions {
-    background-color: #00acb0;
-    padding: 5px;
-    color: #ece7e7;
-}
-
-.summary {
-    width: 600px;
-    text-align: center;
-    font-size: 2rem;
+  background-color: #00acb0;
+  padding: 5px;
+  color: #ece7e7;
 }
 
 form {
-    background-color: #dbd5d5;
-    width: 30%;
-    height: 250px;
-    margin: 20px auto;
-    padding: 25px;
-    border-radius: 2px;
+  background-color: #dbd5d5;
+  width: 30%;
+  height: 250px;
+  margin: 20px auto;
+  padding: 25px;
+  border-radius: 2px;
 }
 
 input {
-    margin: 5px;
-    margin-bottom: 10px;
+  margin: 5px;
+  margin-bottom: 10px;
 }
 
 input[type="submit"] {
-    margin: 10px;
+  margin: 10px;
 }
 
 .message {
-    padding: 10px 0;
+  padding: 10px 0;
 }
 
 .message p {
-    margin-left: 10px;
+  margin-left: 10px;
 }
 
 .message:nth-child(odd) {
-     background-color: #eeeeee;
+  background-color: #eeeeee;
 }
 
 .message:nth-child(even) {
-    background-color: #f8f8f8;
+  background-color: #f8f8f8;
 }
 
 .navbar {
@@ -60,27 +54,36 @@ input[type="submit"] {
 }
 
 ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
 }
 
 li {
-    float: right;
+  float: right;
 }
 
 li a {
-    display: block;
-    color: white;
-    text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
-
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
 }
 
 /* Change the link color to #111 (black) on hover */
+
 li a:hover {
-    text-decoration: underline;
-    color: #eee;
+  text-decoration: underline;
+  color: #eee;
+}
+
+/* About */
+
+.about {
+  margin: 0 auto;
+  width: 600px;
+  text-align: center;
+  font-size: 2rem;
 }
