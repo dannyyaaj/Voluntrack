@@ -10,6 +10,8 @@ class RegisterPage extends Component {
       username: '',
       password: '',
       email: '',
+      firstName: '',
+      lastName: ''
     };
   }
 
@@ -24,6 +26,8 @@ class RegisterPage extends Component {
       const body = {
         username: this.state.username,
         password: this.state.password,
+        email: this.state.email,
+     
       };
 
       // making the request to the server to post the new user's registration
@@ -69,8 +73,41 @@ class RegisterPage extends Component {
     return (
       <div>
         {this.renderAlert()}
+        <h1 className="formHeader">Sign up and start volunteering today</h1>
         <form onSubmit={this.registerUser}>
-          <h1>Sign up and start volunteering today</h1>
+          <div>
+            <label htmlFor="firstName">
+              First Name:
+              <input
+                type="text"
+                name="firstName"
+                value={this.state.firstName}
+                onChange={this.handleInputChangeFor('firstName')}
+              />
+            </label>
+          </div>
+          <div>
+            <label htmlFor="lastName">
+              Last Name:
+              <input
+                type="text"
+                name="lastName"
+                value={this.state.lastName}
+                onChange={this.handleInputChangeFor('lastName')}
+              />
+            </label>
+          </div>
+          <div>
+            <label htmlFor="email">
+              Email:
+              <input
+                type="text"
+                name="email"
+                value={this.state.email}
+                onChange={this.handleInputChangeFor('email')}
+              />
+            </label>
+          </div>
           <div>
             <label htmlFor="username">
               Username:
@@ -93,7 +130,7 @@ class RegisterPage extends Component {
               />
             </label>
           </div>
-          <div>
+          <div className="register">
             <input
               type="submit"
               name="submit"
