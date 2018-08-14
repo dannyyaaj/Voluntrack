@@ -8,10 +8,9 @@ class Carousel extends Component {
         <div
         style={{
           background: `url(${volunteers_one})`,
-          height: `${window.innerHeight}px`
+          height: `1000px`
           }}
         >
-
         </div>
       </div>
     )
