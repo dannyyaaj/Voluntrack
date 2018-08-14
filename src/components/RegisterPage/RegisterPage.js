@@ -9,7 +9,7 @@ class RegisterPage extends Component {
     this.state = {
       username: '',
       password: '',
-      message: '',
+      email: '',
     };
   }
 
@@ -70,7 +70,7 @@ class RegisterPage extends Component {
       <div>
         {this.renderAlert()}
         <form onSubmit={this.registerUser}>
-          <h1>Register User</h1>
+          <h1>Sign up and start volunteering today</h1>
           <div>
             <label htmlFor="username">
               Username:
