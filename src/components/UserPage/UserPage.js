@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-
 import AdminNav from '../../components/Nav/AdminNav';
 
 import { USER_ACTIONS } from '../../redux/actions/userActions';
@@ -9,7 +8,6 @@ import { triggerLogout } from '../../redux/actions/loginActions';
 
 const mapStateToProps = state => ({
   user: state.user,
-  state: state,
 });
 
 class UserPage extends Component {
@@ -32,7 +30,7 @@ class UserPage extends Component {
     console.log(this.props.user)
     let content = null;
 
-    if (this.props.user.userName) {
+    if (this.props.user.userName && this.props.user.data.admin_access === true) {
       content = (
         <div>
           <h1
@@ -41,13 +39,22 @@ class UserPage extends Component {
             Welcome, {this.props.user.userName}!
           </h1>
           <p>Your ID is: {this.props.user.id}</p>
-          <button
-            onClick={this.logout}
-          >
-            Log Out
-          </button>
+          <p>You're an Admin</p>
+
         </div>
-      );
+      )
+    } else {
+      content = (
+        <div>
+          <h1
+            id="welcome"
+          >
+            Welcome, {this.props.user.userName}!
+        </h1>
+          <p>Your ID is: {this.props.user.id}</p>
+
+        </div>
+      )
     }
 
     return (
