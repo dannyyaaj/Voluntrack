@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PublicNav from '../PublicNav/PublicNav';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { triggerLogin, formError, clearError } from '../../redux/actions/loginActions';
@@ -63,6 +64,8 @@ class LoginPage extends Component {
   render() {
     return (
       <div>
+              <PublicNav />
+
         { this.renderAlert() }
         <form onSubmit={this.login}>
           <h1>Login</h1>
