@@ -10,7 +10,7 @@ class Carousel extends Component {
           backgroundSize: "cover",
           backgroundRepeat: "no-repeat",
           backgroundPosition: "center",
-          height: "80vh",
+          height: "75vh",
           opacity: "0.7"
           }}
         >
