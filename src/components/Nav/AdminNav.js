@@ -2,8 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { triggerLogout } from '../../redux/actions/loginActions';
 import { connect } from 'react-redux';
-
-
+// client side routes
 
 class AdminNav extends Component {
 
