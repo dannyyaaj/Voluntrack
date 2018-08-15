@@ -17,7 +17,7 @@ class UserPage extends Component {
 
   componentDidUpdate() {
     if (!this.props.user.isLoading && this.props.user.userName === null) {
-      this.props.history.push('home');
+      this.props.history.push('/home');
     }
   }
 
@@ -52,7 +52,6 @@ class UserPage extends Component {
             Welcome, {this.props.user.userName}!
         </h1>
           <p>Your ID is: {this.props.user.id}</p>
-
         </div>
       )
     }
