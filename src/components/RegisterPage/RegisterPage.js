@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PublicNav from '../PublicNav/PublicNav';
 import axios from 'axios';
 import RegistrationForm from './RegistrationForm';
 import { withStyles } from "@material-ui/core/styles";
@@ -86,91 +87,28 @@ class RegisterPage extends Component {
 
   render() {
     return (
-      <Grid container justify="center">
-        <Grid item xs={12}>
-          <Card className={this.props.classes.card}>
-            <CardContent>
-              {this.renderAlert()}
-              <h1 className="formHeader">Sign up and start volunteering today</h1>
-              <RegistrationForm
-                registerUser={this.registerUser}
-                firstName={this.state.firstName}
-                lastName={this.state.lastName}
-                email={this.state.email}
-                username={this.state.username}
-                password={this.state.password}
-                handleInputChangeFor={this.handleInputChangeFor}
-              />
-            </CardContent>
-          </Card>
+      <div>
+        <PublicNav />
+        <Grid container justify="center">
+          <Grid item xs={12}>
+            <Card className={this.props.classes.card}>
+              <CardContent>
+                {this.renderAlert()}
+                <h1 className="formHeader">Sign up and start volunteering today</h1>
+                <RegistrationForm
+                  registerUser={this.registerUser}
+                  firstName={this.state.firstName}
+                  lastName={this.state.lastName}
+                  email={this.state.email}
+                  username={this.state.username}
+                  password={this.state.password}
+                  handleInputChangeFor={this.handleInputChangeFor}
+                />
+              </CardContent>
+            </Card>
+          </Grid>
         </Grid>
-      </Grid>
-
-      /* <form className="signUpForm" onSubmit={this.registerUser}>
-        <div>
-          <label htmlFor="firstName">
-            First Name:
-            <input
-              type="text"
-              name="firstName"
-              value={this.state.firstName}
-              onChange={this.handleInputChangeFor('firstName')}
-            />
-          </label>
-        </div>
-        <div>
-          <label htmlFor="lastName">
-            Last Name:
-            <input
-              type="text"
-              name="lastName"
-              value={this.state.lastName}
-              onChange={this.handleInputChangeFor('lastName')}
-            />
-          </label>
-        </div>
-        <div>
-          <label htmlFor="email">
-            Email:
-            <input
-              type="text"
-              name="email"
-              value={this.state.email}
-              onChange={this.handleInputChangeFor('email')}
-            />
-          </label>
-        </div>
-        <div>
-          <label htmlFor="username">
-            Username:
-            <input
-              type="text"
-              name="username"
-              value={this.state.username}
-              onChange={this.handleInputChangeFor('username')}
-            />
-          </label>
-        </div>
-        <div>
-          <label htmlFor="password">
-            Password:
-            <input
-              type="password"
-              name="password"
-              value={this.state.password}
-              onChange={this.handleInputChangeFor('password')}
-            />
-          </label>
-        </div>
-        <div className="getStarted">
-          <input
-            type="submit"
-            name="submit"
-            value="Get Started"
-          />
-          <Link to="/home">Cancel</Link>
-        </div>
-      </form> */
+      </div>
     );
   }
 }

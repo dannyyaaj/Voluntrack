@@ -4,7 +4,7 @@ import login from './loginReducer';
 
 const store = combineReducers({
   user,
-  login,
+  login
 });
 
 export default store;

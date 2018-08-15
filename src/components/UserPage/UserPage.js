@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-
 import AdminNav from '../../components/Nav/AdminNav';
 
 import { USER_ACTIONS } from '../../redux/actions/userActions';
@@ -28,30 +27,40 @@ class UserPage extends Component {
   }
 
   render() {
+    console.log(this.props.user)
     let content = null;
 
-    if (this.props.user.userName) {
+    if (this.props.user.userName && this.props.user.data.admin_access === true) {
       content = (
         <div>
           <h1
             id="welcome"
           >
-            Welcome, { this.props.user.userName }!
+            Welcome, {this.props.user.userName}!
           </h1>
           <p>Your ID is: {this.props.user.id}</p>
-          <button
-            onClick={this.logout}
-          >
-            Log Out
-          </button>
+          <p>You're an Admin</p>
+
         </div>
-      );
+      )
+    } else {
+      content = (
+        <div>
+          <h1
+            id="welcome"
+          >
+            Welcome, {this.props.user.userName}!
+        </h1>
+          <p>Your ID is: {this.props.user.id}</p>
+
+        </div>
+      )
     }
 
     return (
       <div>
         <AdminNav />
-        { content }
+        {content}
       </div>
     );
   }

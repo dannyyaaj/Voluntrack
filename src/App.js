@@ -6,12 +6,13 @@ import {
   Switch,
 } from 'react-router-dom';
 
-import PublicNav from './PublicNav';
+import Header from './components/Header/Header';
 import LandingPage from './components/LandingPage/LandingPage';
 import LoginPage from './components/LoginPage/LoginPage';
 import RegisterPage from './components/RegisterPage/RegisterPage';
 import UserPage from './components/UserPage/UserPage';
 import InfoPage from './components/InfoPage/InfoPage';
+import ErrorNotFound from './components/ErrorNotFound/ErrorNotFound';
 
 import './styles/main.css';
 
@@ -19,36 +20,32 @@ const App = () => (
   <div>
     <Router>
       <div>
-        <PublicNav />
+        <Header title="Voluntrack" />
         <Switch>
           <Redirect exact from="/" to="/home" />
           <Route
-            path="/home"
+            exact path="/home"
             component={LandingPage}
           />
           <Route
-            path="/login"
+            exact path="/login"
             component={LoginPage}
           />
           <Route
-            path="/register"
+            exact path="/register"
             component={RegisterPage}
           />
           <Route
-            path="/user"
+            exact path="/user"
             component={UserPage}
           />
           <Route
-            path="/info"
+            exact path="/info"
             component={InfoPage}
           />
-          {/* OTHERWISE (no path!) */}
-          <Route render={() => <h1>404</h1>} />
-
+          <Route component={ErrorNotFound} />
         </Switch>
       </div>
-
-
     </Router>
   </div>
 );
