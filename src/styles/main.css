@@ -95,6 +95,7 @@ li a:hover {
 }
 
 .about {
+  height: 20vh;
   color: white;
   width: 600px;
   text-align: center;
