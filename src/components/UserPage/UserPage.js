@@ -41,7 +41,6 @@ class UserPage extends Component {
             Welcome, {this.props.user.userName}!
           </h1>
           <p>Your ID is: {this.props.user.id}</p>
-          <p>{this.props.user.admin_access}</p>
           <button
             onClick={this.logout}
           >
