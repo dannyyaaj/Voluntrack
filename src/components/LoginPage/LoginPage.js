@@ -54,7 +54,7 @@ class LoginPage extends Component {
           className="alert"
           role="alert"
         >
-          { this.props.login.message }
+          {this.props.login.message}
         </h2>
       );
     }
@@ -64,9 +64,8 @@ class LoginPage extends Component {
   render() {
     return (
       <div>
-              <PublicNav />
-
-        { this.renderAlert() }
+        <PublicNav />
+        {this.renderAlert()}
         <form onSubmit={this.login}>
           <h1>Login</h1>
           <div>

@@ -12,8 +12,8 @@ import LoginPage from './components/LoginPage/LoginPage';
 import RegisterPage from './components/RegisterPage/RegisterPage';
 import UserPage from './components/UserPage/UserPage';
 import InfoPage from './components/InfoPage/InfoPage';
+import ProfilePage from './components/ProfilePage/ProfilePage';
 import ErrorNotFound from './components/ErrorNotFound/ErrorNotFound';
-
 import './styles/main.css';
 
 const App = () => (
@@ -42,6 +42,10 @@ const App = () => (
           <Route
             exact path="/info"
             component={InfoPage}
+          />
+          <Route
+            exact path="/profile"
+            component={ProfilePage}
           />
           <Route component={ErrorNotFound} />
         </Switch>
