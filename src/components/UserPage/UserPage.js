@@ -9,6 +9,7 @@ import { triggerLogout } from '../../redux/actions/loginActions';
 
 const mapStateToProps = state => ({
   user: state.user,
+  state: state,
 });
 
 class UserPage extends Component {
@@ -28,6 +29,7 @@ class UserPage extends Component {
   }
 
   render() {
+    console.log(this.props.user)
     let content = null;
 
     if (this.props.user.userName) {
@@ -36,9 +38,10 @@ class UserPage extends Component {
           <h1
             id="welcome"
           >
-            Welcome, { this.props.user.userName }!
+            Welcome, {this.props.user.userName}!
           </h1>
           <p>Your ID is: {this.props.user.id}</p>
+          <p>{this.props.user.admin_access}</p>
           <button
             onClick={this.logout}
           >
@@ -51,7 +54,7 @@ class UserPage extends Component {
     return (
       <div>
         <AdminNav />
-        { content }
+        {content}
       </div>
     );
   }
