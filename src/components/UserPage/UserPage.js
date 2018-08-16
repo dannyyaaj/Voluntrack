@@ -27,7 +27,7 @@ class UserPage extends Component {
   }
 
   render() {
-    console.log(this.props.user)
+  
     let content = null;
 
     if (this.props.user.userName && this.props.user.data.admin_access === true) {
