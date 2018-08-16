@@ -47,7 +47,7 @@ class AdminProfileForm extends Component {
               className={this.props.classes.textField}
               label="First Name"
               name="first_name"
-              placeholder=""
+              placeholder={this.props.user.first_name}
               fullWidth
               value={this.props.user.first_name}
               onChange={this.props.handleInputChangeFor('first_name')}
@@ -58,7 +58,7 @@ class AdminProfileForm extends Component {
               className={this.props.classes.textField}
               label="Middle Name"
               name="middle_name"
-              placeholder=""
+              placeholder={this.props.user.middle_name}
               fullWidth
               margin="normal"
               value={this.props.user.middle_name}
@@ -70,10 +70,10 @@ class AdminProfileForm extends Component {
               className={this.props.classes.textField}
               label="Last Name"
               name="lastName"
-              placeholder=""
+              placeholder={this.props.user.lastName}
               fullWidth
               margin="normal"
-              value={this.props.lastName}
+              value={this.props.user.lastName}
               onChange={this.props.handleInputChangeFor('lastName')}
             />
           </FormLabel>
@@ -82,9 +82,9 @@ class AdminProfileForm extends Component {
               className={this.props.classes.textField}
               label="Email"
               name="email"
-              placeholder=""
+              placeholder={this.props.user.email}
               fullWidth
-              value={this.props.email}
+              value={this.props.user.email}
               onChange={this.props.handleInputChangeFor('email')}
             />
           </FormLabel>
@@ -94,7 +94,7 @@ class AdminProfileForm extends Component {
               className={this.props.classes.textField}
               label="Primary Phone xxx-xxx-xxxx"
               name="primary_phone"
-              placeholder=""
+              placeholder={this.props.user.primary_phone}
               fullWidth
               value={this.props.user.primary_phone}
               onChange={this.props.handleInputChangeFor('primary_phone')}
@@ -105,7 +105,7 @@ class AdminProfileForm extends Component {
               className={this.props.classes.textField}
               label="Address"
               name="address"
-              placeholder=""
+              placeholder={this.props.user.address}
               fullWidth
               value={this.props.user.address}
               onChange={this.props.handleInputChangeFor('address')}
@@ -116,7 +116,7 @@ class AdminProfileForm extends Component {
               className={this.props.classes.textField}
               label="City"
               name="city"
-              placeholder=""
+              placeholder={this.props.user.city}
               fullWidth
               value={this.props.user.city}
               onChange={this.props.handleInputChangeFor('city')}
@@ -127,7 +127,7 @@ class AdminProfileForm extends Component {
               className={this.props.classes.textField}
               label="State"
               name="state"
-              placeholder=""
+              placeholder={this.props.user.state}
               fullWidth
               value={this.props.user.state}
               onChange={this.props.handleInputChangeFor('state')}
@@ -138,7 +138,7 @@ class AdminProfileForm extends Component {
               className={this.props.classes.textField}
               label="Zipcode"
               name="zipcode"
-              placeholder=""
+              placeholder={this.props.user.zipcode}
               fullWidth
               value={this.props.user.zipcode}
               onChange={this.props.handleInputChangeFor('zipcode')}
