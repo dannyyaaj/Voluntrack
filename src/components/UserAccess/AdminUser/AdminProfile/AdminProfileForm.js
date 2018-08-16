@@ -5,11 +5,6 @@ import FormControl from '@material-ui/core/FormControl';
 import FormLabel from '@material-ui/core/FormLabel';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
-import { connect } from 'react-redux';
-
-const mapStateToProps = state => ({
-  user: state.user,
-});
 
 const styles = () => ({
   form: {
@@ -179,4 +174,4 @@ class AdminProfileForm extends Component {
 
 const StyledAdminProfileForm =
   withStyles(styles)(AdminProfileForm);
-export default connect(mapStateToProps)(StyledAdminProfileForm)
+export default StyledAdminProfileForm
