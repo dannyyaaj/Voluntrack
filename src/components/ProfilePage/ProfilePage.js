@@ -20,13 +20,8 @@ class ProfilePage extends Component {
   }
 
   render() {
-
     let content = null;
-    let adminAccess;
-
     if (this.props.user.data) {
-
-      adminAccess = this.props.user.data.admin_access;
 
       if (this.props.user.data.admin_access === true) {
         content = (
@@ -44,31 +39,8 @@ class ProfilePage extends Component {
         )
       }
     } else {
-
-      console.log('not here yet');
+      console.log('admin_access property is not here yet');
     }
-
-
-    // switch (this.props.user.userName, this.props.user.data.admin_access) {
-    //   case !null, false:
-    //     content = (
-    //       <h1>User Profile Page</h1>
-    //     )
-    //     break;
-    //   case !null, true:
-    //     content = (
-    //       <h1>Admin Profile Page</h1>
-    //     )
-    //     break;
-    //   case false, false:
-    //     content = (
-    //       <UserErrorMessage />
-    //     )
-    //   default:
-    //     content = (
-    //       <UserErrorMessage />
-    //     )
-    // }
     return (
       <div>
         <AdminNav />
