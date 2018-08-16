@@ -1,12 +1,17 @@
 import React, { Component } from 'react';
-import axios from 'axios';
+import { connect } from 'react-redux';
 import AdminProfileForm from './AdminProfileForm';
 import { withStyles } from "@material-ui/core/styles";
 import { Card, CardContent, Grid } from '@material-ui/core';
 
+const mapStateToProps = state => ({
+  user: state.user,
+});
+
 const styles = {
   card: {
     margin: '2rem auto',
+    padding: '0 2rem',
     width: '50%',
     backgroundColor: '#DCEFF5',
   },
@@ -19,50 +24,22 @@ class AdminProfileView extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      username: '',
-      password: '',
+      first_name: '',
+      middle_name: '',
+      last_name: '',
       email: '',
-      firstName: '',
-      lastName: '',
-      admin_access: false
+      primary_phone: '',
+      address: '',
+      city: '',
+      state: '',
+      zipcode: ''
     };
   }
 
-  registerUser = (event) => {
+  updateUserProfile = (event) => {
     event.preventDefault();
 
-    if (this.state.username === '' || this.state.password === '') {
-      this.setState({
-        message: 'Please complete all inputs!',
-      });
-    } else {
-      const body = {
-        username: this.state.username,
-        password: this.state.password,
-        email: this.state.email,
-        firstName: this.state.firstName,
-        lastName: this.state.lastName,
-        admin_access: this.state.admin_access
-      };
-
-      // making the request to the server to post the new user's registration
-      axios.post('/api/user/register/', body)
-        .then((response) => {
-          if (response.status === 201) {
-            this.props.history.push('/home');
-          } else {
-            this.setState({
-              message: 'Ooops! That didn\'t work. The username might already be taken. Try again!',
-            });
-          }
-        })
-        .catch(() => {
-          this.setState({
-            message: 'Ooops! Something went wrong! Is the server running?',
-          });
-        });
-    }
-  } // end registerUser
+  }
 
   handleInputChangeFor = propertyName => (event) => {
     this.setState({
@@ -70,36 +47,20 @@ class AdminProfileView extends Component {
     });
   }
 
-  renderAlert() {
-    if (this.state.message !== '') {
-      return (
-        <h2
-          className="alert"
-          role="alert"
-        >
-          {this.state.message}
-        </h2>
-      );
-    }
-    return (<span />);
-  }
+
 
   render() {
+    console.log(this.state, 'local state')
     return (
       <div>
         <Grid container justify="center">
           <Grid item xs={12}>
             <Card className={this.props.classes.card}>
               <CardContent>
-                {this.renderAlert()}
-                <h1 className="formHeader">Sign up and start volunteering today</h1>
+                <h1 className="formHeader">Your Profile</h1>
+                <p className="formDescription">Manage your basic information below - name, email, and phone number - to make it easier for organizations to get in touch.</p>
                 <AdminProfileForm
-                  registerUser={this.registerUser}
-                  firstName={this.state.firstName}
-                  lastName={this.state.lastName}
-                  email={this.state.email}
-                  username={this.state.username}
-                  password={this.state.password}
+                  user={this.state}
                   handleInputChangeFor={this.handleInputChangeFor}
                 />
               </CardContent>
@@ -112,5 +73,5 @@ class AdminProfileView extends Component {
 }
 const StyledAdminProfileView = withStyles(styles)(AdminProfileView)
 
-export default StyledAdminProfileView;
+export default connect(mapStateToProps)(StyledAdminProfileView);
 
