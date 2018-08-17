@@ -15,7 +15,7 @@ import InfoPage from './components/InfoPage/InfoPage';
 import ProfilePage from './components/ProfilePage/ProfilePage';
 import ErrorNotFound from './components/ErrorNotFound/ErrorNotFound';
 import './styles/main.css';
-import ManageEvents from './components/ManageEvents/ManageEvents';
+import ManageEvents from './components/UserAccess/AdminUser/AdminProfile/ManageEvents';
 
 const App = () => (
   <div>
