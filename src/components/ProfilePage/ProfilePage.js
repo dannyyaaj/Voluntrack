@@ -7,6 +7,7 @@ import { USER_ACTIONS } from '../../redux/actions/userActions';
 
 const mapStateToProps = state => ({
   user: state.user,
+  profile: state.user.profile
 });
 class ProfilePage extends Component {
   componentDidMount() {
@@ -41,6 +42,7 @@ class ProfilePage extends Component {
     } else {
       console.log('admin_access property is not here yet');
     }
+
     return (
       <div>
         <AdminNav />
