@@ -5,6 +5,13 @@ import FormControl from '@material-ui/core/FormControl';
 import FormLabel from '@material-ui/core/FormLabel';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
+import { connect } from 'react-redux';
+import { USER_DATA_ACTIONS } from '../../../../redux/actions/userDataActions';
+import { triggerUpdateUser } from '../../../../redux/actions/userDataActions';
+
+const mapStateToProps = state => ({
+  user: state.user,
+});
 
 const styles = () => ({
   form: {
@@ -29,17 +36,59 @@ const styles = () => ({
 });
 
 class AdminProfileForm extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      first_name: '',
+      middle_name: '',
+      last_name: '',
+      email: '',
+      primary_phone: '',
+      address: '',
+      city: '',
+      state: '',
+      zipcode: '',
+    };
+  }
+
+  componentDidMount() {
+    this.props.dispatch({ type: USER_DATA_ACTIONS.FETCH_USER_DATA });
+  }
 
   goHome = () => {
     window.location.href = "http://localhost:3000/#/user"
   }
 
+  handleInputChangeFor = propertyName => (event) => {
+    this.setState({
+      [propertyName]: event.target.value,
+    });
+  }
+
+  updateUserProfile = (event) => {
+    event.preventDefault();
+    // Check local state for empty values and delete them from state object
+    const acceptedValues = '';
+    const oldState = this.state;
+    const newState = {};
+    for (let key in oldState) {
+      if (oldState.hasOwnProperty(key)) {
+        if (acceptedValues.indexOf(oldState[key]) === -1) {
+          newState[key] = oldState[key];
+        }
+      }
+    }
+    
+    console.log(newState);
+    //dispatch to put request will go here
+    this.props.dispatch(triggerUpdateUser(this.props.user.id, newState))
+  }
+
   render() {
-    console.log(this.props)
     return (
       <form
         className={this.props.classes.form}
-        onSubmit={this.props.registerUser}>
+        onSubmit={this.updateUserProfile}>
         <FormControl component="fieldset"
           className={this.props.classes.container}>
           <FormLabel htmlFor="first_name">
@@ -47,10 +96,10 @@ class AdminProfileForm extends Component {
               className={this.props.classes.textField}
               label="First Name"
               name="first_name"
-              placeholder={this.props.user.first_name}
+              placeholder={this.props.profile.first_name}
               fullWidth
-              value={this.props.user.first_name}
-              onChange={this.props.handleInputChangeFor('first_name')}
+              value={this.state.first_name}
+              onChange={this.handleInputChangeFor('first_name')}
             />
           </FormLabel>
           <FormLabel htmlFor="middle_name">
@@ -58,23 +107,22 @@ class AdminProfileForm extends Component {
               className={this.props.classes.textField}
               label="Middle Name"
               name="middle_name"
-              placeholder={this.props.user.middle_name}
+              placeholder={this.props.profile.middle_name}
               fullWidth
               margin="normal"
-              value={this.props.user.middle_name}
-              onChange={this.props.handleInputChangeFor('middle_name')}
+              value={this.state.middle_name}
+              onChange={this.handleInputChangeFor('middle_name')}
             />
           </FormLabel>
           <FormLabel htmlFor="lastName">
             <TextField
               className={this.props.classes.textField}
               label="Last Name"
-              name="lastName"
-              placeholder={this.props.user.lastName}
+              name="last_name"
+              placeholder={this.props.profile.last_name}
               fullWidth
-              margin="normal"
-              value={this.props.user.lastName}
-              onChange={this.props.handleInputChangeFor('lastName')}
+              value={this.state.last_name}
+              onChange={this.handleInputChangeFor('last_name')}
             />
           </FormLabel>
           <FormLabel htmlFor="email">
@@ -82,10 +130,10 @@ class AdminProfileForm extends Component {
               className={this.props.classes.textField}
               label="Email"
               name="email"
-              placeholder={this.props.user.email}
+              placeholder={this.props.profile.email}
               fullWidth
-              value={this.props.user.email}
-              onChange={this.props.handleInputChangeFor('email')}
+              value={this.state.email}
+              onChange={this.handleInputChangeFor('email')}
             />
           </FormLabel>
           <FormLabel htmlFor="primary_phone"
@@ -94,10 +142,10 @@ class AdminProfileForm extends Component {
               className={this.props.classes.textField}
               label="Primary Phone xxx-xxx-xxxx"
               name="primary_phone"
-              placeholder={this.props.user.primary_phone}
+              placeholder={this.props.profile.primary_phone}
               fullWidth
-              value={this.props.user.primary_phone}
-              onChange={this.props.handleInputChangeFor('primary_phone')}
+              value={this.state.primary_phone}
+              onChange={this.handleInputChangeFor('primary_phone')}
             />
           </FormLabel>
           <FormLabel htmlFor="address">
@@ -105,10 +153,10 @@ class AdminProfileForm extends Component {
               className={this.props.classes.textField}
               label="Address"
               name="address"
-              placeholder={this.props.user.address}
+              placeholder={this.props.profile.address}
               fullWidth
-              value={this.props.user.address}
-              onChange={this.props.handleInputChangeFor('address')}
+              value={this.state.address}
+              onChange={this.handleInputChangeFor('address')}
             />
           </FormLabel>
           <FormLabel htmlFor="city">
@@ -116,10 +164,10 @@ class AdminProfileForm extends Component {
               className={this.props.classes.textField}
               label="City"
               name="city"
-              placeholder={this.props.user.city}
+              placeholder={this.props.profile.city}
               fullWidth
-              value={this.props.user.city}
-              onChange={this.props.handleInputChangeFor('city')}
+              value={this.state.city}
+              onChange={this.handleInputChangeFor('city')}
             />
           </FormLabel>
           <FormLabel htmlFor="state">
@@ -127,10 +175,10 @@ class AdminProfileForm extends Component {
               className={this.props.classes.textField}
               label="State"
               name="state"
-              placeholder={this.props.user.state}
+              placeholder={this.props.profile.state}
               fullWidth
-              value={this.props.user.state}
-              onChange={this.props.handleInputChangeFor('state')}
+              value={this.state.state}
+              onChange={this.handleInputChangeFor('state')}
             />
           </FormLabel>
           <FormLabel htmlFor="zipcode">
@@ -138,10 +186,10 @@ class AdminProfileForm extends Component {
               className={this.props.classes.textField}
               label="Zipcode"
               name="zipcode"
-              placeholder={this.props.user.zipcode}
+              placeholder={this.props.profile.zipcode}
               fullWidth
-              value={this.props.user.zipcode}
-              onChange={this.props.handleInputChangeFor('zipcode')}
+              value={this.state.zipcode}
+              onChange={this.handleInputChangeFor('zipcode')}
             />
           </FormLabel>
           <div>
@@ -174,4 +222,4 @@ class AdminProfileForm extends Component {
 
 const StyledAdminProfileForm =
   withStyles(styles)(AdminProfileForm);
-export default StyledAdminProfileForm
+export default connect(mapStateToProps)(StyledAdminProfileForm);
