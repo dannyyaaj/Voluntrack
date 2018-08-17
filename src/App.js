@@ -15,6 +15,7 @@ import InfoPage from './components/InfoPage/InfoPage';
 import ProfilePage from './components/ProfilePage/ProfilePage';
 import ErrorNotFound from './components/ErrorNotFound/ErrorNotFound';
 import './styles/main.css';
+import ManageEvents from './components/ManageEvents/ManageEvents';
 
 const App = () => (
   <div>
@@ -42,6 +43,10 @@ const App = () => (
           <Route
             exact path="/info"
             component={InfoPage}
+          />
+          <Route
+            exact path="/events"
+            component={ManageEvents}
           />
           <Route
             exact path="/profile"
