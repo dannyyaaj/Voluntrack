@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 // material ui components
-import { withStyles } from '@material-ui/core';
-import FormControl from '@material-ui/core/FormControl';
-import FormLabel from '@material-ui/core/FormLabel';
-import TextField from '@material-ui/core/TextField';
-import Button from '@material-ui/core/Button';
+import { withStyles, FormControl, FormLabel, TextField, Button } from '@material-ui/core';
+// import FormLabel from '@material-ui/core/FormLabel';
+// import TextField from '@material-ui/core/TextField';
+// import Button from '@material-ui/core/Button';
 import { connect } from 'react-redux';
 import { USER_DATA_ACTIONS } from '../../../../redux/actions/userDataActions';
 import { triggerUpdateUser } from '../../../../redux/actions/userDataActions';
@@ -78,7 +77,7 @@ class AdminProfileForm extends Component {
         }
       }
     }
-    
+
     console.log(newState);
     //dispatch to put request will go here
     this.props.dispatch(triggerUpdateUser(this.props.user.id, newState))
@@ -197,7 +196,7 @@ class AdminProfileForm extends Component {
               className={this.props.classes.button}
               color="primary"
               variant="extendedFab"
-              fullWidth
+              fullWidth="true"
               type="submit"
             >
               Update Profile
