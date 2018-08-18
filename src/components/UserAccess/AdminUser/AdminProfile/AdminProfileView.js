@@ -44,7 +44,7 @@ class AdminProfileView extends Component {
 
   // Wait for reduxState to load, then set the local state's values
   async componentDidMount() {
-    await new Promise(resolve => { setTimeout(resolve, 50) })
+    await new Promise(resolve => { setTimeout(resolve, 500) })
     this.setValues();
   }
 
