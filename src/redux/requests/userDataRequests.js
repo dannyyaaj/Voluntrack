@@ -7,7 +7,7 @@ export function callUserData() {
 }
 
 export function updateUserData(action) {
-  return axios.put('api/userData/', action)
+  return axios.put('api/userData', action)
     .then(response => response.data)
     .catch((error) => { throw error.response || error; });
 }
