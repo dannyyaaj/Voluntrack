@@ -1,0 +1,12 @@
+export const USER_DATA_ACTIONS = {
+  FETCH_USER_DATA: 'FETCH_USER_DATA',
+  SET_USER_DATA: 'SET_USER_DATA_ACTION',
+  UNSET_USER_DATA: 'UNSET_USER_DATA_ACTION',
+  USER_DATA_FETCH_FAILED: 'USER_DATA_FETCH_FAILED',
+  PUT_USER_DATA: 'PUT_USER_DATA'
+};
+
+export const triggerUpdateUser = (userId, newUserData) => ({
+  type: USER_DATA_ACTIONS.PUT_USER_DATA,
+  payload: [userId, newUserData],
+});

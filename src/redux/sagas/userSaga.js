@@ -31,7 +31,6 @@ function* fetchUser() {
 // function* userSaga() {
 //   yield takeEvery('FETCH_USER', fetchUser);
 // }
-
 /*
   Alternatively you may use takeLatest.
 

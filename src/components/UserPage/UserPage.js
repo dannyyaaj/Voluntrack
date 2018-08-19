@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import AdminNav from '../../components/Nav/AdminNav';
+import AdminNav from '../UserAccess/AdminUser/AdminNav/AdminNav';
+import VolunteerNav from '../UserAccess/VolunteerUser/VolunteerNav/VolunteerNav';
 
 import { USER_ACTIONS } from '../../redux/actions/userActions';
 import { triggerLogout } from '../../redux/actions/loginActions';
@@ -27,12 +28,13 @@ class UserPage extends Component {
   }
 
   render() {
-    console.log(this.props.user)
+
     let content = null;
 
     if (this.props.user.userName && this.props.user.data.admin_access === true) {
       content = (
         <div>
+          <AdminNav />
           <h1
             id="welcome"
           >
@@ -46,6 +48,7 @@ class UserPage extends Component {
     } else {
       content = (
         <div>
+        <VolunteerNav />
           <h1
             id="welcome"
           >
@@ -58,7 +61,6 @@ class UserPage extends Component {
 
     return (
       <div>
-        <AdminNav />
         {content}
       </div>
     );

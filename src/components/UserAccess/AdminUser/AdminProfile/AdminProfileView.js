@@ -1,12 +1,19 @@
 import React, { Component } from 'react';
-import axios from 'axios';
+import { connect } from 'react-redux';
 import AdminProfileForm from './AdminProfileForm';
 import { withStyles } from "@material-ui/core/styles";
 import { Card, CardContent, Grid } from '@material-ui/core';
+import { USER_DATA_ACTIONS } from '../../../../redux/actions/userDataActions';
+
+const mapStateToProps = state => ({
+  user: state.user,
+  profile: state.user.profile
+});
 
 const styles = {
   card: {
     margin: '2rem auto',
+    padding: '0 2rem',
     width: '50%',
     backgroundColor: '#DCEFF5',
   },
@@ -19,69 +26,55 @@ class AdminProfileView extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      username: '',
-      password: '',
+      first_name: '',
+      middle_name: '',
+      last_name: '',
       email: '',
-      firstName: '',
-      lastName: '',
-      admin_access: false
+      primary_phone: '',
+      address: '',
+      city: '',
+      state: '',
+      zipcode: '',
     };
   }
 
-  registerUser = (event) => {
-    event.preventDefault();
-
-    if (this.state.username === '' || this.state.password === '') {
-      this.setState({
-        message: 'Please complete all inputs!',
-      });
-    } else {
-      const body = {
-        username: this.state.username,
-        password: this.state.password,
-        email: this.state.email,
-        firstName: this.state.firstName,
-        lastName: this.state.lastName,
-        admin_access: this.state.admin_access
-      };
-
-      // making the request to the server to post the new user's registration
-      axios.post('/api/user/register/', body)
-        .then((response) => {
-          if (response.status === 201) {
-            this.props.history.push('/home');
-          } else {
-            this.setState({
-              message: 'Ooops! That didn\'t work. The username might already be taken. Try again!',
-            });
-          }
-        })
-        .catch(() => {
-          this.setState({
-            message: 'Ooops! Something went wrong! Is the server running?',
-          });
-        });
-    }
-  } // end registerUser
-
-  handleInputChangeFor = propertyName => (event) => {
-    this.setState({
-      [propertyName]: event.target.value,
-    });
+  componentWillMount() {
+    this.props.dispatch({ type: USER_DATA_ACTIONS.FETCH_USER_DATA });
   }
 
-  renderAlert() {
-    if (this.state.message !== '') {
-      return (
-        <h2
-          className="alert"
-          role="alert"
-        >
-          {this.state.message}
-        </h2>
-      );
-    }
-    return (<span />);
+  // Wait for reduxState to load, then set the local state's values
+  async componentDidMount() {
+    await new Promise(resolve => { setTimeout(resolve, 500) })
+    this.setValues();
+  }
+
+  componentWillUnmount() {
+    this.props.dispatch({ type: USER_DATA_ACTIONS.UNSET_USER_DATA });
+  }
+
+  setValues = () => {
+    const oldFirstName = this.props.profile.first_name;
+    const oldMiddleName = this.props.profile.middle_name;
+    const oldLastName = this.props.profile.last_name;
+    const oldEmail = this.props.profile.email;
+    const oldPrimaryPhone = this.props.profile.primary_phone;
+    const oldAddress = this.props.profile.address;
+    const oldCity = this.props.profile.city;
+    const oldState = this.props.profile.state;
+    const oldZipcode = this.props.profile.zipcode;
+
+    // Sets local state's values to the most current user information in database, which is stored in reduxState
+    this.setState({
+      first_name: oldFirstName,
+      middle_name: oldMiddleName,
+      last_name: oldLastName,
+      email: oldEmail,
+      primary_phone: oldPrimaryPhone,
+      address: oldAddress,
+      city: oldCity,
+      state: oldState,
+      zipcode: oldZipcode,
+    })
   }
 
   render() {
@@ -91,16 +84,10 @@ class AdminProfileView extends Component {
           <Grid item xs={12}>
             <Card className={this.props.classes.card}>
               <CardContent>
-                {this.renderAlert()}
-                <h1 className="formHeader">Sign up and start volunteering today</h1>
+                <h1 className="formHeader">Your Profile</h1>
+                <p className="formDescription">Manage your basic information below - name, email, and phone number - to make it easier for organizations to get in touch.</p>
                 <AdminProfileForm
-                  registerUser={this.registerUser}
-                  firstName={this.state.firstName}
-                  lastName={this.state.lastName}
-                  email={this.state.email}
-                  username={this.state.username}
-                  password={this.state.password}
-                  handleInputChangeFor={this.handleInputChangeFor}
+                  profile={this.state}
                 />
               </CardContent>
             </Card>
@@ -110,7 +97,8 @@ class AdminProfileView extends Component {
     );
   }
 }
+
 const StyledAdminProfileView = withStyles(styles)(AdminProfileView)
 
-export default StyledAdminProfileView;
+export default connect(mapStateToProps)(StyledAdminProfileView);
 
