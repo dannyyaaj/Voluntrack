@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
 // material ui components
 import { withStyles, FormControl, FormLabel, TextField, Button } from '@material-ui/core';
-// import FormLabel from '@material-ui/core/FormLabel';
-// import TextField from '@material-ui/core/TextField';
-// import Button from '@material-ui/core/Button';
+
 import { connect } from 'react-redux';
 import { USER_DATA_ACTIONS } from '../../../../redux/actions/userDataActions';
 import { triggerUpdateUser } from '../../../../redux/actions/userDataActions';
@@ -214,7 +212,7 @@ class AdminProfileForm extends Component {
           </Button>
           </div>
         </FormControl>
-      </form >
+      </form>
     )
   }
 }
