@@ -1,0 +1,3 @@
+export const EVENT_ACTIONS = {
+  FETCH_EVENT_DATA: 'FETCH_EVENT_DATA',
+}
