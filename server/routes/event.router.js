@@ -1,10 +1,25 @@
 const express = require('express');
 const { rejectUnauthenticated } = require('../modules/authentication-middleware');
 const pool = require('../modules/pool');
+const moment = require('moment');
 
 const router = express.Router();
 
-router.get('/', rejectUnauthenticated, (req, res) => {
+router.get('/upcoming', rejectUnauthenticated, (req, res) => {
+  const queryText = `SELECT * FROM "event"
+  WHERE ("date" >= CURRENT_DATE);`;
+
+  pool.query(queryText)
+    .then((result) => {
+      res.send(result.rows);
+    })
+    .catch((error) => {
+      console.log(error);
+      res.sendStatus(500);
+    })
+});
+
+router.get('/past', rejectUnauthenticated, (req, res) => {
   const queryText = `SELECT * FROM "event";`;
 
   pool.query(queryText)
@@ -19,11 +34,13 @@ router.get('/', rejectUnauthenticated, (req, res) => {
 
 router.post('/', rejectUnauthenticated, (req, res) => {
   
-  const newEventData = req.body
+  const newEventData = req.body.payload
+  console.log(req.body.payload, 'new event payload')
+  console.log(req.body, 'req body')
 
   const queryText = `INSERT INTO "event" ("name", "address", "city", "state", "zipcode", "coordinator", "date", "start_time", "end_time", "description", "roles", "image_url") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9 ,$10, $11, $12);`;
 
-  const serializedData = [newEventData.name, newEventData.address, newEventData.city, newEventData.state, newEventData.zipcode, newEventData.coordinator, newEventData.date, newEventData.start_time, newEventData.end_time, newEventData.description, newEventData.roles, 'null']
+  const serializedData = [newEventData.name, newEventData.address, newEventData.city, newEventData.state, newEventData.zipcode, newEventData.coordinator, newEventData.date,newEventData.start_time, newEventData.end_time, newEventData.description, newEventData.roles, newEventData.image_url]
 
   pool.query(queryText, serializedData)
     .then((results) => {
