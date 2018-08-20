@@ -18,6 +18,7 @@ router.get('/', rejectUnauthenticated, (req, res) => {
 });
 
 router.post('/', rejectUnauthenticated, (req, res) => {
+  
   const newEventData = req.body
 
   const queryText = `INSERT INTO "event" ("name", "address", "city", "state", "zipcode", "coordinator", "date", "start_time", "end_time", "description", "roles", "image_url") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9 ,$10, $11, $12);`;
