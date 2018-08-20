@@ -92,7 +92,6 @@ class ManageEventsView extends Component {
             {modalContent}
           </div>
         </Modal>
-
         {pageContent}
       </div>
     )

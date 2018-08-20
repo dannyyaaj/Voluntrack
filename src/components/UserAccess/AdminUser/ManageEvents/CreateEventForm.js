@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 // material ui components
-import { withStyles, FormControl, TextField, Button, Select, MenuItem } from '@material-ui/core';
+import { withStyles, FormControl, TextField, Button } from '@material-ui/core';
 import { Grid, Row, Col } from 'react-material-responsive-grid';
 import moment from 'moment';
 
@@ -40,19 +40,24 @@ class CreateEventsForm extends Component {
       description: '',
       start_time: '',
       end_time: '',
-      date: '',
+      date: moment().format('YYYY-MM-DD', new Date()),
       address: '',
       city: '',
       state: '',
       zipcode: '',
       coordinator: '',
       image_url: '',
-      roles: [],
+      roles: '',
     };
   }
 
+  handleInputChangeFor = propertyName => (event) => {
+    this.setState({
+      [propertyName]: event.target.value,
+    });
+  }
+
   render() {
-    const currentDate = moment().format('YYYY-MM-DD', new Date());
     return (
       <Grid>
         <form
@@ -74,6 +79,8 @@ class CreateEventsForm extends Component {
                   InputLabelProps={{
                     shrink: true,
                   }}
+                  onChange={this.handleInputChangeFor('name')}
+
                 />
               </Col>
               <Col xs4={2} md={6} lg={6}>
@@ -86,6 +93,8 @@ class CreateEventsForm extends Component {
                   InputLabelProps={{
                     shrink: true,
                   }}
+                  onChange={this.handleInputChangeFor('coordinator')}
+
                 />
                 {/* <Select
                   className={this.props.classes.selectField}
@@ -121,6 +130,7 @@ class CreateEventsForm extends Component {
                   InputLabelProps={{
                     shrink: true,
                   }}
+                  onChange={this.handleInputChangeFor('address')}
                 />
               </Col>
               <Col xs4={2} md={6} lg={6}>
@@ -131,12 +141,12 @@ class CreateEventsForm extends Component {
                   margin="normal"
                   name="date"
                   type="date"
-                  defaultValue={currentDate}
                   fullWidth
                   value={this.state.date}
                   InputLabelProps={{
                     shrink: true,
                   }}
+                  onChange={this.handleInputChangeFor('date')}
                 />
               </Col>
             </Row>
@@ -151,6 +161,8 @@ class CreateEventsForm extends Component {
                   InputLabelProps={{
                     shrink: true,
                   }}
+                  onChange={this.handleInputChangeFor('city')}
+
                 />
               </Col>
               <Col xs4={2} md={3} lg={3}>
@@ -165,6 +177,8 @@ class CreateEventsForm extends Component {
                   InputLabelProps={{
                     shrink: true,
                   }}
+                  onChange={this.handleInputChangeFor('start_time')}
+
                   inputProps={{
                     step: 300, // 5 min
                   }}
@@ -181,6 +195,8 @@ class CreateEventsForm extends Component {
                   InputLabelProps={{
                     shrink: true,
                   }}
+                  onChange={this.handleInputChangeFor('end_time')}
+
                 />
               </Col>
             </Row>
@@ -195,6 +211,8 @@ class CreateEventsForm extends Component {
                   InputLabelProps={{
                     shrink: true,
                   }}
+                  onChange={this.handleInputChangeFor('state')}
+
                 />
               </Col>
               <Col xs4={2} md={6} lg={6}>
@@ -203,10 +221,11 @@ class CreateEventsForm extends Component {
                   label="Volunteer Roles"
                   name="volunteer_roles"
                   fullWidth
-                  value={this.state.roles}
                   InputLabelProps={{
                     shrink: true,
                   }}
+                  onChange={this.handleInputChangeFor('')}
+
                 />
               </Col>
             </Row>
@@ -217,9 +236,12 @@ class CreateEventsForm extends Component {
                   label="Zipcode"
                   name="zipcode"
                   fullWidth
+                  value={this.state.zipcode}
                   InputLabelProps={{
                     shrink: true,
                   }}
+                  onChange={this.handleInputChangeFor('zipcode')}
+
                 />
 
               </Col>
@@ -230,10 +252,11 @@ class CreateEventsForm extends Component {
                   name="roles"
                   type="number"
                   fullWidth
-                  value={this.state.zipcode}
+                  value={this.state.roles}
                   InputLabelProps={{
                     shrink: true,
                   }}
+                  onChange={this.handleInputChangeFor('roles')}
                 />
               </Col>
             </Row>
@@ -252,6 +275,7 @@ class CreateEventsForm extends Component {
                   InputLabelProps={{
                     shrink: true,
                   }}
+                  onChange={this.handleInputChangeFor('description')}
                 />
               </Col>
             </Row>
