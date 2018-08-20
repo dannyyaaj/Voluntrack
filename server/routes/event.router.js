@@ -25,13 +25,13 @@ router.post('/', rejectUnauthenticated, (req, res) => {
   const serializedData = [newEventData.name, newEventData.address, newEventData.city, newEventData.state, newEventData.zipcode, newEventData.coordinator, newEventData.date, newEventData.start_time, newEventData.end_time, newEventData.description, newEventData.roles, 'null']
 
   pool.query(queryText, serializedData)
-  .then((results) => {
-    res.sendStatus(201);
-  })
-  .catch((error) => {
-    res.sendStatus(500);
-  })
-})
+    .then((results) => {
+      res.sendStatus(201);
+    })
+    .catch((error) => {
+      res.sendStatus(500);
+    })
+});
 
 // router.put('/:id', rejectUnauthenticated, (req, res) => {
 //   const newUserData = req.body
