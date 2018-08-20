@@ -12,7 +12,6 @@ router.get('/', rejectUnauthenticated, (req, res) => {
   res.send(req.user);
 });
 
-
 router.put('/', rejectUnauthenticated, (req, res) => {
   let queryText = ``
 });

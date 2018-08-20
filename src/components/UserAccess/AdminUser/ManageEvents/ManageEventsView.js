@@ -6,16 +6,16 @@ import CreateEventForm from './CreateEventForm';
 
 const styles = () => ({
   modalStyle: {
-    // position: 'absolute',
     backgroundColor: 'white',
-    margin: '1.5rem auto',
+    margin: '0 auto',
     width: '90%',
-    height: '85%',
+    height: '90%',
     boxShadow: '0px 0px 30px rgba(0, 0, 0, 0.3)',
-    marginTop: '30px',
+    marginTop: '10px',
+    padding: '30px',
+    opacity: '0.9'
   }
 })
-
 class ManageEventsView extends Component {
   constructor(props) {
     super(props);
@@ -55,7 +55,7 @@ class ManageEventsView extends Component {
     let modalContent = null
     let pageContent = null
     let buttonText = null
-    modalContent = (<CreateEventForm />)
+    modalContent = (<CreateEventForm handleClose={this.handleClose}/>)
 
     this.state.showPastEvents === true && this.state.toggleButtonText === true ?
       pageContent = (<PastEventCardsView />) :
@@ -92,7 +92,6 @@ class ManageEventsView extends Component {
             {modalContent}
           </div>
         </Modal>
-
         {pageContent}
       </div>
     )
