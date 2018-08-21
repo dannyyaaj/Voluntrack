@@ -3,6 +3,7 @@ import { withStyles, Button, Modal, Typography } from '@material-ui/core';
 import EventCardsView from './EventCardsView';
 import PastEventCardsView from './PastEventCardsView';
 import CreateEventForm from './CreateEventForm';
+import { EVENT_ACTIONS } from '../../../../redux/actions/eventActions';
 
 const styles = () => ({
   modalStyle: {
@@ -51,16 +52,18 @@ class ManageEventsView extends Component {
   };
 
   render() {
-    console.log(this.state)
     let modalContent = null
     let pageContent = null
     let buttonText = null
-    modalContent = (<CreateEventForm handleClose={this.handleClose}/>)
+    modalContent = (<CreateEventForm handleClose={this.handleClose} />)
 
     this.state.showPastEvents === true && this.state.toggleButtonText === true ?
       pageContent = (<PastEventCardsView />) :
-      pageContent = (<h1>Upcoming Events</h1>)
-
+      pageContent = (
+        <div>
+          <h1>Upcoming Events</h1>
+          <EventCardsView />
+        </div>)
 
     this.state.toggleButtonText === false ?
       buttonText = 'View Past Events' :
