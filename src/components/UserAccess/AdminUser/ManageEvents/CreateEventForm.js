@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 // material ui components
 import { withStyles, FormControl, TextField, Button } from '@material-ui/core';
 import { Grid, Row, Col } from 'react-material-responsive-grid';
 import moment from 'moment';
+import { EVENT_ACTIONS } from '../../../../redux/actions/eventActions';
 
 const styles = () => ({
   form: {
@@ -57,12 +59,20 @@ class CreateEventsForm extends Component {
     });
   }
 
+  addEvent = (event) => {
+    event.preventDefault();
+    this.props.dispatch({
+      type: EVENT_ACTIONS.POST_EVENT,
+      payload: this.state
+    })
+  }
+
   render() {
     return (
       <Grid>
         <form
           className={this.props.classes.form}
-          onSubmit={this.updateUserProfile}
+          onSubmit={this.addEvent}
           noValidate
         >
           <FormControl component="fieldset"
@@ -299,7 +309,7 @@ class CreateEventsForm extends Component {
                   type="submit"
                   fullWidth
                 >
-                  Update Profile
+                  Create Event
                 </Button>
               </Col>
             </Row>
@@ -312,4 +322,4 @@ class CreateEventsForm extends Component {
 
 const StyledCreateEventsForm = withStyles(styles)(CreateEventsForm);
 
-export default StyledCreateEventsForm;
+export default connect()(StyledCreateEventsForm);
