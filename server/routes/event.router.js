@@ -1,11 +1,10 @@
 const express = require('express');
 const { rejectUnauthenticated } = require('../modules/authentication-middleware');
 const pool = require('../modules/pool');
-const moment = require('moment');
-
 const router = express.Router();
 
 router.get('/upcoming', rejectUnauthenticated, (req, res) => {
+  // GET request for upcoming events
   const queryText = `SELECT * FROM "event"
   WHERE ("date" >= CURRENT_DATE);`;
 
@@ -20,7 +19,9 @@ router.get('/upcoming', rejectUnauthenticated, (req, res) => {
 });
 
 router.get('/past', rejectUnauthenticated, (req, res) => {
-  const queryText = `SELECT * FROM "event";`;
+  // GET request for past events
+  const queryText = `SELECT * FROM "event"
+  WHERE ("date" < CURRENT_DATE);`;
 
   pool.query(queryText)
     .then((result) => {
@@ -33,10 +34,9 @@ router.get('/past', rejectUnauthenticated, (req, res) => {
 });
 
 router.post('/', rejectUnauthenticated, (req, res) => {
-  
+  // POST request with new volunteer event
   const newEventData = req.body.payload
   console.log(req.body.payload, 'new event payload')
-  console.log(req.body, 'req body')
 
   const queryText = `INSERT INTO "event" ("name", "address", "city", "state", "zipcode", "coordinator", "date", "start_time", "end_time", "description", "roles", "image_url") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9 ,$10, $11, $12);`;
 
@@ -51,24 +51,4 @@ router.post('/', rejectUnauthenticated, (req, res) => {
     })
 });
 
-// router.put('/:id', rejectUnauthenticated, (req, res) => {
-//   const newUserData = req.body
-
-//   const queryText = `UPDATE "person" SET "email" = $2, "first_name" = $3, "middle_name" = $4, "last_name" = $5, "primary_phone" = $6, "address" = $7, "city" = $8, "state" = $9, "zipcode" = $10
-//   WHERE "id" = $1;`;
-
-//   const serializedData = [req.user.id, newUserData.email, newUserData.first_name, newUserData.middle_name, newUserData.last_name, newUserData.primary_phone, newUserData.address, newUserData.city, newUserData.state, newUserData.zipcode];
-
-//   pool.query(queryText, serializedData)
-//     .then((result) => {
-//       res.sendStatus(201);
-//     })
-//     .catch((error) => {
-//       console.log(error);
-//       res.sendStatus(500);
-//     })
-// });
-
 module.exports = router;
-
-// INSERT INTO "event" ("name", "address", "city", "state", "zipcode", "coordinator", "date", "start_time", "end_time", "description", "roles", "image_url") VALUES ('community forum', '12345 Street', 'Saint Paul', 'MN', 'zipcode', 'Danny', '2018-08-19', NOW(), NOW() + interval '2 hours','a volunteer event', 10, 'null');
