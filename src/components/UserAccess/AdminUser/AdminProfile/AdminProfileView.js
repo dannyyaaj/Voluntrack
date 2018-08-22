@@ -2,8 +2,11 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import AdminProfileForm from './AdminProfileForm';
 import { withStyles } from "@material-ui/core/styles";
-import { Card, CardContent, Grid } from '@material-ui/core';
+import { Button, Card, CardContent, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from '@material-ui/core';
+import { Grid, Row, Col } from 'react-material-responsive-grid';
+
 import { USER_DATA_ACTIONS } from '../../../../redux/actions/userDataActions';
+import { triggerUpdateUser } from '../../../../redux/actions/userDataActions';
 
 const mapStateToProps = state => ({
   user: state.user,
@@ -20,6 +23,9 @@ const styles = {
   cardActions: {
     padding: '0 40%'
   },
+  dialogModal: {
+    textAlign: 'center',
+  }
 }
 
 class AdminProfileView extends Component {
@@ -35,6 +41,7 @@ class AdminProfileView extends Component {
       city: '',
       state: '',
       zipcode: '',
+      dialogIsOpen: false
     };
   }
 
@@ -77,23 +84,89 @@ class AdminProfileView extends Component {
     })
   }
 
+  handleInputChangeFor = propertyName => (event) => {
+    this.setState({
+      [propertyName]: event.target.value
+    });
+  }
+
+  updateUserProfile = () => {
+    this.setState({
+      dialogIsOpen: false
+    });
+
+    this.props.dispatch(triggerUpdateUser(this.props.user.id, this.state))
+  }
+
+
+  handleClickOpen = (event) => {
+    event.preventDefault();
+    this.setState({
+      dialogIsOpen: true
+    });
+  };
+
+  handleClose = () => {
+    this.setState({
+      dialogIsOpen: false
+    });
+  }
+
+
   render() {
     return (
-      <div>
-        <Grid container justify="center">
-          <Grid item xs={12}>
-            <Card className={this.props.classes.card}>
-              <CardContent>
-                <h1 className="formHeader">Your Profile</h1>
-                <p className="formDescription">Manage your basic information below - name, email, and phone number - to make it easier for organizations to get in touch.</p>
-                <AdminProfileForm
-                  profile={this.state}
-                />
-              </CardContent>
-            </Card>
-          </Grid>
-        </Grid>
-      </div>
+      <Grid
+        fixed="center"
+      >
+        <Card className={this.props.classes.card}>
+          <CardContent>
+            <h1 className="formHeader">Your Profile</h1>
+            <p className="formDescription">Manage your basic information below - name, email, and phone number - to make it easier for organizations to get in touch.</p>
+            <AdminProfileForm
+              handleInputChangeFor={this.handleInputChangeFor}
+              profile={this.state}
+              handleClickOpen={this.handleClickOpen}
+            />
+          </CardContent>
+        </Card>
+        <div>
+          <Dialog
+            fullWidth
+            className={this.props.classes.dialogModal}
+            open={this.state.dialogIsOpen}
+            onClose={this.handleClose}
+            aria-labelledby="alert-dialog-title"
+            aria-describedby="alert-dialog-description"
+          >
+            <DialogTitle>{"Update Profile"}</DialogTitle>
+            <DialogContent>
+              <DialogContentText id="alert-dialog-description">
+                Are you sure everything is correct?
+                  </DialogContentText>
+            </DialogContent>
+            <DialogActions
+            >
+              <Row>
+                <Col xs4={2} md={6} lg={6}>
+                  <Button
+                    onClick={this.handleClose}
+                    color="primary">
+                    Cancel
+                    </Button>
+                </Col>
+                <Col xs4={2} md={6} lg={6}>
+                  <Button
+                    onClick={this.updateUserProfile}
+                    color="primary"
+                    autoFocus>
+                    Save
+                    </Button>
+                </Col>
+              </Row>
+            </DialogActions>
+          </Dialog>
+        </div>
+      </Grid>
     );
   }
 }
