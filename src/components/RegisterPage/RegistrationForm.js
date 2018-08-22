@@ -92,7 +92,7 @@ class RegistrationForm extends Component {
              className={this.props.classes.getStarted}
               color="primary"
               variant="extendedFab"
-              fullWidth="true"
+              fullWidth
               type="submit"
             >
               Get Started
