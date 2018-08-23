@@ -1,10 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 // material ui components
-import { withStyles, FormControl, FormLabel, TextField, Button } from '@material-ui/core';
+import { withStyles } from '@material-ui/core';
 // event actions and reducer
+
 import { EVENT_ACTIONS } from '../../../../redux/actions/eventActions';
 import UpcomingEventCards from './EventCards/UpcomingEventCards';
+import { Grid, Row, Col } from 'react-material-responsive-grid';
+
 
 const mapStateToProps = state => ({
   upcomingEvents: state.event.upcoming
@@ -33,7 +36,7 @@ const styles = () => ({
 });
 
 class EventCardsView extends Component {
-  componentWillMount() {
+  componentDidMount()  {
     this.props.dispatch({
       type: EVENT_ACTIONS.FETCH_UPCOMING_EVENTS
     })
@@ -44,21 +47,25 @@ class EventCardsView extends Component {
     if (this.props.upcomingEvents) {
       upcomingEventCards = this.props.upcomingEvents.map((event, index) => {
         return (
-          <div key={index}>
+
+          <Col xs4={4} md={4} lg={4} key={index}>
             <UpcomingEventCards
+              eventId={event.id}
               event={event}
             />
-
-          </div>
+          </Col>
         )
       })
     } else {
-      console.log('event cards not here yet');
+      console.log('upcoming event cards not here yet')
     }
     return (
       <div>
-        Event Cards Go Here
-        {upcomingEventCards}
+        <Grid>
+          <Row>
+            {upcomingEventCards}
+          </Row>
+        </Grid>
       </div>
     )
   }

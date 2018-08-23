@@ -16,5 +16,7 @@ export function callUpcomingEvent() {
 
 export function callPastEvent() {
   return axios.get('api/event/past')
+  .then(response => response.data)
+  .catch((error) => { throw error.response || error});
 }
 

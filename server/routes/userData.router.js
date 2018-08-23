@@ -5,6 +5,7 @@ const pool = require('../modules/pool');
 const router = express.Router();
 
 router.get('/', rejectUnauthenticated, (req, res) => {
+  // GET request for user information
   let queryText = `SELECT "first_name","middle_name", "last_name","email","primary_phone","address","city","state","zipcode", "event_id", "org_id" FROM "person"
   WHERE "id" = $1;`;
 
@@ -20,6 +21,7 @@ router.get('/', rejectUnauthenticated, (req, res) => {
 });
 
 router.put('/:id', rejectUnauthenticated, (req, res) => {
+  // PUT request to update user information
   const newUserData = req.body
   
   const queryText = `UPDATE "person" SET "email" = $2, "first_name" = $3, "middle_name" = $4, "last_name" = $5, "primary_phone" = $6, "address" = $7, "city" = $8, "state" = $9, "zipcode" = $10

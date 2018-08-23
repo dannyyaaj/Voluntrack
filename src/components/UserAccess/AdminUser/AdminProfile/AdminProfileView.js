@@ -2,8 +2,11 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import AdminProfileForm from './AdminProfileForm';
 import { withStyles } from "@material-ui/core/styles";
-import { Card, CardContent, Grid } from '@material-ui/core';
+import { Button, Card, CardContent, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from '@material-ui/core';
+import { Grid, Row, Col } from 'react-material-responsive-grid';
+
 import { USER_DATA_ACTIONS } from '../../../../redux/actions/userDataActions';
+import { triggerUpdateUser } from '../../../../redux/actions/userDataActions';
 
 const mapStateToProps = state => ({
   user: state.user,
@@ -20,6 +23,9 @@ const styles = {
   cardActions: {
     padding: '0 40%'
   },
+  dialogModal: {
+    textAlign: 'center',
+  }
 }
 
 class AdminProfileView extends Component {
@@ -35,6 +41,7 @@ class AdminProfileView extends Component {
       city: '',
       state: '',
       zipcode: '',
+      dialogIsOpen: false
     };
   }
 
@@ -42,7 +49,7 @@ class AdminProfileView extends Component {
     this.props.dispatch({ type: USER_DATA_ACTIONS.FETCH_USER_DATA });
   }
 
-  // Wait for reduxState to load, then set the local state's values
+  // Wait for redux state to load, then set the local state's values
   async componentDidMount() {
     await new Promise(resolve => { setTimeout(resolve, 500) })
     this.setValues();
@@ -52,6 +59,7 @@ class AdminProfileView extends Component {
     this.props.dispatch({ type: USER_DATA_ACTIONS.UNSET_USER_DATA });
   }
 
+  // Store redux state values in local variable
   setValues = () => {
     const oldFirstName = this.props.profile.first_name;
     const oldMiddleName = this.props.profile.middle_name;
@@ -63,7 +71,7 @@ class AdminProfileView extends Component {
     const oldState = this.props.profile.state;
     const oldZipcode = this.props.profile.zipcode;
 
-    // Sets local state's values to the most current user information in database, which is stored in reduxState
+    // Initialize local state values to the most current user information in database, which is stored in redux state
     this.setState({
       first_name: oldFirstName,
       middle_name: oldMiddleName,
@@ -77,23 +85,91 @@ class AdminProfileView extends Component {
     })
   }
 
+  handleInputChangeFor = propertyName => (event) => {
+    this.setState({
+      [propertyName]: event.target.value
+    });
+  }
+
+  updateUserProfile = () => {
+    this.setState({
+      dialogIsOpen: false
+    });
+    /** Send user id and component local state as 
+    arguments to redux saga for PUT request */
+
+    this.props.dispatch(triggerUpdateUser(this.props.user.id, this.state))
+  }
+
+  // Opens modal
+  handleClickOpen = (event) => {
+    event.preventDefault();
+    this.setState({
+      dialogIsOpen: true
+    });
+  };
+ 
+  // Closes modal
+  handleClose = () => {
+    this.setState({
+      dialogIsOpen: false
+    });
+  }
+
   render() {
     return (
-      <div>
-        <Grid container justify="center">
-          <Grid item xs={12}>
-            <Card className={this.props.classes.card}>
-              <CardContent>
-                <h1 className="formHeader">Your Profile</h1>
-                <p className="formDescription">Manage your basic information below - name, email, and phone number - to make it easier for organizations to get in touch.</p>
-                <AdminProfileForm
-                  profile={this.state}
-                />
-              </CardContent>
-            </Card>
-          </Grid>
-        </Grid>
-      </div>
+      <Grid
+        fixed="center"
+      >
+        <Card className={this.props.classes.card}>
+          <CardContent>
+            <h1 className="formHeader">Your Profile</h1>
+            <p className="formDescription">Manage your basic information below - name, email, and phone number - to make it easier for organizations to get in touch.</p>
+            <AdminProfileForm
+              handleInputChangeFor={this.handleInputChangeFor}
+              profile={this.state}
+              handleClickOpen={this.handleClickOpen}
+            />
+          </CardContent>
+        </Card>
+        <div>
+          <Dialog
+            fullWidth
+            className={this.props.classes.dialogModal}
+            open={this.state.dialogIsOpen}
+            onClose={this.handleClose}
+            aria-labelledby="alert-dialog-title"
+            aria-describedby="alert-dialog-description"
+          >
+            <DialogTitle>{"Update Profile"}</DialogTitle>
+            <DialogContent>
+              <DialogContentText id="alert-dialog-description">
+                Are you sure everything is correct?
+                  </DialogContentText>
+            </DialogContent>
+            <DialogActions
+            >
+              <Row>
+                <Col xs4={2} md={6} lg={6}>
+                  <Button
+                    onClick={this.handleClose}
+                    color="primary">
+                    Cancel
+                    </Button>
+                </Col>
+                <Col xs4={2} md={6} lg={6}>
+                  <Button
+                    onClick={this.updateUserProfile}
+                    color="primary"
+                    autoFocus>
+                    Save
+                    </Button>
+                </Col>
+              </Row>
+            </DialogActions>
+          </Dialog>
+        </div>
+      </Grid>
     );
   }
 }

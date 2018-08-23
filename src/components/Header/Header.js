@@ -2,7 +2,7 @@ import React from 'react';
 
 const Header = ({ title }) => (
   <div className="instructions">
-      <h1 className="lead">{ title }</h1>
+    <h1 className="appTitle">{title}</h1>
   </div>
 );
 

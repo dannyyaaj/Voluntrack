@@ -6,8 +6,8 @@ export function callUserData() {
     .catch((error) => { throw error.response || error; });
 }
 
-export function updateUserData(action) {
-  return axios.put('api/userData', action)
+export function updateUserData(payload) {
+  return axios.put(`api/userData/${payload[0]}`, payload[1])
     .then(response => response.data)
     .catch((error) => { throw error.response || error; });
 }
