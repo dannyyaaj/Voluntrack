@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
-import { withStyles, Button, Modal, Typography } from '@material-ui/core';
+import { connect } from 'react-redux';
+import { withStyles, Button, Modal } from '@material-ui/core';
 import EventCardsView from './EventCardsView';
 import PastEventCardsView from './PastEventCardsView';
 import CreateEventForm from './CreateEventForm';
-import { EVENT_ACTIONS } from '../../../../redux/actions/eventActions';
+
 
 const styles = () => ({
   modalStyle: {
@@ -28,6 +29,7 @@ class ManageEventsView extends Component {
     };
   };
 
+
   openPastEvents = () => {
     this.setState({
       showPastEvents: true,
@@ -40,6 +42,7 @@ class ManageEventsView extends Component {
       showCreateEvents: true,
       modalIsOpen: true,
       showPastEvents: false,
+      toggleButtonText: false,
     })
   }
 
@@ -57,18 +60,22 @@ class ManageEventsView extends Component {
     let buttonText = null
     modalContent = (<CreateEventForm handleClose={this.handleClose} />)
 
+    // Conditionally render Past or Upcoming events
     this.state.showPastEvents === true && this.state.toggleButtonText === true ?
-      pageContent = (<PastEventCardsView />) :
+      pageContent = (
+        <div>
+          <h1>Past Events</h1>
+          <PastEventCardsView />
+        </div>
+      ) :
       pageContent = (
         <div>
           <h1>Upcoming Events</h1>
           <EventCardsView />
         </div>)
-
     this.state.toggleButtonText === false ?
       buttonText = 'View Past Events' :
       buttonText = ('Upcoming Events')
-
     return (
       <div>
         <Button
@@ -103,4 +110,4 @@ class ManageEventsView extends Component {
 
 const StyledManageEventsView = withStyles(styles)(ManageEventsView);
 
-export default StyledManageEventsView;
+export default connect()(StyledManageEventsView);
