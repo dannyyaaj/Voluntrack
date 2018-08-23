@@ -49,7 +49,7 @@ class AdminProfileView extends Component {
     this.props.dispatch({ type: USER_DATA_ACTIONS.FETCH_USER_DATA });
   }
 
-  // Wait for reduxState to load, then set the local state's values
+  // Wait for redux state to load, then set the local state's values
   async componentDidMount() {
     await new Promise(resolve => { setTimeout(resolve, 500) })
     this.setValues();
@@ -59,6 +59,7 @@ class AdminProfileView extends Component {
     this.props.dispatch({ type: USER_DATA_ACTIONS.UNSET_USER_DATA });
   }
 
+  // Store redux state values in local variable
   setValues = () => {
     const oldFirstName = this.props.profile.first_name;
     const oldMiddleName = this.props.profile.middle_name;
@@ -70,7 +71,7 @@ class AdminProfileView extends Component {
     const oldState = this.props.profile.state;
     const oldZipcode = this.props.profile.zipcode;
 
-    // Sets local state's values to the most current user information in database, which is stored in reduxState
+    // Initialize local state values to the most current user information in database, which is stored in redux state
     this.setState({
       first_name: oldFirstName,
       middle_name: oldMiddleName,
@@ -94,24 +95,26 @@ class AdminProfileView extends Component {
     this.setState({
       dialogIsOpen: false
     });
+    /** Send user id and component local state as 
+    arguments to redux saga for PUT request */
 
     this.props.dispatch(triggerUpdateUser(this.props.user.id, this.state))
   }
 
-
+  // Opens modal
   handleClickOpen = (event) => {
     event.preventDefault();
     this.setState({
       dialogIsOpen: true
     });
   };
-
+ 
+  // Closes modal
   handleClose = () => {
     this.setState({
       dialogIsOpen: false
     });
   }
-
 
   render() {
     return (
