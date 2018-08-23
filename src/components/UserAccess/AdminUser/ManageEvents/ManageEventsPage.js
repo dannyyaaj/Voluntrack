@@ -11,7 +11,9 @@ const mapStateToProps = state => ({
 
 class ManageEventsPage extends Component {
   componentDidMount() {
-    this.props.dispatch({ type: USER_ACTIONS.FETCH_USER });
+    this.props.dispatch({
+      type: USER_ACTIONS.FETCH_USER
+    });
   }
 
   render() {
