@@ -11,7 +11,7 @@ import 'react-datepicker/dist/react-datepicker.css';
 const styles = () => ({
   form: {
     textAlign: 'center',
-    margin: '3rem auto',
+    margin: '2.5rem auto',
   },
   container: {
     width: '100%'

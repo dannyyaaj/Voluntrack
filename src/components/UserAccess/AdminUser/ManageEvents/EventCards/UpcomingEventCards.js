@@ -6,12 +6,12 @@ import {
   CardActions, Collapse, IconButton, Modal,
   Typography
 } from '@material-ui/core/';
-import red from '@material-ui/core/colors/red';
+import { red, amber, blue, grey } from '@material-ui/core/colors';
 import {
   Edit as EditIcon,
   PersonAdd as PersonAddIcon,
   ExpandMore as ExpandMoreIcon,
-  MoreVert as MoreVertIcon
+  DeleteForever
 } from '@material-ui/icons';
 import moment from 'moment';
 import { Row, Col } from 'react-material-responsive-grid';
@@ -53,20 +53,25 @@ const styles = theme => ({
     marginLeft: 'auto',
     [theme.breakpoints.up('sm')]: {
       marginRight: '-60%',
+      color: blue[500],
+    }
+  },
+  deleteEvent: {
+    marginLeft: 'auto',
+    [theme.breakpoints.up('sm')]: {
       color: red[500],
     }
   },
-  startTime: {
-
-  },
-  endTime: {
-
+  editEvent: {
+    [theme.breakpoints.up('sm')]: {
+      color: amber[500],
+    }
   },
   location: {
     textAlign: 'center',
   },
   modalStyle: {
-    backgroundColor: 'white',
+    backgroundColor: grey[100],
     margin: '0 auto',
     width: '90%',
     height: '90%',
@@ -82,12 +87,14 @@ class UpcomingEventCards extends React.Component {
     eventId: '',
     expanded: false,
     updateEventModalOpen: false,
+    eventToUpdate: {},
   };
 
-  handleUpdateEvent = (eventId) => {
+  handleUpdateEvent = (eventId, eventToUpdate) => {
     this.setState({
       updateEventModalOpen: true,
-      eventId: eventId
+      eventId: eventId,
+      eventToUpdate: eventToUpdate
     })
   }
 
@@ -102,7 +109,6 @@ class UpcomingEventCards extends React.Component {
   };
 
   render() {
-    console.log(this.state.eventId, 'event id')
     let eventDate = null;
     let eventStartTime = null;
     let eventEndTime = null;
@@ -110,15 +116,16 @@ class UpcomingEventCards extends React.Component {
     eventDate = moment(this.props.event.date).utc().format("ddd, MMM D, YYYY");
     eventStartTime = moment(this.props.event.start_time).utc().format("h:mm A");
     eventEndTime = moment(this.props.event.end_time).utc().format("h:mm A");
-
     return (
       <div>
         <Card className={classes.card}
         >
           <CardHeader
             action={
-              <IconButton>
-                <MoreVertIcon />
+              <IconButton
+                className={classnames(classes.deleteEvent)}
+              >
+                <DeleteForever />
               </IconButton>
             }
             className={classes.title}
@@ -161,7 +168,8 @@ class UpcomingEventCards extends React.Component {
             className={classes.actions}
             disableActionSpacing>
             <IconButton
-              onClick={() => this.handleUpdateEvent(this.props.eventId)}
+              className={classnames(classes.editEvent)}
+              onClick={() => this.handleUpdateEvent(this.props.event.id, this.props.event)}
               aria-label="Edit">
               <EditIcon />
             </IconButton>
@@ -191,20 +199,21 @@ class UpcomingEventCards extends React.Component {
               </Typography>
             </CardContent>
           </Collapse>
-        </Card>
-        <Modal
-          aria-labelledby="create an event"
-          aria-describedby="create a volunteer event"
-          open={this.state.updateEventModalOpen}
-          onClose={this.handleCloseModal}
-        >
-          <div className={this.props.classes.modalStyle}>
-            <UpdateEventForm
+          <Modal
+            aria-labelledby="create an event"
+            aria-describedby="create a volunteer event"
+            open={this.state.updateEventModalOpen}
+            onClose={this.handleCloseModal}
+          >
+            <div className={this.props.classes.modalStyle}>
+              <UpdateEventForm
               eventId={this.state.eventId}
-              handleCloseModal={this.handleCloseModal}
-            />
-          </div>
-        </Modal>
+                eventToUpdate={this.state.eventToUpdate}
+                handleCloseModal={this.handleCloseModal}
+              />
+            </div>
+          </Modal>
+        </Card>
       </div>
     )
   }
