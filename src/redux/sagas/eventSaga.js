@@ -1,6 +1,6 @@
 import { call, put, takeLatest } from 'redux-saga/effects';
 import { EVENT_ACTIONS } from '../actions/eventActions';
-import { addEvent, callUpcomingEvent, callPastEvent } from '../requests/eventRequests';
+import { addEvent, callUpcomingEvent, callPastEvent, updateEventData } from '../requests/eventRequests';
 
 // Get upcoming or past events
 function* fetchUpcomingEvents() {
@@ -52,9 +52,18 @@ function* addEventData(newEvent) {
   }
 }
 
+function* putEventData(action) {
+  try {
+    yield updateEventData(action.payload);
+  } catch (error) {
+    console.log('LOGOUT FAILED -- CHECK YOUR SERVER', error);
+  }
+}
+
 function* eventSaga() {
   yield takeLatest(EVENT_ACTIONS.FETCH_UPCOMING_EVENTS, fetchUpcomingEvents);
   yield takeLatest(EVENT_ACTIONS.FETCH_PAST_EVENTS, fetchPastEvents);
+  yield takeLatest(EVENT_ACTIONS.PUT_EVENT_DATA, putEventData);
   yield takeLatest(EVENT_ACTIONS.POST_EVENT, addEventData)
 }
 
