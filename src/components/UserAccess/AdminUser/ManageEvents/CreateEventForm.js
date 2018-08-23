@@ -5,18 +5,16 @@ import { withStyles, FormControl, TextField, Button } from '@material-ui/core';
 import { Grid, Row, Col } from 'react-material-responsive-grid';
 import moment from 'moment';
 import { EVENT_ACTIONS } from '../../../../redux/actions/eventActions';
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
 
 const styles = () => ({
   form: {
     textAlign: 'center',
-    margin: '1.5rem auto',
+    margin: '3rem auto',
   },
   container: {
     width: '100%'
-    // display: 'grid',
-    // gridGap: '10px',
-    // gridTemplateColumns: '1fr 1fr',
-    // gridTemplateRows: 'repeat(5, 1fr)',
   },
   formTitle: {
     marginBottom: '2.5rem',
@@ -25,30 +23,31 @@ const styles = () => ({
     margin: '1rem auto',
     padding: '0 0 1.2rem 0'
   },
-  selectField: {
-    margin: '.5rem auto',
-    padding: '0 0 1.25rem 0'
+  datePicker: {
+    width: '150%',
+    borderColor: 'red',
+    textAlign: 'center',
   },
   button: {
     marginTop: '3rem',
   }
 });
-
 class CreateEventsForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
       name: '',
       description: '',
-      start_time: '',
-      end_time: '',
-      date: moment().format('YYYY-MM-DD', new Date()),
+      start_time: moment.utc(),
+      end_time: moment.utc(),
+      date: moment.utc(),
       address: '',
       city: '',
       state: '',
       zipcode: '',
       coordinator: '',
       image_url: '',
+      num_of_volunteers: '',
       roles: '',
     };
   }
@@ -59,17 +58,39 @@ class CreateEventsForm extends Component {
     });
   }
 
+  handleEndTimeChange = (time) => {
+    this.setState({
+      end_time: moment.utc(time)
+    });
+  }
+
+  handleStartTimeChange = (time) => {
+    this.setState({
+      date: time,
+      start_time: time
+    });
+  }
+
+  handleDateChange = (newDate) => {
+    this.setState({
+      date: moment.utc(newDate)
+    });
+  }
+
   addEvent = (event) => {
     event.preventDefault();
     this.props.dispatch({
       type: EVENT_ACTIONS.POST_EVENT,
       payload: this.state
     })
+
+    this.props.handleClose()
   }
 
   render() {
+    console.log(this.state.date, 'local date')
     return (
-      <Grid>
+      <Grid fixed={'center'}>
         <form
           className={this.props.classes.form}
           onSubmit={this.addEvent}
@@ -77,7 +98,9 @@ class CreateEventsForm extends Component {
         >
           <FormControl component="fieldset"
             className={this.props.classes.container}>
-            <Row>
+            <Row
+              top={['xs4', 'md', 'lg']}
+            >
               <Col xs4={2} md={6} lg={6}>
                 <TextField
                   className={this.props.classes.textField}
@@ -90,43 +113,32 @@ class CreateEventsForm extends Component {
                     shrink: true,
                   }}
                   onChange={this.handleInputChangeFor('name')}
-
                 />
               </Col>
-              <Col xs4={2} md={6} lg={6}>
-                <TextField
-                  className={this.props.classes.textField}
-                  label="Volunteer Coordinator"
-                  name="coordinator"
-                  fullWidth
-                  value={this.state.coordinator}
-                  InputLabelProps={{
-                    shrink: true,
-                  }}
-                  onChange={this.handleInputChangeFor('coordinator')}
-
+              <Col xs4={1} md={3} lg={3}>
+                <DatePicker
+                  selected={this.state.start_time}
+                  onChange={this.handleStartTimeChange}
+                  showTimeSelect
+                  timeIntervals={30}
+                  dateFormat="ddd, MMM D, YYYY h:mm A"
+                  // timeCaption="Time"
+                  className={this.props.classes.datePicker}
+                  placeholderText={"Please Select Date/Start Time"}
                 />
-                {/* <Select
-                  className={this.props.classes.selectField}
-                  label="Volunteer Coordinator"
-                  value={this.state.coordinator}
-                  name="coordinator"
-                  fullWidth
-                  value={this.state.}
-                >
-                  <MenuItem value="" disabled>
-                    Placeholder
-                  </MenuItem>
-                  <MenuItem value="test">
-                    Test
-                  </MenuItem>
-                  <MenuItem value={2}>
-                    Test
-                  </MenuItem>
-                  <MenuItem value={3}>
-                    Test
-                  </MenuItem>
-                </Select> */}
+
+              </Col>
+              <Col xs4={1} md={3} lg={3}>
+                <DatePicker
+                  selected={this.state.end_time}
+                  onChange={this.handleEndTimeChange}
+                  showTimeSelect
+                  timeIntervals={30}
+                  dateFormat="ddd, MMM D, YYYY h:mm A"
+                  // timeCaption="Time"
+                  className={this.props.classes.datePicker}
+                  placeholderText={"Please Select Date/End Time"}
+                />
               </Col>
             </Row>
             <Row>
@@ -146,17 +158,14 @@ class CreateEventsForm extends Component {
               <Col xs4={2} md={6} lg={6}>
                 <TextField
                   className={this.props.classes.textField}
-                  label="Date"
-                  // name="date"
-                  margin="normal"
-                  name="date"
-                  type="date"
+                  label="Volunteer Coordinator"
+                  name="coordinator"
                   fullWidth
-                  value={this.state.date}
+                  value={this.state.coordinator}
                   InputLabelProps={{
                     shrink: true,
                   }}
-                  onChange={this.handleInputChangeFor('date')}
+                  onChange={this.handleInputChangeFor('coordinator')}
                 />
               </Col>
             </Row>
@@ -175,43 +184,35 @@ class CreateEventsForm extends Component {
 
                 />
               </Col>
-              <Col xs4={2} md={3} lg={3}>
+              <Col xs4={1} md={3} lg={3}>
                 <TextField
                   className={this.props.classes.textField}
-                  label="Start Time"
-                  name="start_time"
-                  type="time"
-                  defaultValue="07:30"
+                  label="Number of Volunteers"
+                  name="num_of_volunteers"
+                  type="number"
                   fullWidth
-                  value={this.state.start_time}
+                  value={this.state.num_of_volunteers}
                   InputLabelProps={{
                     shrink: true,
                   }}
-                  onChange={this.handleInputChangeFor('start_time')}
-
-                  inputProps={{
-                    step: 300, // 5 min
-                  }}
+                  onChange={this.handleInputChangeFor('num_of_volunteers')}
                 />
               </Col>
-              <Col xs4={2} md={3} lg={3}>
+              <Col xs4={1} md={3} lg={3}>
                 <TextField
                   className={this.props.classes.textField}
-                  label="End Time"
-                  name="end_time"
+                  label="Volunteer Roles"
+                  name="volunteer_roles"
                   fullWidth
-                  value={this.state.end_time}
-                  type="time"
                   InputLabelProps={{
                     shrink: true,
                   }}
-                  onChange={this.handleInputChangeFor('end_time')}
-
+                  onChange={this.handleInputChangeFor('roles')}
                 />
               </Col>
             </Row>
             <Row>
-              <Col xs4={2} md={6} lg={6}>
+              <Col xs4={2} md={3} lg={3}>
                 <TextField
                   className={this.props.classes.textField}
                   label="State"
@@ -222,25 +223,9 @@ class CreateEventsForm extends Component {
                     shrink: true,
                   }}
                   onChange={this.handleInputChangeFor('state')}
-
                 />
               </Col>
-              <Col xs4={2} md={6} lg={6}>
-                <TextField
-                  className={this.props.classes.textField}
-                  label="Volunteer Roles"
-                  name="volunteer_roles"
-                  fullWidth
-                  InputLabelProps={{
-                    shrink: true,
-                  }}
-                  onChange={this.handleInputChangeFor('')}
-
-                />
-              </Col>
-            </Row>
-            <Row>
-              <Col xs4={2} md={6} lg={6}>
+              <Col xs4={2} md={3} lg={3}>
                 <TextField
                   className={this.props.classes.textField}
                   label="Zipcode"
@@ -251,22 +236,6 @@ class CreateEventsForm extends Component {
                     shrink: true,
                   }}
                   onChange={this.handleInputChangeFor('zipcode')}
-
-                />
-
-              </Col>
-              <Col xs4={2} md={6} lg={6}>
-                <TextField
-                  className={this.props.classes.textField}
-                  label="Number of Volunteers"
-                  name="roles"
-                  type="number"
-                  fullWidth
-                  value={this.state.roles}
-                  InputLabelProps={{
-                    shrink: true,
-                  }}
-                  onChange={this.handleInputChangeFor('roles')}
                 />
               </Col>
             </Row>
