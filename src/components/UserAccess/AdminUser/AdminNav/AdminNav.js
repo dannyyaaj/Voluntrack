@@ -11,11 +11,11 @@ class AdminNav extends Component {
       <div className="navbar">
         <ul>
           <li>
-            <button
+            <a
               onClick={() => this.props.dispatch(triggerLogout())}
             >
               Log Out
-          </button>
+          </a>
           </li>
           <li>
             <Link to="/profile">
