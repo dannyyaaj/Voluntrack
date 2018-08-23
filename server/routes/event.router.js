@@ -38,7 +38,7 @@ router.post('/', rejectUnauthenticated, (req, res) => {
   const newEventData = req.body.payload
   console.log(req.body.payload, 'new event payload')
 
-  const queryText = `INSERT INTO "event" ("name", "address", "city", "state", "zipcode", "coordinator", "date", "start_time", "end_time", "description", "num_of_volunteers", "image_url","roles") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9 ,$10, $11, $12);`;
+  const queryText = `INSERT INTO "event" ("name", "address", "city", "state", "zipcode", "coordinator", "date", "start_time", "end_time", "description", "num_of_volunteers", "image_url","roles","org_id") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9 ,$10, $11, $12, $13, 1);`;
 
   const serializedData = [newEventData.name, newEventData.address, newEventData.city, newEventData.state, newEventData.zipcode, newEventData.coordinator, newEventData.date,newEventData.start_time, newEventData.end_time, newEventData.description, newEventData.num_of_volunteers, newEventData.image_url, newEventData.roles]
 
