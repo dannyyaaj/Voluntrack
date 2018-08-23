@@ -33,7 +33,7 @@ function* fetchUserData() {
 */
 function* putUserData(action) {
   try {
-    yield updateUserData(action);
+    yield updateUserData(action.payload);
   } catch (error) {
     console.log('LOGOUT FAILED -- CHECK YOUR SERVER', error);
   }
