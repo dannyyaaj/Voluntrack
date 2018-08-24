@@ -60,7 +60,7 @@ class CreateEventsForm extends Component {
 
   handleEndTimeChange = (time) => {
     this.setState({
-      end_time: moment.utc(time)
+      end_time: time
     });
   }
 
@@ -71,19 +71,12 @@ class CreateEventsForm extends Component {
     });
   }
 
-  handleDateChange = (newDate) => {
-    this.setState({
-      date: moment.utc(newDate)
-    });
-  }
-
   addEvent = (event) => {
     event.preventDefault();
     this.props.dispatch({
       type: EVENT_ACTIONS.POST_EVENT,
       payload: this.state
     })
-
     this.props.handleClose()
   }
 
