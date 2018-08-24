@@ -5,7 +5,6 @@ import EventCardsView from './EventCardsView';
 import PastEventCardsView from './PastEventCardsView';
 import CreateEventForm from './CreateEventForm';
 
-
 const styles = () => ({
   modalStyle: {
     backgroundColor: 'white',
@@ -18,11 +17,11 @@ const styles = () => ({
     opacity: '0.9'
   },
   button: {
-    margin: '1rem 5rem 0 1.75rem'
+    margin: '1.75rem 2.75rem 0 1.75rem'
   },
   header: {
     textAlign: 'center',
-    
+
   }
 })
 class ManageEventsView extends Component {
