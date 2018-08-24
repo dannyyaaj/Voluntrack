@@ -26,4 +26,9 @@ export function updateEventData(payload) {
     .then(response => response.data)
     .catch((error) => { throw error.response || error; });
 }
+export function deleteEvent(payload) {
+  return axios.delete(`api/event/upcoming/${payload}`)
+    .then(response => response.data)
+    .catch((error) => { throw error.response || error; });
+}
 
