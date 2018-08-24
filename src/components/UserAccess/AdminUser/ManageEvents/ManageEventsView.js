@@ -16,6 +16,13 @@ const styles = () => ({
     marginTop: '10px',
     padding: '30px',
     opacity: '0.9'
+  },
+  button: {
+    margin: '1rem 5rem 0 1.75rem'
+  },
+  header: {
+    textAlign: 'center',
+    
   }
 })
 class ManageEventsView extends Component {
@@ -64,13 +71,13 @@ class ManageEventsView extends Component {
     this.state.showPastEvents === true && this.state.toggleButtonText === true ?
       pageContent = (
         <div>
-          <h1>Past Events</h1>
+          <h1 className={this.props.classes.header}>Past Events</h1>
           <PastEventCardsView />
         </div>
       ) :
       pageContent = (
         <div>
-          <h1>Upcoming Events</h1>
+          <h1 className={this.props.classes.header}>Upcoming Events</h1>
           <EventCardsView />
         </div>)
     this.state.toggleButtonText === false ?
@@ -79,6 +86,7 @@ class ManageEventsView extends Component {
     return (
       <div>
         <Button
+        className={this.props.classes.button}
           color="secondary"
           variant="raised"
           onClick={this.openPastEvents}
@@ -86,6 +94,7 @@ class ManageEventsView extends Component {
           {buttonText}
         </Button>
         <Button
+        className={this.props.classes.button}
           color="primary"
           variant="raised"
           onClick={this.openCreateEvent}
