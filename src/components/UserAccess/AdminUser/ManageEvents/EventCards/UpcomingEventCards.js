@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import { withStyles } from '@material-ui/core/styles';
 import classnames from 'classnames';
 import {
@@ -16,6 +17,7 @@ import {
 import moment from 'moment';
 import { Row, Col } from 'react-material-responsive-grid';
 import UpdateEventForm from './UpdateEventForm';
+import { triggerDeleteEvent } from '../../../../../redux/actions/eventActions';
 
 
 
@@ -108,6 +110,12 @@ class UpcomingEventCards extends React.Component {
     this.setState(state => ({ expanded: !state.expanded }));
   };
 
+  handleDeleteEvent = (eventId) => {
+    // dispatch props to event saga
+    this.props.dispatch(triggerDeleteEvent(eventId))
+
+  }
+
   render() {
     let eventDate = null;
     let eventStartTime = null;
@@ -124,6 +132,7 @@ class UpcomingEventCards extends React.Component {
             action={
               <IconButton
                 className={classnames(classes.deleteEvent)}
+                onClick={() => this.handleDeleteEvent(this.props.event.id)}
               >
                 <DeleteForever />
               </IconButton>
@@ -221,4 +230,4 @@ class UpcomingEventCards extends React.Component {
 
 const StyledUpcomingEventCards = withStyles(styles)(UpcomingEventCards)
 
-export default StyledUpcomingEventCards;
+export default connect()(StyledUpcomingEventCards);
