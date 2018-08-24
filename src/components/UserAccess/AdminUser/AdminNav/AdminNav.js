@@ -6,13 +6,18 @@ import { connect } from 'react-redux';
 
 class AdminNav extends Component {
 
+  logOutUser = () => {
+    this.props.dispatch(triggerLogout());
+    window.location.href = "http://localhost:3000/#/home"
+  }
+
   render() {
     return (
       <div className="navbar">
         <ul>
           <li>
             <a
-              onClick={() => this.props.dispatch(triggerLogout())}
+              onClick={() => this.logOutUser()}
             >
               Log Out
           </a>
