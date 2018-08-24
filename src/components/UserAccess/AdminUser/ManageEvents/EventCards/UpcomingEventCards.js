@@ -7,7 +7,7 @@ import {
   CardActions, Collapse, IconButton, Modal,
   Typography
 } from '@material-ui/core/';
-import { red, amber, blue, grey } from '@material-ui/core/colors';
+import { red, amber, blue } from '@material-ui/core/colors';
 import {
   Edit as EditIcon,
   PersonAdd as PersonAddIcon,
@@ -16,7 +16,8 @@ import {
 } from '@material-ui/icons';
 import moment from 'moment';
 import { Row, Col } from 'react-material-responsive-grid';
-import UpdateEventForm from './UpdateEventForm';
+// import UpdateEventForm from './UpdateEventForm';
+import TestUpdateEventForm from './TestUpdateEventForm';
 import { triggerDeleteEvent } from '../../../../../redux/actions/eventActions';
 
 
@@ -73,14 +74,14 @@ const styles = theme => ({
     textAlign: 'center',
   },
   modalStyle: {
-    backgroundColor: grey[100],
+    backgroundColor: 'white',
     margin: '0 auto',
     width: '90%',
     height: '90%',
     boxShadow: '0px 0px 30px rgba(0, 0, 0, 0.3)',
     marginTop: '10px',
     padding: '30px',
-    opacity: '0.9'
+    opacity: '.95'
   }
 });
 
@@ -113,10 +114,10 @@ class UpcomingEventCards extends React.Component {
   handleDeleteEvent = (eventId) => {
     // dispatch props to event saga
     this.props.dispatch(triggerDeleteEvent(eventId))
-
   }
 
   render() {
+    console.log(this.props.event, 'event object inside UpcomingEventCards from EventCardsView')
     let eventDate = null;
     let eventStartTime = null;
     let eventEndTime = null;
@@ -208,21 +209,21 @@ class UpcomingEventCards extends React.Component {
               </Typography>
             </CardContent>
           </Collapse>
-          <Modal
-            aria-labelledby="create an event"
-            aria-describedby="create a volunteer event"
-            open={this.state.updateEventModalOpen}
-            onClose={this.handleCloseModal}
-          >
-            <div className={this.props.classes.modalStyle}>
-              <UpdateEventForm
-              eventId={this.state.eventId}
-                eventToUpdate={this.state.eventToUpdate}
-                handleCloseModal={this.handleCloseModal}
-              />
-            </div>
-          </Modal>
         </Card>
+        <Modal
+          aria-labelledby="create an event"
+          aria-describedby="create a volunteer event"
+          open={this.state.updateEventModalOpen}
+          onClose={this.handleCloseModal}
+        >
+          <div className={this.props.classes.modalStyle}>
+            <TestUpdateEventForm
+              eventId={this.state.eventId}
+              eventToUpdate={this.state.eventToUpdate}
+              handleCloseModal={this.handleCloseModal}
+            />
+          </div>
+        </Modal>
       </div>
     )
   }
