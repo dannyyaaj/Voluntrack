@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import AdminNav from '../AdminNav/AdminNav';
+import VolunteerNav from '../../VolunteerUser/VolunteerNav/VolunteerNav';
+import MyEventsView from '../../VolunteerUser/MyEventsView/MyEventsView';
 import ManageEventsView from './ManageEventsView';
 import UserErrorMessage from '../../../ErrorNotFound/UserErrorMessage';
 import { USER_ACTIONS } from '../../../../redux/actions/userActions';
@@ -16,6 +18,12 @@ class ManageEventsPage extends Component {
     });
   }
 
+  componentDidUpdate() {
+    if (!this.props.user.isLoading && this.props.user.userName === null) {
+      this.props.history.push('/home');
+    }
+  }
+
   render() {
     let content = null;
     if (this.props.user.data) {
@@ -28,8 +36,8 @@ class ManageEventsPage extends Component {
       } else {
         content = (
           <div>
-            <AdminNav />
-            <UserErrorMessage />
+            <VolunteerNav />
+            <MyEventsView />
           </div>
         )
       }
