@@ -177,19 +177,21 @@ class AdminProfileForm extends Component {
             </Col>
           </Row>
           <Row>
-            <FormLabel htmlFor="zipcode">
-              <TextField
-                className={this.props.classes.textField}
-                label="Zipcode"
-                name="zipcode"
-                placeholder={this.props.profile.zipcode}
-                fullWidth
-                onChange={this.props.handleInputChangeFor('zipcode')}
-                InputLabelProps={{
-                  shrink: true,
-                }}
-              />
-            </FormLabel>
+            <Col xs4={2} md={6} lg={6}>
+              <FormLabel htmlFor="zipcode">
+                <TextField
+                  className={this.props.classes.textField}
+                  label="Zipcode"
+                  name="zipcode"
+                  placeholder={this.props.profile.zipcode}
+                  fullWidth
+                  onChange={this.props.handleInputChangeFor('zipcode')}
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
+                />
+              </FormLabel>
+            </Col>
           </Row>
           <div>
             <Button
