@@ -4,13 +4,13 @@ import { withStyles } from '@material-ui/core/styles';
 import classnames from 'classnames';
 import {
   Card, CardHeader, CardMedia, CardContent,
-  CardActions, Collapse, IconButton, Modal,
-  Typography
+  CardActions, Collapse, IconButton, Modal, Button,
+  Dialog, DialogActions, DialogContent, DialogContentText,
+  DialogTitle, Typography
 } from '@material-ui/core/';
-import { red, amber, blue, grey } from '@material-ui/core/colors';
+import { red, amber, blue } from '@material-ui/core/colors';
 import {
   Edit as EditIcon,
-  PersonAdd as PersonAddIcon,
   ExpandMore as ExpandMoreIcon,
   DeleteForever
 } from '@material-ui/icons';
@@ -18,7 +18,6 @@ import moment from 'moment';
 import { Row, Col } from 'react-material-responsive-grid';
 import UpdateEventForm from './UpdateEventForm';
 import { triggerDeleteEvent } from '../../../../../redux/actions/eventActions';
-
 
 
 const styles = theme => ({
@@ -51,13 +50,6 @@ const styles = theme => ({
   expandOpen: {
     transform: 'rotate(180deg)',
   },
-  addPerson: {
-    marginLeft: 'auto',
-    [theme.breakpoints.up('sm')]: {
-      marginRight: '-60%',
-      color: blue[500],
-    }
-  },
   deleteEvent: {
     marginLeft: 'auto',
     [theme.breakpoints.up('sm')]: {
@@ -70,17 +62,18 @@ const styles = theme => ({
     }
   },
   location: {
+    margin: '1rem 0 0.5rem 0',
     textAlign: 'center',
   },
   modalStyle: {
-    backgroundColor: grey[100],
+    backgroundColor: 'white',
     margin: '0 auto',
     width: '90%',
     height: '90%',
     boxShadow: '0px 0px 30px rgba(0, 0, 0, 0.3)',
     marginTop: '10px',
     padding: '30px',
-    opacity: '0.9'
+    opacity: '.95'
   }
 });
 
@@ -90,8 +83,10 @@ class PastEventCards extends React.Component {
     expanded: false,
     updateEventModalOpen: false,
     eventToUpdate: {},
+    confirmationDeleteIsOpen: false
   };
 
+  //! Opens modal containing update event form and stores volunteer event object and id on local state for children component (update event form) to use
   handleUpdateEvent = (eventId, eventToUpdate) => {
     this.setState({
       updateEventModalOpen: true,
@@ -106,14 +101,31 @@ class PastEventCards extends React.Component {
     });
   };
 
+  // Expands card to show volunteer event description 
   handleExpandClick = () => {
     this.setState(state => ({ expanded: !state.expanded }));
   };
 
-  handleDeleteEvent = (eventId) => {
-    // dispatch props to event saga
-    this.props.dispatch(triggerDeleteEvent(eventId))
+  // // Opens modal
+  handleConfirmDelete = () => {
+    this.setState({
+      confirmationDeleteIsOpen: true
+    });
+  };
 
+  handleCloseDelete = () => {
+    this.setState({
+      confirmationDeleteIsOpen: false
+    });
+  };
+
+
+  handleDeleteEvent = (eventId) => {
+    this.setState({
+      confirmationDeleteIsOpen: false
+    });
+    // Dispatches delete request to event saga with payload of volunteer event id
+    this.props.dispatch(triggerDeleteEvent(eventId))
   }
 
   render() {
@@ -129,6 +141,15 @@ class PastEventCards extends React.Component {
         <Card className={classes.card}
         >
           <CardHeader
+            action={
+              <IconButton
+                className={classnames(classes.deleteEvent)}
+                // onClick={() => this.handleDeleteEvent(this.props.event.id)}
+                onClick={this.handleConfirmDelete}
+              >
+                <DeleteForever />
+              </IconButton>
+            }
             className={classes.title}
             title={this.props.event.name}
             subheader={eventDate}
@@ -144,6 +165,7 @@ class PastEventCards extends React.Component {
             >
               <Col xs4={2} md={6} lg={6}>
                 <Typography
+                  align="left"
                   className={classes.startTime}
                   component="p"
                   variant="subheading"
@@ -153,6 +175,7 @@ class PastEventCards extends React.Component {
               </Col>
               <Col xs4={2} md={6} lg={6}>
                 <Typography
+                  align="right"
                   className={classes.endTime}
                   component="p"
                   variant="subheading"
@@ -161,8 +184,11 @@ class PastEventCards extends React.Component {
                 </Typography>
               </Col>
             </Row>
-            <Typography variant="body2" className={classes.location} component="p">
+            <Typography variant="body1" className={classes.location} component="p">
               {this.props.event.address} {this.props.event.city}, {this.props.event.state} {this.props.event.zipcode}
+            </Typography>
+            <Typography variant="body1" className={classes.location} component="p">
+              Volunteers Needed: {this.props.event.num_of_volunteers}
             </Typography>
           </CardContent>
           <CardActions
@@ -173,11 +199,6 @@ class PastEventCards extends React.Component {
               onClick={() => this.handleUpdateEvent(this.props.event.id, this.props.event)}
               aria-label="Edit">
               <EditIcon />
-            </IconButton>
-            <IconButton aria-label="Invite"
-              className={classnames(classes.addPerson)}
-            >
-              <PersonAddIcon />
             </IconButton>
             <IconButton
               className={classnames(classes.expand, {
@@ -195,26 +216,60 @@ class PastEventCards extends React.Component {
               <Typography paragraph variant="body1">
                 Description:
             </Typography>
-              <Typography paragraph variant="body2">
+              <Typography paragraph variant="body1">
                 {this.props.event.description}
               </Typography>
             </CardContent>
           </Collapse>
-          <Modal
-            aria-labelledby="create an event"
-            aria-describedby="create a volunteer event"
-            open={this.state.updateEventModalOpen}
-            onClose={this.handleCloseModal}
-          >
-            <div className={this.props.classes.modalStyle}>
-              <UpdateEventForm
-              eventId={this.state.eventId}
-                eventToUpdate={this.state.eventToUpdate}
-                handleCloseModal={this.handleCloseModal}
-              />
-            </div>
-          </Modal>
         </Card>
+        <Modal
+          aria-labelledby="create an event"
+          aria-describedby="create a volunteer event"
+          open={this.state.updateEventModalOpen}
+          onClose={this.handleCloseModal}
+        >
+          <div className={this.props.classes.modalStyle}>
+            <UpdateEventForm
+              eventId={this.state.eventId}
+              eventToUpdate={this.state.eventToUpdate}
+              handleCloseModal={this.handleCloseModal}
+            />
+          </div>
+        </Modal>
+        <Dialog
+          open={this.state.confirmationDeleteIsOpen}
+          onClose={this.handleCloseDelete}
+          fullWidth
+          aria-labelledby="alert-dialog-title"
+          aria-describedby="alert-dialog-description"
+        >
+          <DialogTitle>{"Delete Event"}</DialogTitle>
+          <DialogContent>
+            <DialogContentText id="alert-dialog-description">
+              Are you want to delete this event?
+                  </DialogContentText>
+          </DialogContent>
+          <DialogActions
+          >
+            <Row>
+              <Col xs4={2} md={6} lg={6}>
+                <Button
+                  onClick={this.handleCloseDelete}
+                  color="primary">
+                  Cancel
+                    </Button>
+              </Col>
+              <Col xs4={2} md={6} lg={6}>
+                <Button
+                  onClick={() => this.handleDeleteEvent(this.props.event.id)}
+                  color="primary"
+                  autoFocus>
+                  Delete
+                    </Button>
+              </Col>
+            </Row>
+          </DialogActions>
+        </Dialog>
       </div>
     )
   }

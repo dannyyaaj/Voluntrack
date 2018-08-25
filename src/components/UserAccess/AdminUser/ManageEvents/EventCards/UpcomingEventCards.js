@@ -4,8 +4,9 @@ import { withStyles } from '@material-ui/core/styles';
 import classnames from 'classnames';
 import {
   Card, CardHeader, CardMedia, CardContent,
-  CardActions, Collapse, IconButton, Modal,
-  Typography
+  CardActions, Collapse, IconButton, Modal, Button,
+  Dialog, DialogActions, DialogContent, DialogContentText,
+  DialogTitle, Typography
 } from '@material-ui/core/';
 import { red, amber, blue } from '@material-ui/core/colors';
 import {
@@ -16,11 +17,8 @@ import {
 } from '@material-ui/icons';
 import moment from 'moment';
 import { Row, Col } from 'react-material-responsive-grid';
-// import UpdateEventForm from './UpdateEventForm';
-import TestUpdateEventForm from './TestUpdateEventForm';
+import UpdateEventForm from './UpdateEventForm';
 import { triggerDeleteEvent } from '../../../../../redux/actions/eventActions';
-
-
 
 const styles = theme => ({
   card: {
@@ -71,6 +69,7 @@ const styles = theme => ({
     }
   },
   location: {
+    margin: '1rem 0 0.5rem 0',
     textAlign: 'center',
   },
   modalStyle: {
@@ -91,8 +90,10 @@ class UpcomingEventCards extends React.Component {
     expanded: false,
     updateEventModalOpen: false,
     eventToUpdate: {},
+    confirmationDeleteIsOpen: false
   };
 
+  //! Opens modal containing update event form and stores volunteer event object and id on local state for children component (update event form) to use
   handleUpdateEvent = (eventId, eventToUpdate) => {
     this.setState({
       updateEventModalOpen: true,
@@ -107,17 +108,34 @@ class UpcomingEventCards extends React.Component {
     });
   };
 
+  // Expands card to show volunteer event description 
   handleExpandClick = () => {
     this.setState(state => ({ expanded: !state.expanded }));
   };
 
+  // // Opens modal
+  handleConfirmDelete = () => {
+    this.setState({
+      confirmationDeleteIsOpen: true
+    });
+  };
+
+  handleCloseDelete = () => {
+    this.setState({
+      confirmationDeleteIsOpen: false
+    });
+  };
+
+
   handleDeleteEvent = (eventId) => {
-    // dispatch props to event saga
+    this.setState({
+      confirmationDeleteIsOpen: false
+    });
+    // Dispatches delete request to event saga with payload of volunteer event id
     this.props.dispatch(triggerDeleteEvent(eventId))
   }
 
   render() {
-    console.log(this.props.event, 'event object inside UpcomingEventCards from EventCardsView')
     let eventDate = null;
     let eventStartTime = null;
     let eventEndTime = null;
@@ -133,7 +151,8 @@ class UpcomingEventCards extends React.Component {
             action={
               <IconButton
                 className={classnames(classes.deleteEvent)}
-                onClick={() => this.handleDeleteEvent(this.props.event.id)}
+                // onClick={() => this.handleDeleteEvent(this.props.event.id)}
+                onClick={this.handleConfirmDelete}
               >
                 <DeleteForever />
               </IconButton>
@@ -153,6 +172,7 @@ class UpcomingEventCards extends React.Component {
             >
               <Col xs4={2} md={6} lg={6}>
                 <Typography
+                  align="left"
                   className={classes.startTime}
                   component="p"
                   variant="subheading"
@@ -162,6 +182,7 @@ class UpcomingEventCards extends React.Component {
               </Col>
               <Col xs4={2} md={6} lg={6}>
                 <Typography
+                  align="right"
                   className={classes.endTime}
                   component="p"
                   variant="subheading"
@@ -170,8 +191,11 @@ class UpcomingEventCards extends React.Component {
                 </Typography>
               </Col>
             </Row>
-            <Typography variant="body2" className={classes.location} component="p">
+            <Typography variant="body1" className={classes.location} component="p">
               {this.props.event.address} {this.props.event.city}, {this.props.event.state} {this.props.event.zipcode}
+            </Typography>
+            <Typography variant="body1" className={classes.location} component="p">
+              Volunteers Needed: {this.props.event.num_of_volunteers}
             </Typography>
           </CardContent>
           <CardActions
@@ -204,7 +228,7 @@ class UpcomingEventCards extends React.Component {
               <Typography paragraph variant="body1">
                 Description:
             </Typography>
-              <Typography paragraph variant="body2">
+              <Typography paragraph variant="body1">
                 {this.props.event.description}
               </Typography>
             </CardContent>
@@ -217,13 +241,47 @@ class UpcomingEventCards extends React.Component {
           onClose={this.handleCloseModal}
         >
           <div className={this.props.classes.modalStyle}>
-            <TestUpdateEventForm
+            <UpdateEventForm
               eventId={this.state.eventId}
               eventToUpdate={this.state.eventToUpdate}
               handleCloseModal={this.handleCloseModal}
             />
           </div>
         </Modal>
+        <Dialog
+          open={this.state.confirmationDeleteIsOpen}
+          onClose={this.handleCloseDelete}
+          fullWidth
+          aria-labelledby="alert-dialog-title"
+          aria-describedby="alert-dialog-description"
+        >
+          <DialogTitle>{"Delete Event"}</DialogTitle>
+          <DialogContent>
+            <DialogContentText id="alert-dialog-description">
+              Are you want to delete this event?
+                  </DialogContentText>
+          </DialogContent>
+          <DialogActions
+          >
+            <Row>
+              <Col xs4={2} md={6} lg={6}>
+                <Button
+                  onClick={this.handleCloseDelete}
+                  color="primary">
+                  Cancel
+                    </Button>
+              </Col>
+              <Col xs4={2} md={6} lg={6}>
+                <Button
+                  onClick={() => this.handleDeleteEvent(this.props.event.id)}
+                  color="primary"
+                  autoFocus>
+                  Delete
+                    </Button>
+              </Col>
+            </Row>
+          </DialogActions>
+        </Dialog>
       </div>
     )
   }
