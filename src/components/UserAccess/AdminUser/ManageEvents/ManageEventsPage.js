@@ -4,7 +4,6 @@ import AdminNav from '../AdminNav/AdminNav';
 import VolunteerNav from '../../VolunteerUser/VolunteerNav/VolunteerNav';
 import MyEventsView from '../../VolunteerUser/MyEventsView/MyEventsView';
 import ManageEventsView from './ManageEventsView';
-import UserErrorMessage from '../../../ErrorNotFound/UserErrorMessage';
 import { USER_ACTIONS } from '../../../../redux/actions/userActions';
 
 const mapStateToProps = state => ({
