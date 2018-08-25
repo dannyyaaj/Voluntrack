@@ -6,16 +6,21 @@ import { connect } from 'react-redux';
 
 class VolunteerNav extends Component {
 
+  logOutUser = () => {
+    this.props.dispatch(triggerLogout());
+    window.location.href = "http://localhost:3000/#/home"
+  }
+
   render() {
     return (
       <div className="navbar">
         <ul>
           <li>
-            <button
-              onClick={() => this.props.dispatch(triggerLogout())}
+            <a
+              onClick={() => this.logOutUser()}
             >
               Log Out
-          </button>
+          </a>
           </li>
           <li>
             <Link to="/profile">
@@ -24,7 +29,7 @@ class VolunteerNav extends Component {
           </li>
           <li>
             <Link to="/events">
-              Manage Events
+              My Events
             </Link>
           </li>
           <li>

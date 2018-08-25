@@ -60,7 +60,7 @@ class CreateEventsForm extends Component {
 
   handleEndTimeChange = (time) => {
     this.setState({
-      end_time: moment.utc(time)
+      end_time: time
     });
   }
 
@@ -71,19 +71,12 @@ class CreateEventsForm extends Component {
     });
   }
 
-  handleDateChange = (newDate) => {
-    this.setState({
-      date: moment.utc(newDate)
-    });
-  }
-
   addEvent = (event) => {
     event.preventDefault();
     this.props.dispatch({
       type: EVENT_ACTIONS.POST_EVENT,
       payload: this.state
     })
-
     this.props.handleClose()
   }
 
@@ -122,7 +115,6 @@ class CreateEventsForm extends Component {
                   showTimeSelect
                   timeIntervals={30}
                   dateFormat="ddd, MMM D, YYYY h:mm A"
-                  // timeCaption="Time"
                   className={this.props.classes.datePicker}
                   placeholderText={"Please Select Date/Start Time"}
                 />
@@ -135,7 +127,6 @@ class CreateEventsForm extends Component {
                   showTimeSelect
                   timeIntervals={30}
                   dateFormat="ddd, MMM D, YYYY h:mm A"
-                  // timeCaption="Time"
                   className={this.props.classes.datePicker}
                   placeholderText={"Please Select Date/End Time"}
                 />

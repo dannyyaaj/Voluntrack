@@ -2,9 +2,18 @@ body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
 }
 
+a {
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: none;
+}
+
 .instructions h1 {
-  font-size: 24px;
+  font-size: 36px;
   font-weight: 700;
+  margin-left: 2rem;
 }
 
 .instructions {
@@ -14,6 +23,7 @@ body {
 }
 
 /* Form Styling */
+
 .formHeader {
   text-align: center;
 }

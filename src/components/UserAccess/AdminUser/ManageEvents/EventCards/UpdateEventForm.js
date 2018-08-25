@@ -6,7 +6,7 @@ import { withStyles, FormControl, TextField, Button } from '@material-ui/core';
 import { Grid, Row, Col } from 'react-material-responsive-grid';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
-import { triggerUpdateEvent, EVENT_ACTIONS } from '../../../../../redux/actions/eventActions';
+import { triggerUpdateEvent } from '../../../../../redux/actions/eventActions';
 
 const mapStateToProps = state => ({
   upcomingEvents: state.event.upcoming
@@ -14,6 +14,7 @@ const mapStateToProps = state => ({
 
 const styles = () => ({
   form: {
+    font: 'black',
     textAlign: 'center',
     margin: '2.5rem auto',
   },
@@ -46,7 +47,19 @@ class UpdateEventForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      eventToUpdate: {}
+      name: '',
+      description: '',
+      start_time: '',
+      end_time: '',
+      date: '',
+      address: '',
+      city: '',
+      state: '',
+      zipcode: '',
+      coordinator: '',
+      image_url: '',
+      num_of_volunteers: '',
+      roles: '',
     };
   }
 
@@ -55,47 +68,65 @@ class UpdateEventForm extends Component {
   }
 
   setValues = () => {
+    const oldEventName = this.props.eventToUpdate.name;
+    const oldEventDescription = this.props.eventToUpdate.description;
+    const oldEventStartTime = this.props.eventToUpdate.start_time;
+    const oldEventEndTime = this.props.eventToUpdate.end_time;
+    const oldEventDate = this.props.eventToUpdate.date;
+    const oldEventAddress = this.props.eventToUpdate.address;
+    const oldEventCity = this.props.eventToUpdate.city;
+    const oldEventState = this.props.eventToUpdate.state;
+    const oldEventZipcode = this.props.eventToUpdate.zipcode;
+    const oldEventCoordinator = this.props.eventToUpdate.coordinator;
+    const oldEventImageUrl = this.props.eventToUpdate.image_url;
+    const oldEventNumOfVolunteers = this.props.eventToUpdate.num_of_volunteers;
+    const oldEventRoles = this.props.eventToUpdate.roles;
+
+
     this.setState({
-      eventToUpdate: this.props.eventToUpdate
+      name: oldEventName,
+      description: oldEventDescription,
+      start_time: oldEventStartTime,
+      end_time: oldEventEndTime,
+      date: oldEventDate,
+      address: oldEventAddress,
+      city: oldEventCity,
+      state: oldEventState,
+      zipcode: oldEventZipcode,
+      coordinator: oldEventCoordinator,
+      image_url: oldEventImageUrl,
+      num_of_volunteers: oldEventNumOfVolunteers,
+      roles: oldEventRoles,
     })
   }
 
   handleInputChangeFor = propertyName => (event) => {
     this.setState({
-      eventToUpdate: {
-        ...this.state.eventToUpdate,
-        [propertyName]: event.target.value,
-      }
+      [propertyName]: event.target.value,
     });
   }
 
   handleEndTimeChange = (time) => {
     this.setState({
-      eventToUpdate: {
-        ...this.state.eventToUpdate,
-        end_time: time
-      }
+      end_time: time
     });
   }
 
   handleStartTimeChange = (time) => {
     this.setState({
-      eventToUpdate: {
-        ...this.state.eventToUpdate,
-        start_time: time
-      }
+      date: time,
+      start_time: time
     });
   }
 
   updateEvent = (event) => {
     event.preventDefault();
-    this.props.dispatch(triggerUpdateEvent(this.props.eventId, this.state.eventToUpdate))
+    this.props.dispatch(triggerUpdateEvent(this.props.eventId, this.state))
+    this.props.handleCloseModal();
   }
 
   render() {
-
-    console.log(this.props.eventToUpdate, 'eventToUpdate')
-    console.log(this.state, 'local state')
+    console.log(this.props.eventToUpdate, 'inside TestUpdateEventForm')
     return (
       <Grid fixed={'center'}>
         <form
@@ -137,12 +168,11 @@ class UpdateEventForm extends Component {
               </Col>
               <Col xs4={1} md={3} lg={3}>
                 <DatePicker
-                  selected={this.state.start_time}
+                  selected={moment(this.state.start_time).utc()}
                   onChange={this.handleStartTimeChange}
                   showTimeSelect
                   timeIntervals={30}
                   dateFormat="ddd, MMM D, YYYY h:mm A"
-                  // timeCaption="Time"
                   className={this.props.classes.datePicker}
                   placeholderText={
                     moment(this.props.eventToUpdate.start_time).utc()
@@ -152,12 +182,11 @@ class UpdateEventForm extends Component {
               </Col>
               <Col xs4={1} md={3} lg={3}>
                 <DatePicker
-                  selected={this.state.end_time}
+                  selected={moment(this.state.end_time).utc()}
                   onChange={this.handleEndTimeChange}
                   showTimeSelect
                   timeIntervals={30}
                   dateFormat="ddd, MMM D, YYYY h:mm A"
-                  // timeCaption="Time"
                   className={this.props.classes.datePicker}
                   placeholderText={
                     moment(this.props.eventToUpdate.end_time).utc()
@@ -312,6 +341,6 @@ class UpdateEventForm extends Component {
   }
 }
 
-const StyledCreateEventsForm = withStyles(styles)(UpdateEventForm);
+const StyledUpdateEventForm = withStyles(styles)(UpdateEventForm);
 
-export default connect(mapStateToProps)(StyledCreateEventsForm);
+export default connect(mapStateToProps)(StyledUpdateEventForm);

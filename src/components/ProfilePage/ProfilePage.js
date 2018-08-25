@@ -2,8 +2,11 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import AdminNav from '../UserAccess/AdminUser/AdminNav/AdminNav';
 import AdminProfileView from '../UserAccess/AdminUser/AdminProfile/AdminProfileView';
+import VolunteerNav from '../UserAccess/VolunteerUser/VolunteerNav/VolunteerNav';
+import UserProfileView from '../UserAccess/VolunteerUser/UserProfileView/UserProfileView';
 import UserErrorMessage from '../ErrorNotFound/UserErrorMessage';
 import { USER_ACTIONS } from '../../redux/actions/userActions';
+
 
 const mapStateToProps = state => ({
   user: state.user,
@@ -26,12 +29,19 @@ class ProfilePage extends Component {
 
       if (this.props.user.data.admin_access === true) {
         content = (
-          <AdminProfileView />
+          <div>
+            <AdminNav />
+            <AdminProfileView />
+          </div>
+
         )
       }
       else if (this.props.user.userName) {
         content = (
-          <h1>User Profile Page</h1>
+          <div>
+            <VolunteerNav />
+            <UserProfileView />
+          </div>
         )
       }
       else {
@@ -42,12 +52,10 @@ class ProfilePage extends Component {
     } else {
       console.log('admin_access property is not here yet');
     }
-
     return (
       <div>
-        <AdminNav />
         {content}
-      </div >
+      </div>
     )
   }
 }

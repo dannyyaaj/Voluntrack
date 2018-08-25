@@ -21,7 +21,6 @@ export function callPastEvent() {
 }
 
 export function updateEventData(payload) {
-  console.log('the payload', payload)
   return axios.put(`api/event/upcoming/${payload[0]}`, payload[1])
     .then(response => response.data)
     .catch((error) => { throw error.response || error; });
