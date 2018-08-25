@@ -12,5 +12,4 @@ export function callUser() {
 }
 
 export function placeholder() {
-  console.log('hi');
 }
