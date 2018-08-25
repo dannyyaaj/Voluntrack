@@ -52,7 +52,6 @@ class ProfilePage extends Component {
     } else {
       console.log('admin_access property is not here yet');
     }
-
     return (
       <div>
         {content}

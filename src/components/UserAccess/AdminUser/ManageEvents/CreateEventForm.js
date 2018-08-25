@@ -115,7 +115,6 @@ class CreateEventsForm extends Component {
                   showTimeSelect
                   timeIntervals={30}
                   dateFormat="ddd, MMM D, YYYY h:mm A"
-                  // timeCaption="Time"
                   className={this.props.classes.datePicker}
                   placeholderText={"Please Select Date/Start Time"}
                 />
@@ -128,7 +127,6 @@ class CreateEventsForm extends Component {
                   showTimeSelect
                   timeIntervals={30}
                   dateFormat="ddd, MMM D, YYYY h:mm A"
-                  // timeCaption="Time"
                   className={this.props.classes.datePicker}
                   placeholderText={"Please Select Date/End Time"}
                 />
