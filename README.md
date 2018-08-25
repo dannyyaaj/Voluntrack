@@ -1,5 +1,4 @@
-
-#Voluntrack
+# Voluntrack
 This is a web application that will allow an organization to keep track of their volunteers, events, and create user accounts for their volunteers.
 
 ## Express/Passport with React
