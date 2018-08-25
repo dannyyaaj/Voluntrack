@@ -44,6 +44,9 @@ function* addEventData(newEvent) {
     yield put({
       type: EVENT_ACTIONS.FETCH_UPCOMING_EVENTS
     });
+    yield put({
+      type: EVENT_ACTIONS.FETCH_PAST_EVENTS
+    });
   } catch (error) {
     yield put({
       type: EVENT_ACTIONS.EVENT_DATA_FETCH_FAILED,
@@ -58,6 +61,9 @@ function* putEventData(action) {
     yield put({
       type: EVENT_ACTIONS.FETCH_UPCOMING_EVENTS
     });
+    yield put({
+      type: EVENT_ACTIONS.FETCH_PAST_EVENTS
+    });
   } catch (error) {
     console.log('LOGOUT FAILED -- CHECK YOUR SERVER', error);
   }
@@ -67,6 +73,9 @@ function* deleteEventData(action) {
     yield deleteEvent(action.payload);
     yield put({
       type: EVENT_ACTIONS.FETCH_UPCOMING_EVENTS
+    });
+    yield put({
+      type: EVENT_ACTIONS.FETCH_PAST_EVENTS
     });
   } catch (error) {
     console.log('LOGOUT FAILED -- CHECK YOUR SERVER', error);
