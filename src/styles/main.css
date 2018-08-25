@@ -11,8 +11,9 @@ a:hover {
 }
 
 .instructions h1 {
-  font-size: 24px;
+  font-size: 36px;
   font-weight: 700;
+  margin-left: 2rem;
 }
 
 .instructions {
