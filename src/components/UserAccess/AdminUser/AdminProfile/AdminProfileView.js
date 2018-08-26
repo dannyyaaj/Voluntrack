@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import AdminProfileForm from '../AdminProfile/AdminProfileForm';
+
 import { withStyles } from "@material-ui/core/styles";
 import { Button, Card, CardContent, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from '@material-ui/core';
 import { Grid, Row, Col } from 'react-material-responsive-grid';
@@ -177,4 +178,3 @@ class AdminProfileView extends Component {
 const StyledAdminProfileView = withStyles(styles)(AdminProfileView)
 
 export default connect(mapStateToProps)(StyledAdminProfileView);
-
