@@ -39,10 +39,10 @@ class ManageVolunteersView extends Component {
           <TableCell>{volunteer.last_name}</TableCell>
           <TableCell>{volunteer.person_email}</TableCell>
           <TableCell>{volunteer.primary_phone}</TableCell>
-          <TableCell>{volunteer.person_address} {volunteer.person_city}, {volunteer.person_state}  {volunteer.person_zipcode}</TableCell>
-          <TableCell>{volunteer.event_name}</TableCell>
-          <TableCell>{moment(volunteer.start_time).utc().format(" ddd, MMM D h:mm A")}</TableCell>
-          <TableCell>{moment(volunteer.end_time).utc().format(" ddd, MMM D h:mm A")}</TableCell>
+          <TableCell>{volunteer.person_address} {volunteer.person_city} {volunteer.person_state} {volunteer.person_zipcode}</TableCell>
+          <TableCell>{volunteer.event_name || "Has Not Joined An Event"} </TableCell>
+          <TableCell>{moment(volunteer.start_time).utc().format(" ddd, MMM D h:mm A") || "Has Not Joined An Event"}</TableCell>
+          <TableCell>{moment(volunteer.end_time).utc().format(" ddd, MMM D h:mm A") || moment() || "Has Not Joined An Event"}</TableCell>
         </TableRow>
       )
     })
