@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import PublicNav from '../PublicNav/PublicNav';
-import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { triggerLogin, formError, clearError } from '../../redux/actions/loginActions';
 import { USER_ACTIONS } from '../../redux/actions/userActions';
@@ -39,6 +38,10 @@ class LoginPage extends Component {
     } else {
       this.props.dispatch(triggerLogin(this.state.username, this.state.password));
     }
+  }
+
+  register = () => {
+    window.location.href = "http://localhost:3000/#/register"
   }
 
   handleInputChangeFor = propertyName => (event) => {
@@ -96,7 +99,12 @@ class LoginPage extends Component {
               name="submit"
               value="Log In"
             />
-            <Link to="/register">Register</Link>
+            <input
+              onClick={() => this.register()}
+              type="button"
+              name="register"
+              value="Register"
+            />
           </div>
         </form>
       </div>
