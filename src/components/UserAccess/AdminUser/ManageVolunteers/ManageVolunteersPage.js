@@ -3,16 +3,18 @@ import { connect } from 'react-redux';
 import AdminNav from '../AdminNav/AdminNav';
 import ManageVolunteersView from './ManageVolunteersView';
 import UserErrorMessage from '../../../ErrorNotFound/UserErrorMessage';
-import { USER_ACTIONS } from '../../../../redux/actions/userActions';
+import { VOLUNTEER_ACTIONS } from '../../../../redux/actions/volunteerActions';
 
 const mapStateToProps = state => ({
   user: state.user,
+  volunteers: state.volunteer.allVolunteers,
+  state: state,
 });
 
 class ManageVolunteersPage extends Component {
   componentDidMount() {
     this.props.dispatch({
-      type: USER_ACTIONS.FETCH_USER
+      type: VOLUNTEER_ACTIONS.FETCH_ALL_VOLUNTEERS
     });
   }
 
