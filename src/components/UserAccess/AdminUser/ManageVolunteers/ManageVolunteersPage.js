@@ -12,7 +12,8 @@ const mapStateToProps = state => ({
 });
 
 class ManageVolunteersPage extends Component {
-  componentDidMount() {
+  async componentDidMount() {
+    await new Promise(resolve => { setTimeout(resolve, 500) })
     this.props.dispatch({
       type: VOLUNTEER_ACTIONS.FETCH_ALL_VOLUNTEERS
     });
