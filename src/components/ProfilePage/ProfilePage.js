@@ -40,7 +40,7 @@ class ProfilePage extends Component {
         content = (
           <div>
             <VolunteerNav />
-            <UserProfileView />
+            <AdminProfileView />
           </div>
         )
       }
