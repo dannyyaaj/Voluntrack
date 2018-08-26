@@ -212,7 +212,7 @@ class AdminProfileForm extends Component {
               fullWidth
               onClick={this.goHome}
             >
-              cancel
+              Cancel
           </Button>
           </div>
         </FormControl>
