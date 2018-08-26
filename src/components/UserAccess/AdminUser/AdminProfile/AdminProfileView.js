@@ -100,6 +100,7 @@ class AdminProfileView extends Component {
     arguments to redux saga for PUT request */
 
     this.props.dispatch(triggerUpdateUser(this.props.user.id, this.state))
+
   }
 
   // Opens modal
