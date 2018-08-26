@@ -6,7 +6,8 @@ const router = express.Router();
 router.get('/', rejectUnauthenticated, (req, res) => {
   // GET request for upcoming events
   const queryText = `SELECT "person"."id", "person"."first_name","person"."middle_name", "person"."last_name","person"."email" as "person_email","person"."primary_phone","person"."address" as "person_address","person"."city" as "person_city","person"."state" as "person_state","person"."zipcode" as "person_zipcode", "event_id", "person"."org_id", "event"."name" as "event_name", "event"."start_time", "event"."end_time" FROM "person" LEFT OUTER JOIN "event" ON "person"."event_id" = "event"."id"
-WHERE "person"."admin_access" = false;`;
+  WHERE "person"."admin_access" = false
+  ORDER BY "event"."start_time"  ASC;`;
 
   pool.query(queryText)
     .then((result) => {
