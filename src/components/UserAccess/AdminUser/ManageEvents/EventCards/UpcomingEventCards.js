@@ -192,7 +192,7 @@ class UpcomingEventCards extends React.Component {
               </Col>
             </Row>
             <Typography variant="body1" className={classes.location} component="p">
-              {this.props.event.address} {this.props.event.city}, {this.props.event.state} {this.props.event.zipcode}
+              {this.props.event.address} <br/>{this.props.event.city}, {this.props.event.state} {this.props.event.zipcode}
             </Typography>
             <Typography variant="body1" className={classes.location} component="p">
               Volunteers Needed: {this.props.event.num_of_volunteers}
