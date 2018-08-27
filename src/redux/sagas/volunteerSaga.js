@@ -1,6 +1,6 @@
-import { call, put, takeLatest } from 'redux-saga/effects';
+import { put, takeLatest } from 'redux-saga/effects';
 import { VOLUNTEER_ACTIONS } from '../actions/volunteerActions';
-import { callAllVolunteers } from '../requests/volunteerRequests';
+import { callAllVolunteers, callVolunteersToInvite, inviteToEvent } from '../requests/volunteerRequests';
 
 // Get all volunteers
 function* fetchAllVolunteers() {
@@ -18,57 +18,39 @@ function* fetchAllVolunteers() {
   }
 }
 
-// function* fetchUpcomingEvents() {
+function* fetchNonEventVolunteers() {
+  try {
+    const nonEventVolunteers = yield callVolunteersToInvite();
+    yield put({
+      type: VOLUNTEER_ACTIONS.SET_NON_EVENT_VOLUNTEERS,
+      payload: nonEventVolunteers
+    });
+  } catch (error) {
+    yield put({
+      type: VOLUNTEER_ACTIONS.VOLUNTEER_DATA_FETCH_FAILED,
+      message: error.data || "FORBIDDEN",
+    })
+  }
+}
 
-//   try {
-//     const event = yield callUpcomingEvent();
-//     // Send query results to redux
-//     yield put({
-//       type: EVENT_ACTIONS.SET_UPCOMING_EVENT,
-//       payload: event,
-//     });
-//   } catch (error) {
-//     yield put({
-//       type: EVENT_ACTIONS.EVENT_DATA_FETCH_FAILED,
-//       message: error.data || "FORBIDDEN",
-//     })
-//   }
-// }
-
-// // Get past events
-// function* fetchPastEvents() {
-//   try {
-//     const event = yield callPastEvent();
-//     yield put({
-//       type: EVENT_ACTIONS.SET_PAST_EVENT,
-//       payload: event,
-//     });
-//   } catch (error) {
-//     yield put({
-//       type: EVENT_ACTIONS.EVENT_DATA_FETCH_FAILED,
-//       message: error.data || "FORBIDDEN",
-//     })
-//   }
-// }
-
-// // Post new event to database
-// function* addEventData(newEvent) {
-//   try {
-//     yield call(addEvent(newEvent));
-//     // dispatch get upcoming events
-//     yield put({
-//       type: EVENT_ACTIONS.FETCH_UPCOMING_EVENTS
-//     });
-//     yield put({
-//       type: EVENT_ACTIONS.FETCH_PAST_EVENTS
-//     });
-//   } catch (error) {
-//     yield put({
-//       type: EVENT_ACTIONS.EVENT_DATA_FETCH_FAILED,
-//       message: error.data || "FORBIDDEN",
-//     })
-//   }
-// }
+// Add volunteer to event
+function* addVolunteerToEvent(EventAndVolunteerToAdd) {
+  try {
+    yield inviteToEvent(EventAndVolunteerToAdd);
+    // dispatch invite volunteer to event
+    yield put({
+      type: VOLUNTEER_ACTIONS.FETCH_NON_EVENT_VOLUNTEERS
+    });
+    yield put({
+      type: VOLUNTEER_ACTIONS.FETCH_ALL_VOLUNTEERS
+    });
+  } catch (error) {
+    yield put({
+      type: VOLUNTEER_ACTIONS.VOLUNTEER_DATA_FETCH_FAILED,
+      message: error.data || "FORBIDDEN",
+    })
+  }
+}
 
 // function* putEventData(action) {
 //   try {
@@ -83,6 +65,7 @@ function* fetchAllVolunteers() {
 //     console.log('LOGOUT FAILED -- CHECK YOUR SERVER', error);
 //   }
 // }
+
 // function* deleteEventData(action) {
 //   try {
 //     yield deleteEvent(action.payload);
@@ -99,12 +82,8 @@ function* fetchAllVolunteers() {
 
 function* volunteerSaga() {
   yield takeLatest(VOLUNTEER_ACTIONS.FETCH_ALL_VOLUNTEERS, fetchAllVolunteers);
-
-  // yield takeLatest(EVENT_ACTIONS.FETCH_UPCOMING_EVENTS, fetchUpcomingEvents);
-  // yield takeLatest(EVENT_ACTIONS.FETCH_PAST_EVENTS, fetchPastEvents);
-  // yield takeLatest(EVENT_ACTIONS.PUT_EVENT_DATA, putEventData);
-  // yield takeLatest(EVENT_ACTIONS.POST_EVENT, addEventData)
-  // yield takeLatest(EVENT_ACTIONS.DELETE_EVENT, deleteEventData)
+  yield takeLatest(VOLUNTEER_ACTIONS.FETCH_NON_EVENT_VOLUNTEERS, fetchNonEventVolunteers);
+  yield takeLatest(VOLUNTEER_ACTIONS.PUT_VOLUNTEER_TO_EVENT, addVolunteerToEvent)
 }
 
 export default volunteerSaga;
