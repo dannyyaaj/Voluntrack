@@ -22,7 +22,6 @@ router.get('/upcoming', rejectUnauthenticated, (req, res) => {
 router.put('/upcoming/:id', rejectUnauthenticated, (req, res) => {
   // PUT request to update event information
   const newEventData = req.body
-  console.log(req, 'requesttttt')
   console.log(req.params.id, 'id params')
   console.log(req.body, 'req body')
   const queryText = `UPDATE "event" SET "name" = $2, "address" = $3, "city" = $4, "state" = $5, "zipcode" = $6, "coordinator" = $7, "date" = $8, "start_time" = $9, "end_time" = $10, "description" = $11, "num_of_volunteers" = $12, "image_url" = $13, "roles" = $14
