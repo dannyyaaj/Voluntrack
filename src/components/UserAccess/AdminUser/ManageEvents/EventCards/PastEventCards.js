@@ -8,7 +8,7 @@ import {
   Dialog, DialogActions, DialogContent, DialogContentText,
   DialogTitle, Typography
 } from '@material-ui/core/';
-import { red, amber, blue } from '@material-ui/core/colors';
+import { red, amber } from '@material-ui/core/colors';
 import {
   Edit as EditIcon,
   ExpandMore as ExpandMoreIcon,
@@ -187,9 +187,9 @@ class PastEventCards extends React.Component {
             <Typography variant="body1" className={classes.location} component="p">
               {this.props.event.address} {this.props.event.city}, {this.props.event.state} {this.props.event.zipcode}
             </Typography>
-            <Typography variant="body1" className={classes.location} component="p">
+            {/* <Typography variant="body1" className={classes.location} component="p">
               Volunteers Needed: {this.props.event.num_of_volunteers}
-            </Typography>
+            </Typography> */}
           </CardContent>
           <CardActions
             className={classes.actions}
