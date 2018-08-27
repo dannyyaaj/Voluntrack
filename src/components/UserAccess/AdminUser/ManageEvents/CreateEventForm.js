@@ -192,13 +192,13 @@ class CreateEventsForm extends Component {
               <Col xs4={1} md={3} lg={3}>
                 <TextField
                   className={this.props.classes.textField}
-                  label="Volunteer Roles"
-                  name="volunteer_roles"
+                  label="Upload An Image"
+                  name="image_url"
                   fullWidth
                   InputLabelProps={{
                     shrink: true,
                   }}
-                  onChange={this.handleInputChangeFor('roles')}
+                  onChange={this.handleInputChangeFor('image_url')}
                 />
               </Col>
             </Row>
