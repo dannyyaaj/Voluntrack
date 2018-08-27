@@ -3,10 +3,8 @@ import { connect } from 'react-redux';
 import AdminNav from '../UserAccess/AdminUser/AdminNav/AdminNav';
 import AdminProfileView from '../UserAccess/AdminUser/AdminProfile/AdminProfileView';
 import VolunteerNav from '../UserAccess/VolunteerUser/VolunteerNav/VolunteerNav';
-import UserProfileView from '../UserAccess/VolunteerUser/UserProfileView/UserProfileView';
 import UserErrorMessage from '../ErrorNotFound/UserErrorMessage';
 import { USER_ACTIONS } from '../../redux/actions/userActions';
-
 
 const mapStateToProps = state => ({
   user: state.user,
