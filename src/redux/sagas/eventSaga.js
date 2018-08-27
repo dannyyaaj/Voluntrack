@@ -1,10 +1,9 @@
-import { call, put, takeLatest } from 'redux-saga/effects';
+import { put, takeLatest } from 'redux-saga/effects';
 import { EVENT_ACTIONS } from '../actions/eventActions';
 import { addEvent, callUpcomingEvent, callPastEvent, updateEventData, deleteEvent } from '../requests/eventRequests';
 
 // Get upcoming or past events
 function* fetchUpcomingEvents() {
-
   try {
     const event = yield callUpcomingEvent();
     // Send query results to redux
@@ -39,7 +38,7 @@ function* fetchPastEvents() {
 // Post new event to database
 function* addEventData(newEvent) {
   try {
-    yield call(addEvent(newEvent));
+    yield addEvent(newEvent);
     // dispatch get upcoming events
     yield put({
       type: EVENT_ACTIONS.FETCH_UPCOMING_EVENTS

@@ -28,6 +28,7 @@ const styles = () => ({
     padding: '0 0 1.4rem 0'
   },
   button: {
+    marginTop: '0.25rem',
 
   }
 });
@@ -212,7 +213,7 @@ class AdminProfileForm extends Component {
               fullWidth
               onClick={this.goHome}
             >
-              cancel
+              Cancel
           </Button>
           </div>
         </FormControl>

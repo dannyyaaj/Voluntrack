@@ -5,6 +5,7 @@ import { withStyles } from '@material-ui/core';
 // event actions and reducer
 
 import { EVENT_ACTIONS } from '../../../../redux/actions/eventActions';
+import { VOLUNTEER_ACTIONS } from '../../../../redux/actions/volunteerActions';
 import UpcomingEventCards from './EventCards/UpcomingEventCards';
 import { Grid, Row, Col } from 'react-material-responsive-grid';
 
@@ -31,7 +32,6 @@ const styles = () => ({
     padding: '0 0 1.4rem 0'
   },
   button: {
-
   }
 });
 
@@ -40,6 +40,12 @@ class EventCardsView extends Component {
     this.props.dispatch({
       type: EVENT_ACTIONS.FETCH_UPCOMING_EVENTS
     })
+    this.props.dispatch({
+      type: VOLUNTEER_ACTIONS.FETCH_ALL_VOLUNTEERS
+    });
+    this.props.dispatch({
+      type: VOLUNTEER_ACTIONS.FETCH_NON_EVENT_VOLUNTEERS
+    });
   }
 
   render() {
@@ -47,7 +53,6 @@ class EventCardsView extends Component {
     if (this.props.upcomingEvents) {
       upcomingEventCards = this.props.upcomingEvents.map((event, index) => {
         return (
-
           <Col xs4={4} md={4} lg={4} key={index}>
             <UpcomingEventCards
               eventId={event.id}

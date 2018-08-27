@@ -16,6 +16,7 @@ import ProfilePage from './components/ProfilePage/ProfilePage';
 import ErrorNotFound from './components/ErrorNotFound/ErrorNotFound';
 import './styles/main.css';
 import ManageEventsPage from './components/UserAccess/AdminUser/ManageEvents/ManageEventsPage';
+import ManageVolunteersPage from './components/UserAccess/AdminUser/ManageVolunteers/ManageVolunteersPage';
 
 const App = () => (
   <div>
@@ -47,6 +48,10 @@ const App = () => (
           <Route
             exact path="/events"
             component={ManageEventsPage}
+          />
+          <Route
+            exact path="/volunteers"
+            component={ManageVolunteersPage}
           />
           <Route
             exact path="/profile"

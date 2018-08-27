@@ -27,11 +27,11 @@ class AdminNav extends Component {
               Profile
             </Link>
           </li>
-          <li>
+          {/* <li>
             <Link to="/reporting">
               Reporting
             </Link>
-          </li>
+          </li> */}
           <li>
             <Link to="/volunteers">
               Manage Volunteers

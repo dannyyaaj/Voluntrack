@@ -3,10 +3,9 @@ import { connect } from 'react-redux';
 import AdminNav from '../UserAccess/AdminUser/AdminNav/AdminNav';
 import AdminProfileView from '../UserAccess/AdminUser/AdminProfile/AdminProfileView';
 import VolunteerNav from '../UserAccess/VolunteerUser/VolunteerNav/VolunteerNav';
-import UserProfileView from '../UserAccess/VolunteerUser/UserProfileView/UserProfileView';
 import UserErrorMessage from '../ErrorNotFound/UserErrorMessage';
 import { USER_ACTIONS } from '../../redux/actions/userActions';
-
+import { VOLUNTEER_ACTIONS } from '../../redux/actions/volunteerActions';
 
 const mapStateToProps = state => ({
   user: state.user,
@@ -15,6 +14,9 @@ const mapStateToProps = state => ({
 class ProfilePage extends Component {
   componentDidMount() {
     this.props.dispatch({ type: USER_ACTIONS.FETCH_USER });
+    this.props.dispatch({
+      type: VOLUNTEER_ACTIONS.FETCH_ALL_VOLUNTEERS
+    });
   }
 
   componentDidUpdate() {
@@ -40,7 +42,7 @@ class ProfilePage extends Component {
         content = (
           <div>
             <VolunteerNav />
-            <UserProfileView />
+            <AdminProfileView />
           </div>
         )
       }

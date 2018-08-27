@@ -1,11 +1,6 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 // material ui components
-import { withStyles } from '@material-ui/core';
-import FormControl from '@material-ui/core/FormControl';
-import FormLabel from '@material-ui/core/FormLabel';
-import TextField from '@material-ui/core/TextField';
-import Button from '@material-ui/core/Button';
+import { withStyles, FormControl, FormLabel, TextField, Button } from '@material-ui/core';
 
 const styles = () => ({
   container: {
@@ -23,12 +18,18 @@ const styles = () => ({
     margin: '0 auto',
     padding: '0 0 1.5rem 0'
   },
-  getStarted: {
-  
+  button: {
+    marginTop: '1rem',
   }
+
 });
 
 class RegistrationForm extends Component {
+
+  returnHome = () => {
+    window.location.href = "http://localhost:3000/#/home"
+  }
+
   render() {
     return (
       <form
@@ -89,7 +90,7 @@ class RegistrationForm extends Component {
           </FormLabel>
           <div>
             <Button
-             className={this.props.classes.getStarted}
+              className={this.props.classes.button}
               color="primary"
               variant="extendedFab"
               fullWidth
@@ -98,9 +99,16 @@ class RegistrationForm extends Component {
               Get Started
                </Button>
           </div>
-          <div>
-          <Link to="/home">Cancel</Link>
-          </div>
+          <Button
+            className={this.props.classes.button}
+            color="secondary"
+            variant="extendedFab"
+            fullWidth
+            type="button"
+            onClick={this.returnHome}
+          >
+            Cancel
+          </Button>
         </FormControl>
       </form>
     )

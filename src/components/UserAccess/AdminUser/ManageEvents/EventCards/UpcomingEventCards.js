@@ -18,6 +18,7 @@ import {
 import moment from 'moment';
 import { Row, Col } from 'react-material-responsive-grid';
 import UpdateEventForm from './UpdateEventForm';
+import InviteVolunteerForm from '../../ManageVolunteers/InviteVolunteerForm';
 import { triggerDeleteEvent } from '../../../../../redux/actions/eventActions';
 
 const styles = theme => ({
@@ -81,16 +82,29 @@ const styles = theme => ({
     marginTop: '10px',
     padding: '30px',
     opacity: '.95'
+  },
+  inviteVolunteerModal: {
+    backgroundColor: 'white',
+    margin: '0 auto',
+    width: '50%',
+    height: '75%',
+    boxShadow: '0px 0px 30px rgba(0, 0, 0, 0.3)',
+    marginTop: '10px',
+    padding: '30px',
+    opacity: '.95'
   }
 });
 
 class UpcomingEventCards extends React.Component {
   state = {
     eventId: '',
+    volunteerId: '',
     expanded: false,
     updateEventModalOpen: false,
     eventToUpdate: {},
-    confirmationDeleteIsOpen: false
+    confirmationDeleteIsOpen: false,
+    inviteVolunteerModalOpen: false,
+
   };
 
   //! Opens modal containing update event form and stores volunteer event object and id on local state for children component (update event form) to use
@@ -98,13 +112,32 @@ class UpcomingEventCards extends React.Component {
     this.setState({
       updateEventModalOpen: true,
       eventId: eventId,
-      eventToUpdate: eventToUpdate
+      eventToUpdate: eventToUpdate,
+      inviteVolunteerModalOpen: false,
+    })
+  }
+
+  handleInviteVolunteer = (eventId) => {
+    this.setState({
+      updateEventModalOpen: false,
+      eventId: eventId,
+      inviteVolunteerModalOpen: true,
+    })
+  }
+
+  handleUpdateEvent = (eventId, eventToUpdate) => {
+    this.setState({
+      updateEventModalOpen: true,
+      eventId: eventId,
+      eventToUpdate: eventToUpdate,
+      inviteVolunteerModalOpen: false,
     })
   }
 
   handleCloseModal = () => {
     this.setState({
       updateEventModalOpen: false,
+      inviteVolunteerModalOpen: false,
     });
   };
 
@@ -192,11 +225,11 @@ class UpcomingEventCards extends React.Component {
               </Col>
             </Row>
             <Typography variant="body1" className={classes.location} component="p">
-              {this.props.event.address} {this.props.event.city}, {this.props.event.state} {this.props.event.zipcode}
+              {this.props.event.address} <br />{this.props.event.city}, {this.props.event.state} {this.props.event.zipcode}
             </Typography>
-            <Typography variant="body1" className={classes.location} component="p">
+            {/* <Typography variant="body1" className={classes.location} component="p">
               Volunteers Needed: {this.props.event.num_of_volunteers}
-            </Typography>
+            </Typography> */}
           </CardContent>
           <CardActions
             className={classes.actions}
@@ -209,6 +242,8 @@ class UpcomingEventCards extends React.Component {
             </IconButton>
             <IconButton aria-label="Invite"
               className={classnames(classes.addPerson)}
+              onClick={() => this.handleInviteVolunteer(this.props.event.id)}
+
             >
               <PersonAddIcon />
             </IconButton>
@@ -234,6 +269,7 @@ class UpcomingEventCards extends React.Component {
             </CardContent>
           </Collapse>
         </Card>
+
         <Modal
           aria-labelledby="create an event"
           aria-describedby="create a volunteer event"
@@ -248,6 +284,25 @@ class UpcomingEventCards extends React.Component {
             />
           </div>
         </Modal>
+
+        {/* Invite Volunteer Modal */}
+        <Modal
+          aria-labelledby="Invite Volunteer"
+          aria-describedby="invite a volunteer to this event"
+          open={this.state.inviteVolunteerModalOpen}
+          onClose={this.handleCloseModal}
+        >
+          <div className={this.props.classes.inviteVolunteerModal}>
+
+            <InviteVolunteerForm
+              eventId={this.state.eventId}
+              parentState={this.state}
+              handleCloseModal={this.handleCloseModal}
+            />
+          </div>
+        </Modal>
+
+        {/* Delete Confirmation Dialog */}
         <Dialog
           open={this.state.confirmationDeleteIsOpen}
           onClose={this.handleCloseDelete}
