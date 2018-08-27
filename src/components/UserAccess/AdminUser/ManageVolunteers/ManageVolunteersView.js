@@ -29,8 +29,8 @@ const styles = theme => ({
 });
 
 class ManageVolunteersView extends Component {
+
   render() {
-    console.log(this.props.volunteers, 'all volunteers')
     let organizationVolunteers = this.props.volunteers.map((volunteer, index) => {
       return (
         <TableRow className={this.props.classes.row} key={index}>
