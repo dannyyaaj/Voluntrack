@@ -12,6 +12,16 @@ const allVolunteers = (state = null, action) => {
   }
 }
 
+// Dispatch action type to get all volunteers with no event assigned yet
+const inviteVolunteers = (state = null, action) => {
+  switch (action.type) {
+    case VOLUNTEER_ACTIONS.SET_NON_EVENT_VOLUNTEERS:
+      return action.payload || state;
+    default:
+      return state;
+  }
+}
+
 // const eventVolunteers = (state = null, action) => {
 //   switch (action.type) {
 //     case EVENT_ACTIONS.SET_PAST_EVENT:
@@ -22,5 +32,6 @@ const allVolunteers = (state = null, action) => {
 // }
 
 export default combineReducers({
- allVolunteers
+ allVolunteers,
+ inviteVolunteers
 });
