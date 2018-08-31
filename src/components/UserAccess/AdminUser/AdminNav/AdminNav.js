@@ -8,7 +8,6 @@ class AdminNav extends Component {
 
   logOutUser = () => {
     this.props.dispatch(triggerLogout());
-    window.location.href = "http://localhost:3000/#/home"
   }
 
   render() {
@@ -16,11 +15,11 @@ class AdminNav extends Component {
       <div className="navbar">
         <ul>
           <li>
-            <a
+            <Link to="/home"
               onClick={() => this.logOutUser()}
             >
               Log Out
-          </a>
+          </Link>
           </li>
           <li>
             <Link to="/profile">
