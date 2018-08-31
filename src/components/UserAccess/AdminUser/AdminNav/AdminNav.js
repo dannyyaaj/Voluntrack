@@ -8,7 +8,7 @@ class AdminNav extends Component {
 
   logOutUser = () => {
     this.props.dispatch(triggerLogout());
-    window.location.href = "http://localhost:3000/#/home"
+    window.location.href = "https://secure-cove-24503.herokuapp.com/#/home"
   }
 
   render() {
@@ -27,11 +27,6 @@ class AdminNav extends Component {
               Profile
             </Link>
           </li>
-          {/* <li>
-            <Link to="/reporting">
-              Reporting
-            </Link>
-          </li> */}
           <li>
             <Link to="/volunteers">
               Manage Volunteers
