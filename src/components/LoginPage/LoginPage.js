@@ -18,15 +18,15 @@ const styles = {
     backgroundColor: 'white',
   },
   container: {
-    width: '60%'
+    width: '75%'
   },
   formTitle: {
     color: 'black',
     marginBottom: '2.5rem',
   },
   textField: {
-    margin: '.5rem auto',
-    padding: '0 0 1.4rem 0'
+    margin: '0 auto',
+    padding: '0 0 1.5rem 0'
   },
   button: {
     margin: '0.25rem auto 0.5rem auto',
@@ -100,9 +100,9 @@ class LoginPage extends Component {
         <Grid container justify="center">
           <Grid item xs={12}>
             <Card className={this.props.classes.card}>
-              <h1>Please Login</h1>
               <CardContent>
                 {this.renderAlert()}
+                <h1>Please Login</h1>
                 <form
                   className={this.props.classes.form}
                   onSubmit={this.login}>
