@@ -3,34 +3,33 @@ import PublicNav from '../PublicNav/PublicNav';
 import { connect } from 'react-redux';
 import { triggerLogin, formError, clearError } from '../../redux/actions/loginActions';
 import { USER_ACTIONS } from '../../redux/actions/userActions';
-import { withStyles, Card, CardContent, Grid, FormControl, FormLabel, TextField, Button } from "@material-ui/core";
+import { withStyles, Card, CardContent, FormControl, FormLabel, TextField, Button } from "@material-ui/core";
+import { Row, Col, Grid } from 'react-material-responsive-grid';
 
 const styles = {
   card: {
+    textAlign: 'center',
     margin: '2rem auto',
     width: '50%',
     backgroundColor: '#DCEFF5',
   },
-  cardActions: {
-    padding: '0 40%'
+  form: {
+    margin: '1.5rem auto',
+    backgroundColor: 'white',
   },
   container: {
-    textAlign: 'center',
-    margin: '1.5rem auto',
-    padding: '1.5rem 2rem',
-    backgroundColor: 'white',
+    width: '60%'
   },
   formTitle: {
     color: 'black',
     marginBottom: '2.5rem',
   },
   textField: {
-    width: 500,
-    margin: '0 auto',
-    padding: '0 0 1.5rem 0'
+    margin: '.5rem auto',
+    padding: '0 0 1.4rem 0'
   },
   button: {
-    marginTop: '1rem',
+    margin: '0.25rem auto 0.5rem auto',
   }
 }
 
@@ -101,55 +100,70 @@ class LoginPage extends Component {
         <Grid container justify="center">
           <Grid item xs={12}>
             <Card className={this.props.classes.card}>
+              <h1>Please Login</h1>
               <CardContent>
                 {this.renderAlert()}
                 <form
-                  className={this.props.classes.container}
+                  className={this.props.classes.form}
                   onSubmit={this.login}>
-                  <FormControl component="fieldset">
-                    <h1>Please Login</h1>
-                    <FormLabel htmlFor="username">
-                      <TextField
-                        className={this.props.classes.textField}
-                        label="Username"
-                        name="username"
-                        fullWidth
-                        margin="normal"
-                        value={this.state.username}
-                        onChange={this.handleInputChangeFor('username')}
-                      />
-                    </FormLabel>
-                    <FormLabel htmlFor="password">
-                      <TextField
-                        className={this.props.classes.textField}
-                        label="Password"
-                        name="password"
-                        fullWidth
-                        margin="normal"
-                        value={this.state.password}
-                        onChange={this.handleInputChangeFor('password')}
-                      />
-                    </FormLabel>
-                    <Button
-                      className={this.props.classes.button}
-                      color="primary"
-                      variant="extendedFab"
-                      fullWidth
-                      type="submit"
-                    >
-                      Log In
+                  <FormControl className={this.props.classes.container}
+                    component="fieldset">
+                    <Row>
+                      <Col xs4={4} md={12} lg={12}>
+                        <FormLabel htmlFor="username">
+                          <TextField
+                            className={this.props.classes.textField}
+                            label="Username"
+                            name="username"
+                            fullWidth
+                            value={this.state.username}
+                            onChange={this.handleInputChangeFor('username')}
+                          />
+                        </FormLabel>
+                      </Col>
+                    </Row>
+                    <Row>
+                      <Col xs4={4} md={12} lg={12}>
+                        <FormLabel htmlFor="password">
+                          <TextField
+                            className={this.props.classes.textField}
+                            label="Password"
+                            name="password"
+                            fullWidth
+                            value={this.state.password}
+                            onChange={this.handleInputChangeFor('password')}
+                          />
+                        </FormLabel>
+                      </Col>
+                    </Row>
+                    <Row>
+                      <Col xs4={4} md={12} lg={12}>
+                        <Button
+                          className={this.props.classes.button}
+                          color="primary"
+                          variant="extendedFab"
+                          fullWidth
+                          type="submit"
+                        >
+                          Log In
                     </Button>
-                    <Button
-                      onClick={() => this.register()}
-                      className={this.props.classes.button}
-                      color="secondary"
-                      type="button"
-                      name="register"
-                      variant="extendedFab"
-                      fullWidth
-                    >
-                      Register
+                      </Col>
+                    </Row>
+                    <Row>
+                      <Col xs4={4} md={12} lg={12}>
+                        <Button
+                          onClick={() => this.register()}
+                          className={this.props.classes.button}
+                          color="secondary"
+                          type="button"
+                          name="register"
+                          variant="extendedFab"
+                          fullWidth
+                        >
+                          Register
                       </Button>
+                      </Col>
+                    </Row>
                   </FormControl>
                 </form>
               </CardContent>

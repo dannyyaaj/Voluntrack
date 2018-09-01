@@ -3,18 +3,18 @@ import React, { Component } from 'react';
 import { withStyles, FormControl, FormLabel, TextField, Button } from '@material-ui/core';
 
 const styles = () => ({
-  container: {
-    textAlign: 'center',
+  form: {
     margin: '1.5rem auto',
-    padding: '1.5rem 2rem',
     backgroundColor: 'white',
+  },
+  container: {
+    width: '60%'
   },
   formTitle: {
     color: 'black',
     marginBottom: '2.5rem',
   },
   textField: {
-    width: 500,
     margin: '0 auto',
     padding: '0 0 1.5rem 0'
   },
@@ -33,9 +33,10 @@ class RegistrationForm extends Component {
   render() {
     return (
       <form
-        className={this.props.classes.container}
+        className={this.props.classes.form}
         onSubmit={this.props.registerUser}>
-        <FormControl component="fieldset">
+        <FormControl component="fieldset"
+        className={this.props.classes.container}>
           <FormLabel htmlFor="firstName">
             <TextField
               className={this.props.classes.textField}

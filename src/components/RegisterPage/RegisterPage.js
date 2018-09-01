@@ -7,13 +7,11 @@ import { Card, CardContent, Grid } from '@material-ui/core';
 
 const styles = {
   card: {
+    textAlign: 'center',
     margin: '2rem auto',
     width: '50%',
     backgroundColor: '#DCEFF5',
-  },
-  cardActions: {
-    padding: '0 40%'
-  },
+  }
 }
 
 class RegisterPage extends Component {

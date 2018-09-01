@@ -28,7 +28,7 @@ const styles = () => ({
     padding: '0 0 1.4rem 0'
   },
   button: {
-    marginTop: '0.25rem',
+    margin: '0.25rem auto',
 
   }
 });
