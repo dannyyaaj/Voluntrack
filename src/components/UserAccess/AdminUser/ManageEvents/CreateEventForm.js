@@ -8,30 +8,32 @@ import { EVENT_ACTIONS } from '../../../../redux/actions/eventActions';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 
-const styles = () => ({
+const styles = {
   form: {
-    textAlign: 'center',
-    margin: '2.5rem auto',
+    padding: '1.5rem 0',
+    margin: '1.5rem auto',
+    backgroundColor: 'white',
   },
   container: {
-    width: '100%'
+    width: '75%'
   },
   formTitle: {
+    color: 'black',
     marginBottom: '2.5rem',
   },
   textField: {
-    margin: '1rem auto',
-    padding: '0 0 1.2rem 0'
+    margin: '0 auto',
+    padding: '0 0 1.5rem 0'
   },
   datePicker: {
-    width: '150%',
+    width: '125%',
     borderColor: 'red',
     textAlign: 'center',
   },
   button: {
-    marginTop: '3rem',
+    margin: '0.25rem auto 0.5rem auto',
   }
-});
+};
 class CreateEventsForm extends Component {
   constructor(props) {
     super(props);
@@ -94,7 +96,7 @@ class CreateEventsForm extends Component {
             <Row
               top={['xs4', 'md', 'lg']}
             >
-              <Col xs4={2} md={6} lg={6}>
+              <Col xs4={4} md={6} lg={6}>
                 <TextField
                   className={this.props.classes.textField}
                   label="Event Name"
@@ -108,7 +110,7 @@ class CreateEventsForm extends Component {
                   onChange={this.handleInputChangeFor('name')}
                 />
               </Col>
-              <Col xs4={1} md={3} lg={3}>
+              <Col xs4={4} md={3} lg={3}>
                 <DatePicker
                   selected={this.state.start_time}
                   onChange={this.handleStartTimeChange}
@@ -120,7 +122,7 @@ class CreateEventsForm extends Component {
                 />
 
               </Col>
-              <Col xs4={1} md={3} lg={3}>
+              <Col xs4={4} md={3} lg={3}>
                 <DatePicker
                   selected={this.state.end_time}
                   onChange={this.handleEndTimeChange}
@@ -133,7 +135,7 @@ class CreateEventsForm extends Component {
               </Col>
             </Row>
             <Row>
-              <Col xs4={2} md={6} lg={6}>
+              <Col xs4={4} md={6} lg={6}>
                 <TextField
                   className={this.props.classes.textField}
                   label="Address"
@@ -146,7 +148,7 @@ class CreateEventsForm extends Component {
                   onChange={this.handleInputChangeFor('address')}
                 />
               </Col>
-              <Col xs4={2} md={6} lg={6}>
+              <Col xs4={4} md={6} lg={6}>
                 <TextField
                   className={this.props.classes.textField}
                   label="Volunteer Coordinator"
@@ -161,7 +163,7 @@ class CreateEventsForm extends Component {
               </Col>
             </Row>
             <Row>
-              <Col xs4={2} md={6} lg={6}>
+              <Col xs4={4} md={6} lg={6}>
                 <TextField
                   className={this.props.classes.textField}
                   label="City"
@@ -175,7 +177,7 @@ class CreateEventsForm extends Component {
 
                 />
               </Col>
-              <Col xs4={1} md={3} lg={3}>
+              <Col xs4={4} md={3} lg={3}>
                 <TextField
                   className={this.props.classes.textField}
                   label="Number of Volunteers"
@@ -189,7 +191,7 @@ class CreateEventsForm extends Component {
                   onChange={this.handleInputChangeFor('num_of_volunteers')}
                 />
               </Col>
-              <Col xs4={1} md={3} lg={3}>
+              <Col xs4={4} md={3} lg={3}>
                 <TextField
                   className={this.props.classes.textField}
                   label="Upload An Image"
@@ -203,7 +205,7 @@ class CreateEventsForm extends Component {
               </Col>
             </Row>
             <Row>
-              <Col xs4={2} md={3} lg={3}>
+              <Col xs4={4} md={3} lg={3}>
                 <TextField
                   className={this.props.classes.textField}
                   label="State"
@@ -216,7 +218,7 @@ class CreateEventsForm extends Component {
                   onChange={this.handleInputChangeFor('state')}
                 />
               </Col>
-              <Col xs4={2} md={3} lg={3}>
+              <Col xs4={4} md={3} lg={3}>
                 <TextField
                   className={this.props.classes.textField}
                   label="Zipcode"
@@ -238,7 +240,7 @@ class CreateEventsForm extends Component {
                   name="description"
                   placeholder="Tell people more about this event"
                   multiline
-                  rows={2}
+                  rows={4}
                   rowsMax={4}
                   fullWidth
                   value={this.state.description}
@@ -250,7 +252,7 @@ class CreateEventsForm extends Component {
               </Col>
             </Row>
             <Row>
-              <Col xs4={2} md={6} lg={6}>
+              <Col xs4={4} md={6} lg={6}>
                 <Button
                   className={this.props.classes.button}
                   color="secondary"
@@ -261,7 +263,7 @@ class CreateEventsForm extends Component {
                   Cancel
                 </Button>
               </Col>
-              <Col xs4={2} md={6} lg={6}>
+              <Col xs4={4} md={6} lg={6}>
                 <Button
                   className={this.props.classes.button}
                   color="primary"
