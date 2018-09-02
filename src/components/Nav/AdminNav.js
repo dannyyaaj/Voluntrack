@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { triggerLogout } from '../../redux/actions/loginActions';
 import { connect } from 'react-redux';
 import Header from '../Header/Header';
+import { Row, Col } from 'react-material-responsive-grid';
 
 // client side routes
 
@@ -15,31 +16,38 @@ class AdminNav extends Component {
   render() {
     return (
       <div className="navbar">
-          <Header />
-        <ul>
-          <li>
-            <Link to="/home"
-              onClick={() => this.logOutUser()}
-            >
-              Log Out
-          </Link>
-          </li>
-          <li>
-            <Link to="/profile">
-              Profile
+        <Header />
+        <Row
+          end={['md', 'lg']}
+          center={['xs4']}
+        >
+          <Col xs4={1} md={12} lg={12}>
+            <ul>
+              <li>
+                <Link to="/home"
+                  onClick={() => this.logOutUser()}
+                >
+                  Log Out
+                </Link>
+              </li>
+              <li>
+                <Link to="/profile">
+                  Profile
             </Link>
-          </li>
-          <li>
-            <Link to="/volunteers">
-              Manage Volunteers
+              </li>
+              <li>
+                <Link to="/volunteers">
+                  Manage Volunteers
             </Link>
-          </li>
-          <li>
-            <Link to="/events">
-              Manage Events
+              </li>
+              <li>
+                <Link to="/events">
+                  Manage Events
             </Link>
-          </li>
-        </ul>
+              </li>
+            </ul>
+          </Col>
+        </Row>
       </div>
     )
   }
