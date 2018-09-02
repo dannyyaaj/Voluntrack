@@ -1,20 +1,22 @@
 import React, { Component } from 'react';
 import { USER_ACTIONS } from '../../redux/actions/userActions';
 import { connect } from 'react-redux';
+import { withStyles, Button } from '@material-ui/core';
 
 const mapStateToProps = state => ({
   user: state.user,
 });
 
+const styles = {
+  button: {
+    margin: '0.25rem auto',
+  }
+};
+
 class ErrorNotFound extends Component {
   componentDidMount() {
     this.props.dispatch({ type: USER_ACTIONS.FETCH_USER });
   }
-
-  // redirect user to home page
-  goHome = () => this.props.history.push('/');
-
-  goUser = () => this.props.history.push('/user')
 
   render() {
     let content = null;
@@ -23,7 +25,13 @@ class ErrorNotFound extends Component {
         <div>
           <h1>404</h1>
           <p>OOPS, SORRY WE CAN'T FIND THAT PAGE!</p>
-          <button onClick={this.goUser}>Home</button>
+          <Button
+            className={this.props.classes.button}
+            color="primary"
+            variant="extendedFab"
+            onClick={this.props.goUser}>
+            Home
+           </Button>
         </div>
       )
     } else {
@@ -31,15 +39,24 @@ class ErrorNotFound extends Component {
         <div>
           <h1>404</h1>
           <p>OOPS, SORRY WE CAN'T FIND THAT PAGE!</p>
-          <button onClick={this.goHome}>Home Page</button>
+          <Button
+            className={this.props.classes.button}
+            color="primary"
+            variant="extendedFab"
+            onClick={this.props.goHome}>
+            Home Page
+           </Button>
         </div>
       )
     }
     return (
-      <div>
+      <React.Fragment>
         {content}
-      </div>
+      </React.Fragment>
     )
   }
 }
-export default connect(mapStateToProps)(ErrorNotFound)
+
+const StyledErrorNotFound = withStyles(styles)(ErrorNotFound)
+
+export default connect(mapStateToProps)(StyledErrorNotFound)
