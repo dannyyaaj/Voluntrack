@@ -30,13 +30,17 @@ class EventsPage extends Component {
         content = (
           <div>
             <AdminNav />
-            <ManageEventsView />
+            <div className="eventsPageContainer">
+              <ManageEventsView />
+            </div>
           </div>)
       } else {
         content = (
           <div>
             <VolunteerNav />
-            <MyEventsView />
+            <div className="eventsPageContainer">
+              <MyEventsView />
+            </div>
           </div>
         )
       }
