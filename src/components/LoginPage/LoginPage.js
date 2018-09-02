@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import PublicNav from '../PublicNav/PublicNav';
+import PublicNav from '../Nav/PublicNav';
 import { connect } from 'react-redux';
 import { triggerLogin, formError, clearError } from '../../redux/actions/loginActions';
 import { USER_ACTIONS } from '../../redux/actions/userActions';
@@ -14,6 +14,7 @@ const styles = {
     backgroundColor: '#DCEFF5',
   },
   form: {
+    padding: '1.5rem 0',
     margin: '1.5rem auto',
     backgroundColor: 'white',
   },
@@ -55,7 +56,7 @@ class LoginPage extends Component {
 
   componentDidUpdate() {
     if (!this.props.user.isLoading && this.props.user.userName !== null) {
-      this.props.history.push('user');
+      this.props.history.push('events');
     }
   }
 
