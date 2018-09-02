@@ -22,6 +22,10 @@ a:hover {
   color: #ece7e7;
 }
 
+.errorMessage {
+  text-align: center;
+}
+
 /* Form Styling */
 
 .formHeader {
