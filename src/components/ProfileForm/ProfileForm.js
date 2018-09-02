@@ -31,7 +31,6 @@ const styles = {
     margin: '0.25rem auto 0.5rem auto',
   }
 };
-
 class ProfileForm extends Component {
 
   goHome = () => {
@@ -46,7 +45,7 @@ class ProfileForm extends Component {
         <FormControl component="fieldset"
           className={this.props.classes.container}>
           <Row>
-            <Col xs4={2} md={6} lg={6}>
+            <Col xs4={4} md={6} lg={6}>
               <FormLabel htmlFor="first_name">
                 <TextField
                   className={this.props.classes.textField}
@@ -62,7 +61,7 @@ class ProfileForm extends Component {
                 />
               </FormLabel>
             </Col>
-            <Col xs4={2} md={6} lg={6}>
+            <Col xs4={4} md={6} lg={6}>
               <FormLabel htmlFor="middle_name">
                 <TextField
                   className={this.props.classes.textField}
@@ -81,7 +80,7 @@ class ProfileForm extends Component {
             </Col>
           </Row>
           <Row>
-            <Col xs4={2} md={6} lg={6}>
+            <Col xs4={4} md={6} lg={6}>
               <FormLabel htmlFor="lastName">
                 <TextField
                   className={this.props.classes.textField}
@@ -96,7 +95,7 @@ class ProfileForm extends Component {
                 />
               </FormLabel>
             </Col>
-            <Col xs4={2} md={6} lg={6}>
+            <Col xs4={4} md={6} lg={6}>
               <FormLabel htmlFor="email">
                 <TextField
                   className={this.props.classes.textField}
@@ -113,7 +112,7 @@ class ProfileForm extends Component {
             </Col>
           </Row>
           <Row>
-            <Col xs4={2} md={6} lg={6}>
+            <Col xs4={4} md={6} lg={6}>
               <FormLabel htmlFor="primary_phone"
                 className={this.props.classes.formLabel}>
                 <TextField
@@ -129,7 +128,7 @@ class ProfileForm extends Component {
                 />
               </FormLabel>
             </Col>
-            <Col xs4={2} md={6} lg={6}>
+            <Col xs4={4} md={6} lg={6}>
               <FormLabel htmlFor="address">
                 <TextField
                   className={this.props.classes.textField}
@@ -146,7 +145,7 @@ class ProfileForm extends Component {
             </Col>
           </Row>
           <Row>
-            <Col xs4={2} md={6} lg={6}>
+            <Col xs4={4} md={6} lg={6}>
               <FormLabel htmlFor="city">
                 <TextField
                   className={this.props.classes.textField}
@@ -161,7 +160,7 @@ class ProfileForm extends Component {
                 />
               </FormLabel>
             </Col>
-            <Col xs4={2} md={6} lg={6}>
+            <Col xs4={4} md={6} lg={6}>
               <FormLabel htmlFor="state">
                 <TextField
                   className={this.props.classes.textField}
@@ -178,7 +177,7 @@ class ProfileForm extends Component {
             </Col>
           </Row>
           <Row>
-            <Col xs4={2} md={6} lg={6}>
+            <Col xs4={4} md={6} lg={6}>
               <FormLabel htmlFor="zipcode">
                 <TextField
                   className={this.props.classes.textField}
