@@ -1,65 +1,50 @@
 import React from 'react';
-import {
-  HashRouter as Router,
-  Route,
-  Redirect,
-  Switch,
-} from 'react-router-dom';
-
-import Header from './components/Header/Header';
+import { HashRouter as Router, Redirect, Route, Switch } from 'react-router-dom';
+import ErrorNotFound from './components/ErrorNotFound/ErrorNotFound';
+import ManageEventsPage from './components/EventsPage/EventsPage';
+import InfoPage from './components/InfoPage/InfoPage';
 import LandingPage from './components/LandingPage/LandingPage';
 import LoginPage from './components/LoginPage/LoginPage';
-import RegisterPage from './components/RegisterPage/RegisterPage';
-import UserPage from './components/UserPage/UserPage';
-import InfoPage from './components/InfoPage/InfoPage';
 import ProfilePage from './components/ProfilePage/ProfilePage';
-import ErrorNotFound from './components/ErrorNotFound/ErrorNotFound';
-import './styles/main.css';
-import ManageEventsPage from './components/UserAccess/AdminUser/ManageEvents/ManageEventsPage';
+import RegisterPage from './components/RegisterPage/RegisterPage';
 import ManageVolunteersPage from './components/UserAccess/AdminUser/ManageVolunteers/ManageVolunteersPage';
+import './styles/main.css';
 
 const App = () => (
   <div>
     <Router>
-      <div>
-        <Header title="Voluntrack" />
-        <Switch>
-          <Redirect exact from="/" to="/home" />
-          <Route
-            exact path="/home"
-            component={LandingPage}
-          />
-          <Route
-            exact path="/login"
-            component={LoginPage}
-          />
-          <Route
-            exact path="/register"
-            component={RegisterPage}
-          />
-          <Route
-            exact path="/user"
-            component={UserPage}
-          />
-          <Route
-            exact path="/info"
-            component={InfoPage}
-          />
-          <Route
-            exact path="/events"
-            component={ManageEventsPage}
-          />
-          <Route
-            exact path="/volunteers"
-            component={ManageVolunteersPage}
-          />
-          <Route
-            exact path="/profile"
-            component={ProfilePage}
-          />
-          <Route component={ErrorNotFound} />
-        </Switch>
-      </div>
+      <Switch>
+        <Redirect exact from="/" to="/home" />
+        <Route
+          exact path="/home"
+          component={LandingPage}
+        />
+        <Route
+          exact path="/login"
+          component={LoginPage}
+        />
+        <Route
+          exact path="/register"
+          component={RegisterPage}
+        />
+        <Route
+          exact path="/info"
+          component={InfoPage}
+        />
+        <Route
+          exact path="/events"
+          component={ManageEventsPage}
+        />
+        <Route
+          exact path="/volunteers"
+          component={ManageVolunteersPage}
+        />
+        <Route
+          exact path="/profile"
+          component={ProfilePage}
+        />
+        <Route component={ErrorNotFound} />
+      </Switch>
     </Router>
   </div>
 );
