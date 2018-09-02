@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import AdminNav from '../UserAccess/AdminUser/AdminNav/AdminNav';
-import AdminProfileView from '../UserAccess/AdminUser/AdminProfile/AdminProfileView';
-import VolunteerNav from '../UserAccess/VolunteerUser/VolunteerNav/VolunteerNav';
+import AdminNav from '../Nav/AdminNav';
+import ProfileView from '../ProfileView/ProfileView';
+import VolunteerNav from '../Nav/VolunteerNav';
 import UserErrorMessage from '../ErrorNotFound/UserErrorMessage';
 import { USER_ACTIONS } from '../../redux/actions/userActions';
 import { VOLUNTEER_ACTIONS } from '../../redux/actions/volunteerActions';
@@ -33,7 +33,7 @@ class ProfilePage extends Component {
         content = (
           <div>
             <AdminNav />
-            <AdminProfileView />
+            <ProfileView />
           </div>
 
         )
@@ -42,7 +42,7 @@ class ProfilePage extends Component {
         content = (
           <div>
             <VolunteerNav />
-            <AdminProfileView />
+            <ProfileView />
           </div>
         )
       }
