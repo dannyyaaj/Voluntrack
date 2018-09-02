@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import AdminNav from '../AdminNav/AdminNav';
+import AdminNav from '../../../Nav/AdminNav';
 import ManageVolunteersView from './ManageVolunteersView';
 import UserErrorMessage from '../../../ErrorNotFound/UserErrorMessage';
 import { VOLUNTEER_ACTIONS } from '../../../../redux/actions/volunteerActions';
