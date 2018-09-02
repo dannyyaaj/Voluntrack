@@ -99,7 +99,6 @@ class LoginPage extends Component {
       <div>
         <PublicNav />
         <Grid container justify="center">
-          <Grid item xs={12}>
             <Card className={this.props.classes.card}>
               <CardContent>
                 {this.renderAlert()}
@@ -170,7 +169,6 @@ class LoginPage extends Component {
               </CardContent>
             </Card>
           </Grid>
-        </Grid>
       </div>
     );
   }
