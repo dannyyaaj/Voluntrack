@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import PublicNav from '../PublicNav/PublicNav';
+import PublicNav from '../Nav/PublicNav';
 import axios from 'axios';
 import RegistrationForm from './RegistrationForm';
 import { withStyles } from "@material-ui/core/styles";
