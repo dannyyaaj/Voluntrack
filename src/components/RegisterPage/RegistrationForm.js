@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 // material ui components
 import { withStyles, FormControl, FormLabel, TextField, Button } from '@material-ui/core';
-import { Row, Col, Grid } from 'react-material-responsive-grid';
+import { Row, Col } from 'react-material-responsive-grid';
 
 const styles = {
   form: {
+    padding: '1.5rem 0',
     margin: '1.5rem auto',
     backgroundColor: 'white',
   },
