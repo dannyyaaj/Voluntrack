@@ -5,25 +5,25 @@ import EventCardsView from './EventCardsView';
 import PastEventCardsView from './PastEventCardsView';
 import CreateEventForm from './CreateEventForm';
 
-const styles = () => ({
+const styles = {
   modalStyle: {
+    textAlign: 'center',
     backgroundColor: 'white',
-    margin: '0 auto',
-    width: '90%',
-    height: '90%',
+    margin: '5rem auto',
+    width: '75%',
     boxShadow: '0px 0px 30px rgba(0, 0, 0, 0.3)',
-    marginTop: '10px',
-    padding: '30px',
-    opacity: '0.9'
+    padding: '1.5rem 0',
+    opacity: '0.95'
   },
   button: {
-    margin: '1.75rem 2.75rem 0 1.75rem'
+    textAlign:'center',
+    margin: '3rem 3rem 1rem 3rem'
   },
   header: {
     textAlign: 'center',
 
   }
-})
+};
 class ManageEventsView extends Component {
   constructor(props) {
     super(props);
@@ -83,7 +83,7 @@ class ManageEventsView extends Component {
       buttonText = 'View Past Events' :
       buttonText = ('Upcoming Events')
     return (
-      <div>
+      <React.Fragment>
         <Button
         className={this.props.classes.button}
           color="secondary"
@@ -111,7 +111,7 @@ class ManageEventsView extends Component {
           </div>
         </Modal>
         {pageContent}
-      </div>
+      </React.Fragment>
     )
   }
 }
