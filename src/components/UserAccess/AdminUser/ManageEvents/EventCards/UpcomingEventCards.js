@@ -74,24 +74,22 @@ const styles = theme => ({
     textAlign: 'center',
   },
   modalStyle: {
+    textAlign: 'center',
     backgroundColor: 'white',
-    margin: '0 auto',
-    width: '90%',
-    height: '90%',
+    margin: '5rem auto',
+    width: '75%',
     boxShadow: '0px 0px 30px rgba(0, 0, 0, 0.3)',
-    marginTop: '10px',
-    padding: '30px',
-    opacity: '.95'
+    padding: '1.5rem 0',
+    opacity: '0.95'
   },
   inviteVolunteerModal: {
+    textAlign: 'center',
     backgroundColor: 'white',
-    margin: '0 auto',
-    width: '50%',
-    height: '75%',
+    margin: '5rem auto',
+    width: '75%',
     boxShadow: '0px 0px 30px rgba(0, 0, 0, 0.3)',
-    marginTop: '10px',
-    padding: '30px',
-    opacity: '.95'
+    padding: '1.5rem 0',
+    opacity: '0.95'
   }
 });
 
@@ -184,7 +182,6 @@ class UpcomingEventCards extends React.Component {
             action={
               <IconButton
                 className={classnames(classes.deleteEvent)}
-                // onClick={() => this.handleDeleteEvent(this.props.event.id)}
                 onClick={this.handleConfirmDelete}
               >
                 <DeleteForever />
@@ -203,7 +200,7 @@ class UpcomingEventCards extends React.Component {
               center={['xs4', 'md', 'lg']}
               top={['xs4', 'md', 'lg']}
             >
-              <Col xs4={2} md={6} lg={6}>
+              <Col xs4={4} md={6} lg={6}>
                 <Typography
                   align="left"
                   className={classes.startTime}
@@ -213,7 +210,7 @@ class UpcomingEventCards extends React.Component {
                   {eventStartTime}
                 </Typography>
               </Col>
-              <Col xs4={2} md={6} lg={6}>
+              <Col xs4={4} md={6} lg={6}>
                 <Typography
                   align="right"
                   className={classes.endTime}
@@ -319,14 +316,14 @@ class UpcomingEventCards extends React.Component {
           <DialogActions
           >
             <Row>
-              <Col xs4={2} md={6} lg={6}>
+              <Col xs4={4} md={6} lg={6}>
                 <Button
                   onClick={this.handleCloseDelete}
                   color="primary">
                   Cancel
                     </Button>
               </Col>
-              <Col xs4={2} md={6} lg={6}>
+              <Col xs4={4} md={6} lg={6}>
                 <Button
                   onClick={() => this.handleDeleteEvent(this.props.event.id)}
                   color="primary"
