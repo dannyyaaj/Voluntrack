@@ -33,9 +33,7 @@ class ProfilePage extends Component {
         content = (
           <React.Fragment>
             <AdminNav />
-            <ProfileView 
-              history={this.props.history}
-            />
+            <ProfileView />
           </React.Fragment>
 
         )
@@ -44,9 +42,7 @@ class ProfilePage extends Component {
         content = (
           <React.Fragment>
             <VolunteerNav />
-            <ProfileView 
-              history={this.props.history}
-            />
+            <ProfileView />
           </React.Fragment>
         )
       }
