@@ -71,7 +71,7 @@ class LoginPage extends Component {
   }
 
   register = () => {
-    window.location.href = "http://localhost:3000/#/register"
+    this.props.history.push('/register');
   }
 
   handleInputChangeFor = propertyName => (event) => {
@@ -98,7 +98,7 @@ class LoginPage extends Component {
     return (
       <div>
         <PublicNav />
-        <Grid container justify="center">
+        <Grid justify="center">
             <Card className={this.props.classes.card}>
               <CardContent>
                 {this.renderAlert()}
@@ -173,6 +173,7 @@ class LoginPage extends Component {
     );
   }
 }
+
 const StyledLoginPage = withStyles(styles)(LoginPage)
 
 export default connect(mapStateToProps)(StyledLoginPage);

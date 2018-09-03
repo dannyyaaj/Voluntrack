@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { withRouter } from 'react-router';
 // material ui components
 import { withStyles, FormControl, FormLabel, TextField, Button } from '@material-ui/core';
 import { Row, Col } from 'react-material-responsive-grid';
@@ -28,7 +29,7 @@ const styles = {
 class RegistrationForm extends Component {
 
   returnHome = () => {
-    window.location.href = "http://localhost:3000/#/home"
+    this.props.history.push('/home')
   }
 
   render() {
@@ -145,4 +146,4 @@ class RegistrationForm extends Component {
 
 const StyledRegistrationForm =
   withStyles(styles)(RegistrationForm);
-export default StyledRegistrationForm;
+export default withRouter(StyledRegistrationForm);

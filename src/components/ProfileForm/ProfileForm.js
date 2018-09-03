@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router';
 // material ui components
 import { withStyles, FormControl, FormLabel, TextField, Button } from '@material-ui/core';
 // react material responsive grid components
@@ -223,4 +224,5 @@ class ProfileForm extends Component {
 
 const StyledProfileForm =
   withStyles(styles)(ProfileForm);
-export default connect(mapStateToProps)(StyledProfileForm);
+  
+export default withRouter(connect(mapStateToProps)(StyledProfileForm));
