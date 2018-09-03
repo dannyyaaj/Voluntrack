@@ -11,7 +11,7 @@ import ManageVolunteersPage from './components/UserAccess/AdminUser/ManageVolunt
 import './styles/main.css';
 
 const App = () => (
-  <div>
+  <React.Fragment>
     <Router>
       <Switch>
         <Redirect exact from="/" to="/home" />
@@ -46,7 +46,7 @@ const App = () => (
         <Route component={ErrorNotFound} />
       </Switch>
     </Router>
-  </div>
+  </React.Fragment>
 );
 
 export default App;
