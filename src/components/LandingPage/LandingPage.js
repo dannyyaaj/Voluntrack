@@ -2,12 +2,12 @@ import React, { Component } from 'react';
 import About from '../About/About';
 import Carousel from '../Carousel/Carousel';
 import PublicNav from '../Nav/PublicNav';
-import { Grid, Row, Col } from 'react-material-responsive-grid';
+import { Row, Col } from 'react-material-responsive-grid';
 
 class LandingPage extends Component {
   render() {
     return (
-      <Grid>
+      <React.Fragment>
         <Row>
           <Col xs4={4} md={12} lg={12}>
             <PublicNav />
@@ -23,8 +23,9 @@ class LandingPage extends Component {
             <About />
           </Col>
         </Row>
-      </Grid>
+      </React.Fragment>
     )
   }
 }
+
 export default LandingPage
