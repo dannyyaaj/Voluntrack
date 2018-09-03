@@ -51,13 +51,13 @@ class RegisterPage extends Component {
             this.props.history.push('/home');
           } else {
             this.setState({
-              message: 'Ooops! That didn\'t work. The username might already be taken. Try again!',
+              message: 'Ooops! Something went wrong! Is the server running?',
             });
           }
         })
         .catch(() => {
           this.setState({
-            message: 'Ooops! Something went wrong! Is the server running?',
+            message: 'Ooops! That didn\'t work. The username might already be taken. Try again!'
           });
         });
     }
@@ -84,6 +84,7 @@ class RegisterPage extends Component {
   }
 
   render() {
+    console.log(this.state, ' local state')
     return (
       <div>
         <PublicNav />
