@@ -31,19 +31,23 @@ class ProfilePage extends Component {
 
       if (this.props.user.data.admin_access === true) {
         content = (
-          <div>
+          <React.Fragment>
             <AdminNav />
-            <ProfileView />
-          </div>
+            <ProfileView 
+              history={this.props.history}
+            />
+          </React.Fragment>
 
         )
       }
       else if (this.props.user.userName) {
         content = (
-          <div>
+          <React.Fragment>
             <VolunteerNav />
-            <ProfileView />
-          </div>
+            <ProfileView 
+              history={this.props.history}
+            />
+          </React.Fragment>
         )
       }
       else {

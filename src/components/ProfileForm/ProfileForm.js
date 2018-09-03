@@ -34,7 +34,7 @@ const styles = {
 class ProfileForm extends Component {
 
   goHome = () => {
-    window.location.href = "http://localhost:3000/#/user"
+    this.props.history.push('/events')
   }
 
   render() {

@@ -92,9 +92,9 @@ class ProfileView extends Component {
     this.setState({
       dialogIsOpen: false
     });
+
     /** Send user id and component local state as 
     arguments to redux saga for PUT request */
-
     this.props.dispatch(triggerUpdateUser(this.props.user.id, this.state))
 
   }
@@ -106,7 +106,7 @@ class ProfileView extends Component {
       dialogIsOpen: true
     });
   };
- 
+
   // Closes modal
   handleClose = () => {
     this.setState({
@@ -124,6 +124,7 @@ class ProfileView extends Component {
             <h1 className="formHeader">Your Profile</h1>
             <p className="formDescription">Manage your basic information below - name, email, and phone number - to make it easier for organizations to get in touch.</p>
             <ProfileForm
+              history={this.props.history}
               handleInputChangeFor={this.handleInputChangeFor}
               profile={this.state}
               handleClickOpen={this.handleClickOpen}
