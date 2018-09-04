@@ -18,7 +18,7 @@ import {
 import moment from 'moment';
 import { Row, Col } from 'react-material-responsive-grid';
 import UpdateEventForm from './UpdateEventForm';
-import InviteVolunteerForm from '../../ManageVolunteers/InviteVolunteerForm';
+import AddVolunteerForm from '../../ManageVolunteers/AddVolunteerForm';
 import { triggerDeleteEvent } from '../../../../../redux/actions/eventActions';
 
 const styles = theme => ({
@@ -175,7 +175,7 @@ class UpcomingEventCards extends React.Component {
     eventStartTime = moment(this.props.event.start_time).utc().format("h:mm A");
     eventEndTime = moment(this.props.event.end_time).utc().format("h:mm A");
     return (
-      <div>
+      <React.Fragment>
         <Card className={classes.card}
         >
           <CardHeader
@@ -291,7 +291,7 @@ class UpcomingEventCards extends React.Component {
         >
           <div className={this.props.classes.inviteVolunteerModal}>
 
-            <InviteVolunteerForm
+            <AddVolunteerForm
               eventId={this.state.eventId}
               parentState={this.state}
               handleCloseModal={this.handleCloseModal}
@@ -334,7 +334,7 @@ class UpcomingEventCards extends React.Component {
             </Row>
           </DialogActions>
         </Dialog>
-      </div>
+      </React.Fragment>
     )
   }
 }

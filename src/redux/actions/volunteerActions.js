@@ -11,12 +11,8 @@ export const VOLUNTEER_ACTIONS = {
   DELETE_VOLUNTEER: 'DELETE_VOLUNTEER'
 }
 
-export const inviteVolunteerToEvent = (volunteerId, eventId) => ({
+export const addVolunteerToEvent = (volunteerId, eventId) => ({
   type: VOLUNTEER_ACTIONS.PUT_VOLUNTEER_TO_EVENT,
   payload: [volunteerId, eventId]
 })
 
-// export const triggerUpdateEvent = (volunteerId, newEventData) => ({
-//   type: VOLUNTEER_ACTIONS.PUT_VOLUNTEER_,
-//   payload: [volunteerId, newEventData]
-// })
