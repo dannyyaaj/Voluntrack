@@ -3,9 +3,9 @@ import { connect } from 'react-redux';
 // material ui components
 import { withStyles, FormControl, Button, Select, FormHelperText, Input, InputLabel, MenuItem } from '@material-ui/core';
 import { Grid, Row, Col } from 'react-material-responsive-grid';
-import { inviteVolunteerToEvent } from '../../../../redux/actions/volunteerActions';
+import { addVolunteerToEvent } from '../../../../redux/actions/volunteerActions';
 
-
+//rename list of volunteers not assigned to an event from redux store as volunteers
 const mapStateToProps = state => ({
   upcomingEvents: state.event.upcoming,
   volunteers: state.volunteer.inviteVolunteers,
@@ -37,7 +37,7 @@ const styles = () => ({
   },
 });
 
-class InviteVolunteerForm extends Component {
+class AddVolunteerForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -45,30 +45,38 @@ class InviteVolunteerForm extends Component {
     };
   }
 
+  //Stores volunteer id on local state
   handleInputChangeFor = propertyName => (event) => {
     this.setState({
       [propertyName]: event.target.value,
     });
   }
 
-  inviteVolunteer = (event) => {
+  //Dispatch PUT request with volunteer id stored on local state and event id stored on parent state
+  addVolunteer = (event) => {
     event.preventDefault();
-    this.props.dispatch(inviteVolunteerToEvent(this.state.volunteer_id, this.props.parentState))
+    this.props.dispatch(addVolunteerToEvent(this.state.volunteer_id, this.props.parentState))
     this.props.handleCloseModal();
   }
 
   render() {
-    const volunteersList = this.props.volunteers.map((volunteer, index) => {
-      return (
-        <MenuItem key={index} value={volunteer.id}>{volunteer.first_name} {volunteer.last_name}</MenuItem>
-      )
-    })
+    let volunteersList = []
+    if (this.props.volunteers) {
+      // map through all volunteers who are not yet assigned to an event
+      volunteersList = this.props.volunteers.map((volunteer, index) => {
+        return (
+          <MenuItem key={index} value={volunteer.id}>{volunteer.first_name} {volunteer.last_name}</MenuItem>
+        )
+      })
+    } else {
+      console.log('volunteers list is not here yet')
+    }
 
     return (
       <Grid fixed={'center'}>
         <form
           className={this.props.classes.form}
-          onSubmit={this.inviteVolunteer}
+          onSubmit={this.addVolunteer}
           noValidate
         >
           <FormControl component="fieldset"
@@ -83,7 +91,6 @@ class InviteVolunteerForm extends Component {
                   input={<Input name="Select a Volunteer" />}
                   autoWidth
                   fullWidth
-
                 >
                   <MenuItem value="">
                     <em>None</em>
@@ -94,7 +101,7 @@ class InviteVolunteerForm extends Component {
               </Col>
             </Row>
             <Row>
-              <Col xs4={2} md={6} lg={6}>
+              <Col xs4={4} md={6} lg={6}>
                 <Button
                   className={this.props.classes.button}
                   color="secondary"
@@ -105,7 +112,7 @@ class InviteVolunteerForm extends Component {
                   Cancel
                 </Button>
               </Col>
-              <Col xs4={2} md={6} lg={6}>
+              <Col xs4={4} md={6} lg={6}>
                 <Button
                   className={this.props.classes.button}
                   color="primary"
@@ -113,17 +120,17 @@ class InviteVolunteerForm extends Component {
                   type="submit"
                   fullWidth
                 >
-                  Invite
+                  Add
                 </Button>
               </Col>
             </Row>
           </FormControl>
         </form>
-      </Grid >
+      </Grid>
     )
   }
 }
 
-const StyledInviteVolunteerForm = withStyles(styles)(InviteVolunteerForm);
+const StyledAddVolunteerForm = withStyles(styles)(AddVolunteerForm);
 
-export default connect(mapStateToProps)(StyledInviteVolunteerForm);
+export default connect(mapStateToProps)(StyledAddVolunteerForm);
