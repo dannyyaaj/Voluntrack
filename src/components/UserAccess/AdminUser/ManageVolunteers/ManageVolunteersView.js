@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import { withStyles } from "@material-ui/core/styles";
-import { Paper, Table, TableBody, TableCell, TableHead, TableRow } from '@material-ui/core/';
-
+import { Button, Paper, Table, TableBody, TableCell, TableHead, TableRow } from '@material-ui/core/';
+import { addVolunteerToEvent } from '../../../../redux/actions/volunteerActions';
 import moment from 'moment';
 
 
@@ -30,19 +30,32 @@ const styles = theme => ({
 
 class ManageVolunteersView extends Component {
 
+  removeVolunteer = (volunteerId) => {
+    this.props.dispatch(addVolunteerToEvent(volunteerId,' '))
+  }
+
   render() {
     let organizationVolunteers = this.props.volunteers.map((volunteer, index) => {
       return (
         <TableRow className={this.props.classes.row} key={index}>
-          <TableCell >{volunteer.id}</TableCell>
+          <TableCell>{volunteer.id}</TableCell>
           <TableCell>{volunteer.first_name}</TableCell>
           <TableCell>{volunteer.last_name}</TableCell>
           <TableCell>{volunteer.person_email}</TableCell>
           <TableCell>{volunteer.primary_phone}</TableCell>
           <TableCell>{volunteer.person_address} {volunteer.person_city} {volunteer.person_state} {volunteer.person_zipcode}</TableCell>
-          <TableCell>{volunteer.event_name || "Has Not Joined An Event"} </TableCell>
+          <TableCell>{volunteer.event_name || "Has Not Joined An Event"}</TableCell>
           <TableCell>{moment(volunteer.start_time).utc().format(" ddd, MMM D h:mm A") || "Has Not Joined An Event"}</TableCell>
-          <TableCell>{moment(volunteer.end_time).utc().format(" ddd, MMM D h:mm A") || moment() || "Has Not Joined An Event"}</TableCell>
+          <TableCell>{moment(volunteer.end_time).utc().format(" ddd, MMM D h:mm A") || moment()}</TableCell>
+          <TableCell>{volunteer.event_name ?
+            <Button
+              color="secondary"
+              variant="raised"
+              onClick={() => this.removeVolunteer(volunteer.id)}
+            >
+              Remove
+          </Button> : " "}
+          </TableCell>
         </TableRow>
       )
     })
@@ -63,6 +76,7 @@ class ManageVolunteersView extends Component {
                 <TableCell>Event</TableCell>
                 <TableCell>Start Time</TableCell>
                 <TableCell>End Time</TableCell>
+                <TableCell>Edit</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
