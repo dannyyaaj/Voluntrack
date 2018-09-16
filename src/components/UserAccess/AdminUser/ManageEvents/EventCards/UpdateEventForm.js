@@ -335,7 +335,7 @@ class UpdateEventForm extends Component {
             </Row>
           </FormControl>
         </form>
-      </Grid >
+      </Grid>
     )
   }
 }
