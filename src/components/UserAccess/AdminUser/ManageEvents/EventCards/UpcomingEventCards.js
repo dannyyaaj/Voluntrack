@@ -310,7 +310,7 @@ class UpcomingEventCards extends React.Component {
           <DialogTitle>{"Delete Event"}</DialogTitle>
           <DialogContent>
             <DialogContentText id="alert-dialog-description">
-              Are you want to delete this event?
+              Are sure you want to delete this event?
                   </DialogContentText>
           </DialogContent>
           <DialogActions
