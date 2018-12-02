@@ -24,7 +24,7 @@ const styles = theme => ({
   card: {
     maxWidth: '90%',
     margin: '1rem',
-    // float: 'left'
+
   },
   title: {
     fontSize: '5px',
