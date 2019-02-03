@@ -83,7 +83,6 @@ class CreateEventsForm extends Component {
   }
 
   render() {
-    console.log(this.state.date, 'local date')
     return (
       <Grid fixed={'center'}>
         <form

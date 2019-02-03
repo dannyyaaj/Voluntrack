@@ -1,3 +1,8 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
 }
@@ -10,6 +15,12 @@ a:hover {
   text-decoration: none;
 }
 
+.instructions {
+  background-color: #29b6f6;
+  padding-top: 1rem;
+  color: #ece7e7;
+}
+
 .instructions h1 {
   font-size: 36px;
   font-weight: 700;
@@ -18,10 +29,8 @@ a:hover {
   vertical-align: bottom;
 }
 
-.instructions {
-  background-color: #29b6f6;
-  padding-top: 1rem;
-  color: #ece7e7;
+.instructions h1:hover {
+  color: black;
 }
 
 .errorMessage {
